@@ -1,6 +1,14 @@
 @objects
-    header css .App-header
+    Header css .Header
+    Logo css .Logo
 
 = Header =
-    header:
-        inside screen 0px top left right
+    Header:
+        inside screen 0px top
+        height 71px
+
+= Logo =
+    Logo:
+        width 174px
+        height 24px
+        inside Header 24px left, 25px top

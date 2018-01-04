@@ -1,0 +1,10 @@
+.Header {
+    position: relative;
+    height: 71px;
+}
+
+.Header .Logo {
+    position: absolute;
+    top: 25px;
+    left: 24px;
+}
