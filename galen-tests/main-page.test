@@ -1,9 +1,3 @@
-@@ table devices
-  | device    | size     |
-  | mobile    | 500x700  |
-  | desktop   | 1300x700 |
-
-@@ parameterized using devices
-main page on ${device} device
-  ${websiteUrl} ${size}
-    check galen-tests/specs/main-page.spec --include "${device}"
+Home page on a desktop
+    http://localhost:3000/     1280x700
+        check   galen-tests/specs/main-page-desktop.spec
