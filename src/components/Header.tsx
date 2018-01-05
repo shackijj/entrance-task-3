@@ -6,7 +6,7 @@ import './Header.css';
 const Header = () => (
     <div className="Header">
         <Logo classes={['Header-Logo']}/>
-        <Button classes={['Header-Button']} text="Создать встречу"/>
+        <Button classes={['Header-Button', 'Button_theme_create']} text="Создать встречу"/>
     </div>
 );
 

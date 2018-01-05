@@ -1,12 +1,41 @@
 .Button {
   text-decoration: none;
-  color: #fff;
   padding: 0.7692em 1.2308em;
   border-radius: 0.3077em;
   cursor: pointer;
+  font-weight: 500;
+}
+
+.Button_theme_create {
+  color: #fff;
   background-color: #007DFF;
 }
 
-.Button:hover {
-  background-color: #0059FF;
+.Button_theme_create:hover {
+  background-color: #0059ff;
+}
+
+.Button_theme_create_pressed {
+  background-color: #0011fd;
+}
+
+.Button_theme_create_disabled {
+  background-color: #e5e9ec;
+}
+
+.Button_theme_cancel {
+  color: #000;
+  background-color: #E9ECEF;
+}
+
+.Button_theme_cancel:hover {
+  background-color: #E9ECEF;
+}
+
+.Button_theme_cancel_pressed {
+  background-color: #c9ced4;
+}
+
+.Button_theme_cancel_disabled {
+  background-color: #e1e5e8;
 }
