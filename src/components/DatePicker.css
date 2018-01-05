@@ -1,0 +1,10 @@
+.DatePicker {
+  height: 24px;
+}
+
+.DatePicker-Date {
+  font-weight: 500;
+  font-size: 1.154em;
+  vertical-align: 50%;
+  padding: 0 0.923em;
+}

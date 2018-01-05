@@ -18,7 +18,7 @@
   background-color: #0059ff;
 }
 
-.Button_pressed.Button_theme_create {
+.Button_theme_create:active {
   background-color: #0011fd;
 }
 
@@ -35,7 +35,7 @@
   background-color: #E9ECEF;
 }
 
-.Button_pressed.Button_theme_cancel {
+.Button_theme_cancel:active {
   background-color: #c9ced4;
 }
 
