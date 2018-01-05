@@ -3,8 +3,14 @@
     height: 71px;
 }
 
-.Header .Logo {
+.Header-Logo {
     position: absolute;
     top: 25px;
     left: 24px;
+}
+
+.Header-Button {
+    position: absolute;
+    top: 18px;
+    right: 24px;
 }
