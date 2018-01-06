@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Header from './Header';
-import TimeLine from './TimeLine';
+import DatePicker from './DatePicker';
 
 const MainPage = () => (
     <div className="MainPage">
         <Header/>
-        <TimeLine/>
+        <DatePicker formattedDate="14 январа"/>
     </div>
 );
 
