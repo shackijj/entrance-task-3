@@ -1,7 +1,6 @@
 .Header {
     position: relative;
     height: 71px;
-    padding: 0em calc(50% - 640px);
     border-bottom: 1px solid #E9ECEF;
 }
 
