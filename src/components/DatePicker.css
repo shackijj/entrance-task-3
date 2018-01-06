@@ -1,10 +1,22 @@
 .DatePicker {
-  height: 24px;
+  position: relative;
+  border-bottom: 1px solid #E9ECEF;
+  padding: 0.846em 0;
+  text-align: center;
 }
 
 .DatePicker-Date {
+  display: inline-block;
+  line-height: 24px;
   font-weight: 500;
   font-size: 1.154em;
-  vertical-align: 50%;
-  padding: 0 0.923em;
+  cursor: pointer;
+}
+
+.DatePicker-ArrowLeft {
+  float: left;
+}
+
+.DatePicker-ArrowRight {
+  float: right;
 }
