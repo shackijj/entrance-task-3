@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+
 import 'reset-css/reset.css';
-import './fonts/fonts.css';
 import './index.css';
 
 ReactDOM.render(
