@@ -3,12 +3,12 @@ import * as classNames from 'classnames';
 import './Button.css';
 
 interface ButtonProps {
+  disabled?: boolean;
   classes?: string[];
-  text: string;
 }
 
-const Button = ({classes, text}: ButtonProps) => (
-  <a className={classNames('Button', classes)}>{text}</a>
+const Button: React.SFC<ButtonProps> = ({classes, children, disabled}) => (
+  <a className={classNames('Button', {'Button_disabled': disabled}, classes)}>{children}</a>
 );
 
 export default Button;
