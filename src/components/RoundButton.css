@@ -1,0 +1,10 @@
+.RoundButton {
+  width: 1.846em;
+  height: 1.846em;
+  border-radius: 100px;
+  background-color: #E9ECEF;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: 10px 10px;
+}
