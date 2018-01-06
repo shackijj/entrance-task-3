@@ -9,7 +9,9 @@ interface RoundButtonProps {
 
 const RoundButton: React.SFC<RoundButtonProps> = ({classes, icon}) => (
   <a className={classNames('RoundButton', classes)}>
-    {icon}
+    <span className="RoundButton-Icon">
+      {icon}
+    </span>
   </a>
 );
 
