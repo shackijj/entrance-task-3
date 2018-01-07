@@ -13,8 +13,15 @@ interface RoomListProps {
 const RoomList: React.SFC<RoomListProps> = ({rooms, title}) => (
   <div className="RoomList">
     <h3 className="RoomList-Title">{title}</h3>
-    {rooms.map((room, idx) => (
-      <div key={idx} className="RoomList-Item"/>
+    {rooms.map(({title: roomTitle, capacity}, idx) => (
+      <div key={idx} className="RoomList-Item">
+        <div className="RoomList-ItemTitle">
+          {roomTitle}
+        </div>
+        <div className="RoomList-ItemDescription">
+          {capacity}
+        </div>
+      </div>
     ))}
   </div>
 );
