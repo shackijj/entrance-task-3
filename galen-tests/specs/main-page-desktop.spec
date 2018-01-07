@@ -2,11 +2,13 @@
     Header css .Header
     Logo css .Header-Logo
     CreateButton css .Header-Button
-    TimeLine css .TimeLine
+    DatePicker css .DatePicker
+    RoomList css .RoomList
 
 = Header =
     Header:
         inside screen 0px top
+        width 100% of screen/width
         height 71px
 
     Logo:
@@ -19,6 +21,14 @@
         width 140px
         height 36px
 
-= TimeLine =
-    TimeLine:
-        height 46px
+= Body =
+    DatePicker:
+        below Header 11px
+        inside screen 24px left
+        width 197px
+
+    RoomList:
+        below DatePicker 12px
+        inside screen 24px left
+        width 220px
+    

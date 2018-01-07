@@ -1,3 +1,5 @@
+@@ import constants.test
+
 Home page on a desktop
-    http://localhost:3000/     1280x700
+    ${base_url}/iframe.html?selectedKind=MainPage&selectedStory=whole%20page    1280x700
         check   galen-tests/specs/main-page-desktop.spec

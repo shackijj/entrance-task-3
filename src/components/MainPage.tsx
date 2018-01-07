@@ -6,9 +6,10 @@ import './MainPage.css';
 const MainPage = () => (
     <div className="MainPage">
         <Header/> 
-        <div className="MainPage-Aside">
-            <DatePicker formattedDate="14 январа"/>
-        </div>
+        <DatePicker
+            classes={['MainPage-DatePicker']}
+            formattedDate="14 январа"
+        />
     </div>
 );
 

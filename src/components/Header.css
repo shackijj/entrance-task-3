@@ -1,7 +1,8 @@
 .Header {
     position: relative;
-    height: 71px;
+    height: 70px;
     border-bottom: 1px solid #E9ECEF;
+    padding: 0em calc(50% - 640px);
 }
 
 .Header-Logo {

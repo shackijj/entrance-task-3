@@ -18,7 +18,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "galen-test": "galen test galen-tests/*.test -DwebsiteUrl=http://localhost:3000"
+    "galen-test": "galen test galen-tests/*.test"
   },
   "devDependencies": {
     "@storybook/react": "^3.3.3",
