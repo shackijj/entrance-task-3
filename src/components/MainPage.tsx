@@ -3,12 +3,16 @@ import Header from './Header';
 import DatePicker from './DatePicker';
 import './MainPage.css';
 
-const MainPage = () => (
+interface MainPageProps {
+    formattedDate: string;
+}
+
+const MainPage: React.SFC<MainPageProps> = ({formattedDate}) => (
     <div className="MainPage">
         <Header/> 
         <DatePicker
             classes={['MainPage-DatePicker']}
-            formattedDate="14 январа"
+            formattedDate={formattedDate}
         />
     </div>
 );
