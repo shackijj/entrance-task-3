@@ -6,8 +6,8 @@ describe('RoomList', () => {
   it('should be a list of rooms', () => {
     const title = '4 этаж';
     const rooms = [
-      {title: 'BooZoo', capacity: '3 - 6 человек'},
-      {title: 'FooZoo', capacity: '6 человек'},
+      {title: 'BooZoo', description: '3 - 6 человек'},
+      {title: 'FooZoo', description: '6 человек'},
     ];
     const actual = shallow(<RoomList rooms={rooms} title={title}/>).html();
     const expected = shallow(
