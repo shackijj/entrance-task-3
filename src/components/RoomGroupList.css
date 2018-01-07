@@ -1,1 +1,36 @@
-.RoomGroupList {}
+.RoomGroupList {
+
+}
+
+.RoomGroupList-GroupTitle {
+  color: #858E98;
+  font-size: 0.846em;
+  letter-spacing: 0.0307em;
+  margin-bottom: 0.615em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.RoomGroupList-GroupItem {
+  padding: 0.307em 0;
+  margin-bottom: 0.615em;
+  line-height: 1.308em;
+}
+
+.RoomGroupList-GroupItemTitle {
+  font-weight: 500;
+  font-size: 1.153em;
+  margin-bottom: 0.154em;
+}
+
+.RoomGroupList-GroupItem_hover .RoomGroupList-GroupItemTitle {
+  color: #0070E0;
+}
+
+.RoomGroupList-GroupItem_pressed .RoomGroupList-GroupItemTitle {
+  color: #1D54FE
+}
+
+.RoomGroupList-GroupItem_disabled {
+  
+}
