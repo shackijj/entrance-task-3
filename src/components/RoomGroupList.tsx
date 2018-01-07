@@ -1,21 +1,24 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
+import './RoomGroupList.css';
 
 interface Room {
   title: string;
   description: string;
 }
 
-interface RoomGroup {
+export interface RoomGroup {
   title: string;
   rooms: Room[];
 }
 
-interface RoomListProps {
+export interface RoomListProps {
   groups: RoomGroup[];
+  classes?: string[];
 }
 
-const RoomList: React.SFC<RoomListProps> = ({groups}) => (
-  <div className="RoomGroupList">
+const RoomGroupList: React.SFC<RoomListProps> = ({groups, classes}) => (
+  <div className={classNames('RoomGroupList', classes)}>
     {groups.map(({title, rooms}, groupKey) => (
       <div key={groupKey} className="RoomGroupList-Group">
         <h3 className="RoomGroupList-GroupTitle">{title}</h3>
@@ -34,4 +37,4 @@ const RoomList: React.SFC<RoomListProps> = ({groups}) => (
   </div>
 );
 
-export default RoomList;
+export default RoomGroupList;

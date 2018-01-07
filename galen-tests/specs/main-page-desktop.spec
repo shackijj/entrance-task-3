@@ -3,7 +3,8 @@
     Logo css .Header-Logo
     CreateButton css .Header-Button
     DatePicker css .DatePicker
-    RoomGroupList css .FloorList
+    RoomGroupListWrapper css .MainPage-RoomGroupListWrapper
+    RoomGroupList css .RoomGroupList
 
 = Header =
     Header:
@@ -27,8 +28,10 @@
         inside screen 24px left
         width 197px
 
-    RoomGroupList:
+    RoomGroupListWrapper:
         below DatePicker 12px
-        inside screen 24px left
-        width 220px
+        inside screen 0px left
+        width 245px
     
+    RoomGroupList:
+        inside RoomGroupListWrapper 25px left, 22px top
