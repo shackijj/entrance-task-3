@@ -89,8 +89,8 @@ describe('RoomList', () => {
           {
             title: 'Zoo',
             description: '1 человек',
-            isHovered: true,
-            isPressed: false,
+            isHovered: false,
+            isPressed: true,
             isDisabled: false,
           },
           {
@@ -98,14 +98,14 @@ describe('RoomList', () => {
             description: '1 человек',
             isHovered: true,
             isPressed: false,
-            isDisabled: false,
+            isDisabled: true,
           },
         ],
       },
     ];
     const wrapper = shallow(<RoomGroupList classes={['Test']} groups={groups}/>);
     const items = wrapper.find('.RoomGroupList-GroupItem');
-    const firstItem = shallow(items.get(0)).find('.RoomGroupList-GroupItem');
+    shallow(items.get(0)).find('.RoomGroupList-GroupItem');
     expect(firstItem.hasClass('RoomGroupList-GroupItem_hover')).toEqual(true);
  });
 });
