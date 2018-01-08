@@ -1,5 +1,6 @@
 .Logo {
+    background-image: url(./Logo.svg);
     display: block;
-    width: 174px;
+    width: 175px;
     height: 24px;
 }

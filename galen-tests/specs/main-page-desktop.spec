@@ -14,7 +14,7 @@
         height 72px
 
     Logo:
-        width 174px
+        width 175px
         height 24px
         inside Header 24px left, 25px top
 
