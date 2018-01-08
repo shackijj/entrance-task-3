@@ -7,7 +7,7 @@ describe('RoundButton', () => {
 
   it('should have class RoundButton', () => {
     const wrapper = shallow(<RoundButton icon={<DummyElement/>}/>);
-    expect(wrapper.html()).toEqual('<a class="RoundButton"><span>Dummy</span></a>');
+    expect(wrapper.html()).toEqual('<a class="RoundButton"><span class="RoundButton-Icon"><span>Dummy</span></span></a>');
   });
   it('should have className depenging on classes prop', () => {
     const wrapper = shallow(<RoundButton icon={<DummyElement/>} classes={['Foo', 'Bar']}/>);
