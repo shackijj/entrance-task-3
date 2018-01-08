@@ -5,6 +5,9 @@ import './RoomGroupList.css';
 interface Room {
   title: string;
   description: string;
+  isHovered?: boolean;
+  isPressed?: boolean;
+  isDisabled?: boolean;
 }
 
 export interface RoomGroup {
@@ -22,8 +25,12 @@ const RoomGroupList: React.SFC<RoomListProps> = ({groups, classes}) => (
     {groups.map(({title, rooms}, groupKey) => (
       <div key={groupKey} className="RoomGroupList-Group">
         <h3 className="RoomGroupList-GroupTitle">{title}</h3>
-        {rooms.map(({title: itemTitle, description}, itemKey) => (
-          <div key={itemKey} className="RoomGroupList-GroupItem">
+        {rooms.map(({title: itemTitle, description, isHovered, isPressed, isDisabled}, itemKey) => (
+          <div key={itemKey} className={classNames(["RoomGroupList-GroupItem", {
+            "RoomGroupList-GroupItem_hover": isHovered,
+            "RoomGroupList-GroupItem_pressed": isPressed,
+            "RoomGroupList-GroupItem_disabled": isDisabled,
+          }])}>
             <div className="RoomGroupList-GroupItemTitle">
               {itemTitle}
             </div>

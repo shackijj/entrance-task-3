@@ -105,7 +105,16 @@ describe('RoomList', () => {
     ];
     const wrapper = shallow(<RoomGroupList classes={['Test']} groups={groups}/>);
     const items = wrapper.find('.RoomGroupList-GroupItem');
-    shallow(items.get(0)).find('.RoomGroupList-GroupItem');
-    expect(firstItem.hasClass('RoomGroupList-GroupItem_hover')).toEqual(true);
+    expect(shallow(items.get(0))
+      .find('.RoomGroupList-GroupItem')
+      .hasClass('RoomGroupList-GroupItem_hover')).toEqual(true);
+
+    expect(shallow(items.get(1))
+      .find('.RoomGroupList-GroupItem')
+      .hasClass('RoomGroupList-GroupItem_pressed')).toEqual(true);
+
+    expect(shallow(items.get(2))
+      .find('.RoomGroupList-GroupItem')
+      .hasClass('RoomGroupList-GroupItem_disabled')).toEqual(true);
  });
 });
