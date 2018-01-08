@@ -1,5 +1,5 @@
-.TimeLine {
-  height: 44px;
-  border-left: 0;
-  border-right: 0;
+.Timeline {
+  height: 45px;
+  width: 1368px;
+  border-bottom: 1px solid #E9ECEF;
 }

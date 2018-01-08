@@ -1,12 +1,8 @@
 import * as React from 'react';
-import DatePicker from './DatePicker';
-
-import './TimeLine.css';
+import './Timeline.css';
 
 const TimeLine = () => (
-  <div className="TimeLine">
-    <DatePicker formattedDate="14 дек · Сегодня"/>
-  </div>
+  <div className="Timeline"/>
 );
 
 export default TimeLine;

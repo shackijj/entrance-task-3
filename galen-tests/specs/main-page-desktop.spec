@@ -4,8 +4,9 @@
     CreateButton css .Header-Button
     DatePicker css .DatePicker
     RoomGroupListWrapper css .MainPage-RoomGroupListWrapper
+    RoomEventList css .MainPage-RoomEventListWrapper
     RoomGroupList css .RoomGroupList
-    Timeline css .Timeline 
+    Timeline css .Timeline
 
 = Header =
     Header:
@@ -30,9 +31,12 @@
         width 197px
 
     RoomGroupListWrapper:
-        below DatePicker 10px
+        below DatePicker 11px
         inside screen 0px left
         width 245px
     
     RoomGroupList:
-        inside RoomGroupListWrapper 25px left, 24px top
+        inside RoomGroupListWrapper 25px left, 23px top
+
+    RoomEventList:
+        below Header 0px

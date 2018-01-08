@@ -1,18 +1,19 @@
 .Header {
     position: relative;
+    max-width: 1280px;
     height: 71px;
     border-bottom: 1px solid #E9ECEF;
     padding: 0em calc(50% - 640px);
 }
 
 .Header-Logo {
-    position: absolute;
-    top: 25px;
-    left: 24px;
+    float: left;
+    margin-top: 25px;
+    margin-left: 24px;
 }
 
 .Header-Button {
-    position: absolute;
-    top: 18px;
-    right: 24px;
+    float: right;
+    margin-top: 18px;
+    margin-right: 24px;
 }
