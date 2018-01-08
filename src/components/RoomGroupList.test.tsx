@@ -1,26 +1,25 @@
 import * as React from 'react';
-import RoomGroupList from './RoomGroupList';
+import RoomGroupList, { RoomGroup } from './RoomGroupList';
 import { shallow } from 'enzyme';
 
 describe('RoomList', () => {
-  const groups = [
-    {
-      title: '4 этаж',
-      rooms: [
-        {title: 'Boo', description: '1 человек'},
-        {title: 'Foo', description: '2 человек'},
-      ],
-    },
-    {
-      title: '5 этаж',
-      rooms: [
-        {title: 'Zoo', description: '3 человек'},
-        {title: 'Moo', description: '4 человек'},
-      ],
-    }
-  ];
-
   it('should be a list of rooms', () => {
+    const groups = [
+      {
+        title: '4 этаж',
+        rooms: [
+          {title: 'Boo', description: '1 человек'},
+          {title: 'Foo', description: '2 человек'},
+        ],
+      },
+      {
+        title: '5 этаж',
+        rooms: [
+          {title: 'Zoo', description: '3 человек'},
+          {title: 'Moo', description: '4 человек'},
+        ],
+      }
+    ];
     const actual = shallow(<RoomGroupList groups={groups}/>).html();
     const expected = shallow(
       <div className="RoomGroupList">
@@ -69,8 +68,44 @@ describe('RoomList', () => {
   });
 
   it('should change className depending on classes prop', () => {
-     const wrapper = shallow(<RoomGroupList classes={['Test']} groups={groups}/>);
-     const div = wrapper.find('div.RoomGroupList');
-     expect(div.hasClass('RoomGroupList Test')).toEqual(true);
+    const groups: RoomGroup[] = [];
+    const wrapper = shallow(<RoomGroupList classes={['Test']} groups={groups}/>);
+    const div = wrapper.find('div.RoomGroupList');
+    expect(div.hasClass('RoomGroupList Test')).toEqual(true);
   });
+
+  it('should change GroupItem class attr depending on rooms props', () => {
+    const groups = [
+      {
+        title: '4 этаж',
+        rooms: [
+          {
+            title: 'Boo',
+            description: '1 человек',
+            isHovered: true,
+            isPressed: false,
+            isDisabled: false,
+          },
+          {
+            title: 'Zoo',
+            description: '1 человек',
+            isHovered: true,
+            isPressed: false,
+            isDisabled: false,
+          },
+          {
+            title: 'Moo',
+            description: '1 человек',
+            isHovered: true,
+            isPressed: false,
+            isDisabled: false,
+          },
+        ],
+      },
+    ];
+    const wrapper = shallow(<RoomGroupList classes={['Test']} groups={groups}/>);
+    const items = wrapper.find('.RoomGroupList-GroupItem');
+    const firstItem = shallow(items.get(0)).find('.RoomGroupList-GroupItem');
+    expect(firstItem.hasClass('RoomGroupList-GroupItem_hover')).toEqual(true);
+ });
 });
