@@ -4,9 +4,9 @@
   padding-top: 1em;
   padding-bottom: 0.7692em;
   border-radius: 0.3077em;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.035em;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 .Button_theme_create {

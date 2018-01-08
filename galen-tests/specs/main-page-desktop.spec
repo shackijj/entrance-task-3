@@ -11,7 +11,7 @@
     Header:
         inside screen 0px top
         width 100% of screen/width
-        height 71px
+        height 72px
 
     Logo:
         width 174px
@@ -19,7 +19,7 @@
         inside Header 24px left, 25px top
 
     CreateButton:
-        inside Header 24px right, 18px top
+        inside Header ~24px right, 18px top
         width 140px
         height 36px
 
@@ -30,9 +30,9 @@
         width 197px
 
     RoomGroupListWrapper:
-        below DatePicker 11px
+        below DatePicker 10px
         inside screen 0px left
         width 245px
     
     RoomGroupList:
-        inside RoomGroupListWrapper 25px left, 22px top
+        inside RoomGroupListWrapper 25px left, 24px top
