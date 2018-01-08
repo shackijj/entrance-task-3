@@ -16,7 +16,9 @@
 
 .MainPage-RoomGroupListWrapper {
   padding-left: calc(50% - 640px);
-  width: 245px;
+  min-height: calc(100vh - 71px - 46px);
+  width: 244px;
+  border-right: 1px solid #E9ECEF;
   float: left;
   clear: left;
 }
@@ -28,6 +30,7 @@
 
 .MainPage-RoomEventListWrapper {
   margin-left: calc(50% - 640px + 245px);
+  min-height: calc(100vh - 71px);
   overflow-y: scroll;
 }
 
