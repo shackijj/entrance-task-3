@@ -5,6 +5,7 @@
     DatePicker css .DatePicker
     RoomGroupListWrapper css .MainPage-RoomGroupListWrapper
     RoomGroupList css .RoomGroupList
+    Timeline css .Timeline 
 
 = Header =
     Header:
@@ -29,7 +30,7 @@
         width 197px
 
     RoomGroupListWrapper:
-        below DatePicker 12px
+        below DatePicker 11px
         inside screen 0px left
         width 245px
     
