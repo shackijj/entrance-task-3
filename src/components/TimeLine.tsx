@@ -6,10 +6,10 @@ interface TimelineProps {
   endHour?: number;
 }
 
-const Timeline = ({startHour = 0, endHour = 23}: TimelineProps) => {
+const Timeline = ({startHour = 0, endHour = 24}: TimelineProps) => {
   const hours = [];
   for (let i = startHour; i < endHour; i++) {
-    hours.push(i);
+    hours.push(i + 1);
   }
   return (
     <ul className="Timeline">
