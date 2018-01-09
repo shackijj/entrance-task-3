@@ -26,11 +26,14 @@ const RoomGroupList: React.SFC<RoomListProps> = ({groups, classes}) => (
       <div key={groupKey} className="RoomGroupList-Group">
         <h3 className="RoomGroupList-GroupTitle">{title}</h3>
         {rooms.map(({title: itemTitle, description, isHovered, isPressed, isDisabled}, itemKey) => (
-          <div key={itemKey} className={classNames(["RoomGroupList-GroupItem", {
-            "RoomGroupList-GroupItem_hover": isHovered,
-            "RoomGroupList-GroupItem_pressed": isPressed,
-            "RoomGroupList-GroupItem_disabled": isDisabled,
-          }])}>
+          <div
+            key={itemKey} 
+            className={classNames(['RoomGroupList-GroupItem', {
+              'RoomGroupList-GroupItem_hover': isHovered,
+              'RoomGroupList-GroupItem_pressed': isPressed,
+              'RoomGroupList-GroupItem_disabled': isDisabled,
+            }])}
+          >
             <div className="RoomGroupList-GroupItemTitle">
               {itemTitle}
             </div>
