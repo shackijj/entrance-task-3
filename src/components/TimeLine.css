@@ -66,5 +66,5 @@
   Hackish height. TODO: Find better DRY soulution
   view port height - header height - timline height + padding-top of clock + height of clock
   */
-  min-height: calc(100vh - 71px - 46px + 16px + 20px);
+  min-height: calc(100vh - 71px - 46px + 16px + 19px);
 }
