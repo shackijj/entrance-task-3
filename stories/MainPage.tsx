@@ -48,6 +48,81 @@ const roomGroups = [
         description: '3 - 6 человек',
       },
     ]
+  },
+  {
+    title: '7 этаж',
+    rooms: [
+      {
+        title: 'Джокер',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Мариванна',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Тонкий боб',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Черная вдова',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Белорусский ликёр',
+        description: '3 - 6 человек',
+      },
+    ]
+  },
+  {
+    title: '8 этаж',
+    rooms: [
+      {
+        title: 'Джокер',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Мариванна',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Тонкий боб',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Черная вдова',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Белорусский ликёр',
+        description: '3 - 6 человек',
+      },
+    ]
+  },
+  {
+    title: '9 этаж',
+    rooms: [
+      {
+        title: 'Джокер',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Мариванна',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Тонкий боб',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Черная вдова',
+        description: '3 - 6 человек',
+      },
+      {
+        title: 'Белорусский ликёр',
+        description: '3 - 6 человек',
+      },
+    ]
   }
 ];
 
