@@ -31,6 +31,7 @@
 .MainPage-RoomEventListWrapper {
   margin-left: calc(50% - 640px + 245px);
   min-height: calc(100vh - 71px);
+  background-color: #F6F7F9;
   overflow-y: scroll;
 }
 

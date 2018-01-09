@@ -40,3 +40,7 @@
 
     RoomEventList:
         below Header 0px
+
+    Timeline:
+        below Header 0px
+        height 46px

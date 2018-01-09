@@ -3,3 +3,7 @@
   Not sure about copyrights
 - Arrows icons's SVG aren't centered well
 - Should round buttons be changed on hover or focus?
+
+
+TODO: 
+- Download OpenSans fonts
