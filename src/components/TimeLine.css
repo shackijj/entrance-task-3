@@ -9,13 +9,12 @@
   color: #252525;
   font-weight: bold;
   letter-spacing: 0.4px;
-  padding-left: 17px;
+  padding: 0 33px;
 }
 
 .Timeline-Hour {
   position: relative;
-  min-width: 49px;
-  margin-left: 17px;
+  min-width: 66px;
   padding-top: 16px;
   text-align: center;
 }

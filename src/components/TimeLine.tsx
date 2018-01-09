@@ -7,7 +7,7 @@ interface TimelineProps {
   currentTime?: Date;
 }
 
-const Timeline = ({startHour = 0, endHour = 24, currentTime}: TimelineProps) => {
+const Timeline = ({startHour = 0, endHour = 23, currentTime}: TimelineProps) => {
   const hours = [];
   for (let i = startHour; i < endHour; i++) {
     hours.push(i + 1);
@@ -19,8 +19,9 @@ const Timeline = ({startHour = 0, endHour = 24, currentTime}: TimelineProps) => 
     const h = currentTime.getHours();
     const m = currentTime.getMinutes();
     formattedTime = `${h}:${(m < 10) ? '0' : ''}${m}`;
+    const offset = ((h * 60 + m) / 1440) * 100;
     style = {
-      left: `${((h * 60 + m) / 1140) * 100}%`
+      left: `${offset.toFixed(6)}%`
     };
   }
 
