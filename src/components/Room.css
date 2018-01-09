@@ -1,0 +1,25 @@
+.Room {
+  padding: 0.307em 0;
+  margin-bottom: 0.615em;
+  line-height: 1.308em;
+}
+
+.Room-Title {
+  font-weight: 500;
+  font-size: 1.153em;
+  margin-bottom: 0.154em;
+}
+
+.Room_hover .Room-Title {
+  font-weight: bold;
+  color: #0070E0;
+}
+
+.Room_pressed .Room-Title {
+  font-weight: bold;
+  color: #1D54FE
+}
+
+.Room_disabled {
+  color: #858E98;
+}

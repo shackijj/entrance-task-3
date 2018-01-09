@@ -3,11 +3,12 @@ import Header from './Header';
 import DatePicker from './DatePicker';
 import Timeline from './Timeline';
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
+import Room, { RoomProps } from './Room';
 import './MainPage.css';
 
 interface MainPageProps {
     formattedDate: string;
-    roomGroups: RoomGroup[];
+    roomGroups: RoomGroup<RoomProps>[];
     currentTime?: Date;
 }
 
@@ -22,6 +23,7 @@ const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentT
         </div>
         <div className="MainPage-RoomGroupListWrapper">
             <RoomGroupList
+                RoomComponent={Room}
                 classes={['MainPage-RoomGroupList']}
                 groups={roomGroups}
             />

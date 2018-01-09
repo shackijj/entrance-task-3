@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import RoomGroupList from '../src/components/RoomGroupList';
+import Room from '../src/components/Room';
 
 const roomGroups = [
   {
@@ -30,4 +31,5 @@ const roomGroups = [
 ];
 
 storiesOf('RoomGroupList', module)
-  .add('with room conditions', () => (<RoomGroupList groups={roomGroups}/>));
+  .add('with room conditions', () => (
+    <RoomGroupList groups={roomGroups} RoomComponent={Room}/>));
