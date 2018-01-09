@@ -1,6 +1,25 @@
-@import url(./fonts/fonts.css);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+
+@font-face{
+	src: url(./fonts/HelveticaNeue-Bold.woff2)format("woff2");
+	font-family: 'HelveticaNeue';
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face{
+	src: url(./fonts/HelveticaNeue-Medium.woff2)format("woff2");
+	font-family: 'HelveticaNeue';
+	font-weight: 500;
+	font-style: normal;
+}
+@font-face{
+	src: url(./fonts/HelveticaNeue-Roman.woff2)format("woff2");
+	font-family: 'HelveticaNeue';
+	font-weight: normal;
+	font-style: normal;
+}
 
 html {
   font-size: 13px;
-  font-family: "HelveticaNeue", Helvetica, sans-serif;
+  font-family: "HelveticaNeue", "Open Sans", Helvetica, sans-serif;
 }
