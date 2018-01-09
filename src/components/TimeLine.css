@@ -19,6 +19,10 @@
   text-align: center;
 }
 
+.Timeline-Hour_passed {
+  color: #858E98;
+}
+
 .Timeline-Hour:after {
   content: "";
   position: absolute;

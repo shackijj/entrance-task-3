@@ -29,4 +29,10 @@ describe('Timeline', () => {
       left: '4.166667%'
     });
   });
+
+  it('should mark passed hours', () => {
+    const currentTime = new Date('2018-01-09T02:00:00.55');
+    const wrapper = shallow(<Timeline currentTime={currentTime}/>);
+    expect(wrapper.find('.Timeline-Hour_passed')).toHaveLength(2);
+  });
 });
