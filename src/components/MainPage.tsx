@@ -8,9 +8,10 @@ import './MainPage.css';
 interface MainPageProps {
     formattedDate: string;
     roomGroups: RoomGroup[];
+    currentTime?: Date;
 }
 
-const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups}) => (
+const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentTime}) => (
     <div className="MainPage">
         <Header/>
         <div className="MainPage-DatePickerWrapper">
@@ -26,7 +27,7 @@ const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups}) => (
             />
         </div>
         <div className="MainPage-RoomEventListWrapper">
-            <Timeline/>
+            <Timeline currentTime={currentTime}/>
         </div>
     </div>
 );
