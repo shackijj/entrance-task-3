@@ -3,13 +3,13 @@
   display: inline-flex;
   flex-flow: row nowrap;
   height: 45px;
-  font-size: 0.846em;
   background-color: #fff;
   border-bottom: 1px solid #E9ECEF;
   color: #252525;
   font-weight: bold;
   letter-spacing: 0.4px;
   padding: 0 33px;
+  font-size: 0.846em;
 }
 
 .Timeline-Hour {
@@ -32,8 +32,35 @@
 
 .Timeline-CurrentTime {
   position: absolute;
-  top: 16px;
-  width: 1px;
+  top: 11px;
+}
+
+.Timeline-CurrentTimeClock {
+  position: absolute;
+  left: -25px;
+  padding-top: 0.363em;
+  padding-bottom: 0.273em;
+  letter-spacing: 0.4px;
+  line-height: 1.181em;
   background-color: #007DFF;
-  min-height: calc(100vh - 71px - 46px + 16px + 13px);
+  text-align: center;
+  color: #fff;
+  border-radius: 100px;
+  z-index: 2;
+  display: block;
+  width: 49px;
+}
+
+.Timeline-CurrentTime:before {
+  content: "";
+  z-index: 1;
+  background-color: #007DFF;
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  /*
+  Hackish height. TODO: Find better DRY soulution
+  view port height - header height - timline height + padding-top of clock + height of clock
+  */
+  min-height: calc(100vh - 71px - 46px + 16px + 20px);
 }

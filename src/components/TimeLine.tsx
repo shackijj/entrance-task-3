@@ -27,7 +27,10 @@ const Timeline = ({startHour = 0, endHour = 23, currentTime}: TimelineProps) => 
 
   return (
     <ul className="Timeline">
-      {formattedTime ? <li style={style} className="Timeline-CurrentTime">{formattedTime}</li> : ''}
+      {formattedTime ?
+        <li style={style} className="Timeline-CurrentTime">
+          <span className="Timeline-CurrentTimeClock">{formattedTime}</span>
+        </li> : ''}
       {hours.map((hour, idx) => (<li key={idx} className="Timeline-Hour">{hour}</li>))}
     </ul>
   );
