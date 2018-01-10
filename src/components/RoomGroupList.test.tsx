@@ -43,5 +43,17 @@ describe('RoomGroupList', () => {
     />);
     const div = wrapper.find('div.RoomGroupList');
     expect(div.hasClass('RoomGroupList Test')).toEqual(true);
+    expect(wrapper.find('.RoomGroupList-GroupTitle')).toHaveLength(1);
+  });
+
+  it('should hide GroupTitle depending on showGroupTitle', () => {
+    const wrapper = shallow(
+    <RoomGroupList
+      RoomComponent={DummyComponent}
+      classes={['Test']}
+      groups={roomGroups}
+      showGroupTitle={false}
+    />);
+    expect(wrapper.find('.RoomGroupList-GroupTitle')).toHaveLength(0);
   });
 });

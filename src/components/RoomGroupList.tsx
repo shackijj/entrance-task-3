@@ -10,14 +10,15 @@ interface RoomGroupListProps<RoomProps> {
   RoomComponent: React.SFC<RoomProps>;
   groups: RoomGroup<RoomProps>[];
   classes?: string[];
+  showGroupTitle?: boolean;
 }
 
-function RoomGroupList<T>({groups, RoomComponent, classes}: RoomGroupListProps<T>) {
+function RoomGroupList<T>({groups, RoomComponent, classes, showGroupTitle = true}: RoomGroupListProps<T>) {
   return (
     <div className={classNames('RoomGroupList', classes)}>
       {groups.map(({title, rooms}, groupKey) => (
         <div key={groupKey} className="RoomGroupList-Group">
-          <h3 className="RoomGroupList-GroupTitle">{title}</h3>
+          {showGroupTitle ? <h3 className="RoomGroupList-GroupTitle">{title}</h3> : ''}
           {rooms.map((room, itemKey) => {
             return <RoomComponent {...room} key={itemKey}/>;
           })}
