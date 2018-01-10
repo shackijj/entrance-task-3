@@ -3,25 +3,27 @@ import * as classNames from 'classnames';
 import './Timeline.css';
 
 interface TimelineProps {
-  startHour?: number;
-  endHour?: number;
+  hourStart?: number;
+  hourEnd?: number;
   currentTime?: Date;
 }
 
-const Timeline = ({startHour = 0, endHour = 23, currentTime}: TimelineProps) => {
+const Timeline = ({hourStart = 0, hourEnd = 23, currentTime}: TimelineProps) => {
   const hours = [];
-  for (let i = startHour; i < endHour; i++) {
+  for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);
   }
 
   let formattedTime;
   let style;
-  let currentHour: number | undefined;
+  let hourCurrent: number | undefined;
   if (currentTime) {
-    currentHour = currentTime.getHours();
-    const m = currentTime.getMinutes();
-    formattedTime = `${currentHour}:${(m < 10) ? '0' : ''}${m}`;
-    const offset = ((currentHour * 60 + m) / 1440) * 100;
+    hourCurrent = currentTime.getHours();
+    const hourMinutes = currentTime.getMinutes();
+    formattedTime = `${hourCurrent}:${(hourMinutes < 10) ? '0' : ''}${hourMinutes}`;
+    const totalMinutes = ((hourEnd + 1 - hourStart) * 60);
+    const currentMinutes = (hourCurrent - hourStart) * 60 + hourMinutes;
+    const offset = (currentMinutes / totalMinutes) * 100;
     style = {
       left: `${offset.toFixed(6)}%`
     };
@@ -29,7 +31,7 @@ const Timeline = ({startHour = 0, endHour = 23, currentTime}: TimelineProps) => 
 
   return (
     <ul className="Timeline">
-      {formattedTime ?
+      {formattedTime && hourCurrent >= hourStart && hourCurrent <= hourEnd ?
         <li style={style} className="Timeline-CurrentTime">
           <span className="Timeline-Clock">{formattedTime}</span>
         </li> : ''}
@@ -37,7 +39,7 @@ const Timeline = ({startHour = 0, endHour = 23, currentTime}: TimelineProps) => 
           <li
             key={idx}
             className={classNames('Timeline-Hour', {
-              'Timeline-Hour_passed': (currentHour && hour <= currentHour) ? true : false
+              'Timeline-Hour_passed': (hourCurrent && hour <= hourCurrent) ? true : false
             })}
           >
             {hour}

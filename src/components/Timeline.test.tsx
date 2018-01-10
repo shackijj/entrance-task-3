@@ -22,11 +22,31 @@ describe('Timeline', () => {
     expect(wrapper.find('.Timeline-CurrentTime').text()).toEqual('7:03');
   });
 
+  it('current time should not be rendered if current time is less than hourStart', () => {
+    const currentTime = new Date('2018-01-09T06:00:00.55');
+    const wrapper = shallow(<Timeline currentTime={currentTime} hourStart={7} hourEnd={23}/>);
+    expect(wrapper.find('.Timeline-CurrentTime')).toHaveLength(0);
+  });
+
+  it('current time should not be rendered if current time is more than hourStart', () => {
+    const currentTime = new Date('2018-01-09T22:00:00.55');
+    const wrapper = shallow(<Timeline currentTime={currentTime} hourStart={7} hourEnd={21}/>);
+    expect(wrapper.find('.Timeline-CurrentTime')).toHaveLength(0);
+  });
+
   it('should set an offset for current date according to its value', () => {
     const currentTime = new Date('2018-01-09T01:00:00.55');
     const wrapper = shallow(<Timeline currentTime={currentTime}/>);
     expect(wrapper.find('.Timeline-CurrentTime').prop('style')).toEqual({
       left: '4.166667%'
+    });
+  });
+
+  it('should set an offset for current time according to hourStart and hourEnd', () => {
+    const currentTime = new Date('2018-01-09T10:00:00.55');
+    const wrapper = shallow(<Timeline currentTime={currentTime} hourStart={8} hourEnd={10}/>);
+    expect(wrapper.find('.Timeline-CurrentTime').prop('style')).toEqual({
+      left: '66.666667%'
     });
   });
 
