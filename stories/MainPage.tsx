@@ -33,8 +33,8 @@ const roomGroups = [
         events: [
           {
             title: 'Событие 3',
-            dateStart: new Date('2018-01-09T5:04:00.55'),
-            dateEnd: new Date('2018-01-09T10::00.55')
+            dateStart: new Date('2018-01-09T05:04:00.55'),
+            dateEnd: new Date('2018-01-09T10:00:00.55')
           },
           {
             title: 'Событие 4',
@@ -60,24 +60,24 @@ const roomGroups = [
           {
             title: 'Событие 7',
             dateStart: new Date('2018-01-09T10:04:00.55'),
-            dateEnd: new Date('2018-01-09T13::00.55')
-          },
-          {
-            title: 'Событие 8',
-            dateStart: new Date('2018-01-09T20:00.55'),
-            dateEnd: new Date('2018-01-09T21:00:00.55')
+            dateEnd: new Date('2018-01-09T13:00:00.55')
           },
           {
             title: 'Событие 9',
             dateStart: new Date('2018-01-09T15:00:00.55'),
             dateEnd: new Date('2018-01-09T16:15:00.55')
-          }
+          },
+          {
+            title: 'Событие 8',
+            dateStart: new Date('2018-01-09T20:00:00.55'),
+            dateEnd: new Date('2018-01-09T21:00:00.55')
+          },
         ]
       },
     ]
   },
   {
-    title: '7 этаж',
+    title: '6 этаж',
     rooms: [
       {
         title: 'Джокер',

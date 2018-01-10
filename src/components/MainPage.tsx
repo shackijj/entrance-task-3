@@ -3,12 +3,13 @@ import Header from './Header';
 import DatePicker from './DatePicker';
 import Timeline from './Timeline';
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
-import Room, { RoomProps } from './Room';
+import Room from './Room';
+import RoomTimeline, { RoomTimelineProps } from './RoomTimeline';
 import './MainPage.css';
 
 interface MainPageProps {
     formattedDate: string;
-    roomGroups: RoomGroup<RoomProps>[];
+    roomGroups: RoomGroup<RoomTimelineProps>[];
     currentTime?: Date;
 }
 
@@ -30,6 +31,10 @@ const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentT
         </div>
         <div className="MainPage-RoomEventListWrapper">
             <Timeline currentTime={currentTime}/>
+            <RoomGroupList
+                RoomComponent={RoomTimeline}
+                groups={roomGroups}
+            />
         </div>
     </div>
 );
