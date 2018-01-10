@@ -181,5 +181,23 @@ describe('RoomTimeline', () => {
     expect(getStyleProp(slots.get(2))).toEqual({
       width: '58.333333%' // 14h0m / 24h
     });
+  });
+
+  it('should render one free slot if events are empty', () => {
+    const wrapper = shallow(
+      <RoomTimeline
+        dateCurrent={new Date('2018-01-09T07:30:00.55')}
+        hourStart={0}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        description={'3 - 6 человек'}
+        events={[]}
+      />
+    );
+
+    const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(getStyleProp(slots.get(0))).toEqual({
+      width: '100.000000%'
+    });
   }); 
 });

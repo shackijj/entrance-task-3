@@ -58,13 +58,19 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
     prevEvent = curEvent;
   });
 
+  if (events.length === 0) {
+    slotProps.push({
+      duration: totalMinutes,
+      type: 'free',
+    });
+  }
   return (
     <div className="RoomTimeline">
       {slotProps.map(({type, duration}, idx) => (
         <div
           key={idx}
           className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
-          style={{width: `${(duration * 100 / totalMinutes).toFixed(6)}%`}}
+          style={{width: `${((duration * 100 / totalMinutes).toFixed(6))}%`}}
         />
       ))}
     </div>
