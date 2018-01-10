@@ -20,18 +20,20 @@ const Timeline = ({hourStart = 0, hourEnd = 23, currentTime}: TimelineProps) => 
   if (currentTime) {
     hourCurrent = currentTime.getHours();
     const hourMinutes = currentTime.getMinutes();
-    formattedTime = `${hourCurrent}:${(hourMinutes < 10) ? '0' : ''}${hourMinutes}`;
-    const totalMinutes = ((hourEnd + 1 - hourStart) * 60);
-    const currentMinutes = (hourCurrent - hourStart) * 60 + hourMinutes;
-    const offset = (currentMinutes / totalMinutes) * 100;
-    style = {
-      left: `${offset.toFixed(6)}%`
-    };
+    if (hourCurrent >= hourStart && hourCurrent <= hourEnd) {
+      formattedTime = `${hourCurrent}:${(hourMinutes < 10) ? '0' : ''}${hourMinutes}`;
+      const totalMinutes = ((hourEnd + 1 - hourStart) * 60);
+      const currentMinutes = (hourCurrent - hourStart) * 60 + hourMinutes;
+      const offset = (currentMinutes / totalMinutes) * 100;
+      style = {
+        left: `${offset.toFixed(6)}%`
+      };
+    }
   }
 
   return (
     <ul className="Timeline">
-      {formattedTime && hourCurrent >= hourStart && hourCurrent <= hourEnd ?
+      {formattedTime ?
         <li style={style} className="Timeline-CurrentTime">
           <span className="Timeline-Clock">{formattedTime}</span>
         </li> : ''}
