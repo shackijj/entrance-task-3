@@ -1,0 +1,12 @@
+.RoomTimeline-Slot {
+  height: 28px;
+  display: inline-block;
+}
+
+.RoomTimeline-Slot_free {
+  background-color: #fff;
+}
+
+.RoomTimeline-Slot_event {
+  background-color: #D5DFE9; 
+}
