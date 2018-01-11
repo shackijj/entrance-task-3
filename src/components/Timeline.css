@@ -15,7 +15,8 @@
 .Timeline-Hour {
   position: relative;
   min-width: 66px;
-  padding-top: 16px;
+  margin-top: 16px;
+  line-height: 13px;
   text-align: center;
 }
 
