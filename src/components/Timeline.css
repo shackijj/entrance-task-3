@@ -3,8 +3,6 @@
   display: inline-flex;
   flex-flow: row nowrap;
   height: 45px;
-  background-color: #fff;
-  border-bottom: 1px solid #E9ECEF;
   color: #252525;
   font-weight: bold;
   letter-spacing: 0.4px;
@@ -30,9 +28,9 @@
   display: block;
   background-color: rgba(19,100,205,0.10);
   width: 1px;
-  min-height: calc(100vh - 71px - 46px);
+  height: calc(100vh - 72px - 46px);
   left: 50%;
-  top: 46px;
+  top: 30px;
 }
 
 .Timeline-CurrentTime {
@@ -63,9 +61,5 @@
   position: absolute;
   left: 50%;
   width: 1px;
-  /*
-  Hackish height. TODO: Find better DRY soulution
-  view port height - header height - timline height + padding-top of clock + height of clock
-  */
-  min-height: calc(100vh - 71px - 46px + 16px + 19px);
+  min-height: calc(100vh - 71px - 46px + 19px + 12px);
 }

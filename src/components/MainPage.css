@@ -1,26 +1,25 @@
 .MainPage {}
 
-.MainPage-DatePickerWrapper {
-  float: left;
-  padding-left: calc(50% - 640px);
-  padding-bottom: 10px;
-  padding-top: 11px;
+.MainPage-SubHeader {
   border-bottom: 1px solid #E9ECEF;
+  padding: 0 calc(50% - 640px);
+  max-width: 1280px;
+  position: relative;
+  height: 46px;  
 }
 
 .MainPage-DatePicker {
   width: 197px;
+  float: left;
   margin-left: 24px;
+  margin-top: 10px;
   margin-right: 24px;
 }
 
 .MainPage-RoomGroupListWrapper {
-  padding-left: calc(50% - 640px);
-  min-height: calc(100vh - 71px - 46px);
   width: 244px;
   border-right: 1px solid #E9ECEF;
   float: left;
-  clear: left;
 }
 
 .MainPage-RoomGroupList {
@@ -29,17 +28,28 @@
 }
 
 .MainPage-RoomEventListWrapper {
-  margin-left: calc(50% - 640px + 245px);
-  min-height: calc(100vh - 71px);
-  background-color: #F6F7F9;
+  max-width: 1280px;
+  padding: 0 calc(50% - 640px);
+  height: calc(100vh - 72px);
   overflow-y: scroll;
 }
 
-.MainPage-Clearfix {
-  clear: both;
+.MainPage-TimelineEvents {
+  width: 1122px;
+  height: calc(100vh - 72px - 46px);
+  background-color: #E9ECEF;
+  overflow-y: scroll;
 }
 
+.MainPage-RoomTimelineList {
+  width: 1122px;
+}
+
+.MainPage-Timeline {}
+
 .MainPage-RoomTimelineList .RoomGroupList-Group {
-  margin-top: 46px;
-  margin-bottom: 53px;
+  padding-top: 46px;
+}
+.MainPage-RoomGroupList .RoomGroupList-Group {
+  margin-bottom: 19px;
 }

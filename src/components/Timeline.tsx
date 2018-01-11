@@ -6,9 +6,10 @@ interface TimelineProps {
   hourStart?: number;
   hourEnd?: number;
   currentTime?: Date;
+  classes?: string[];
 }
 
-const Timeline = ({hourStart = 0, hourEnd = 23, currentTime}: TimelineProps) => {
+const Timeline = ({hourStart = 0, hourEnd = 23, currentTime, classes}: TimelineProps) => {
   const hours = [];
   for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);
@@ -32,7 +33,7 @@ const Timeline = ({hourStart = 0, hourEnd = 23, currentTime}: TimelineProps) => 
   }
 
   return (
-    <ul className="Timeline">
+    <ul className={classNames('Timeline', classes)}>
       {formattedTime ?
         <li style={style} className="Timeline-CurrentTime">
           <span className="Timeline-Clock">{formattedTime}</span>
