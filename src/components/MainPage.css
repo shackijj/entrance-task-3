@@ -22,30 +22,35 @@
   float: left;
 }
 
-.MainPage-RoomGroupList {
-  margin-left: 25px;
-  margin-top: 23px;
-}
-
 .MainPage-RoomEventListWrapper {
   max-width: 1280px;
   padding: 0 calc(50% - 640px);
   height: calc(100vh - 72px);
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .MainPage-TimelineEvents {
-  width: 1122px;
+  width: 1367px;
   height: calc(100vh - 72px - 46px);
-  background-color: #E9ECEF;
   overflow-y: scroll;
+}
+
+.MainPage-RoomGroupList {
+  margin-left: 25px;
+  margin-top: 23px;
+  width: 220px;
+  float: left;
 }
 
 .MainPage-RoomTimelineList {
   width: 1122px;
+  margin-left: 245px;
+  background-color: #E9ECEF;
 }
 
-.MainPage-Timeline {}
+.MainPage-Timeline {
+  margin-left: 245px;
+}
 
 .MainPage-RoomTimelineList .RoomGroupList-Group {
   padding-top: 46px;

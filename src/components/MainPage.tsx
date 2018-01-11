@@ -2,7 +2,7 @@ import * as React from 'react';
 // import DatePicker from './DatePicker';
 import Timeline from './Timeline';
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
-// import Room from './Room';
+import Room from './Room';
 import RoomTimeline, { RoomTimelineProps } from './RoomTimeline';
 import './MainPage.css';
 
@@ -24,15 +24,18 @@ const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentT
   <div className="MainPage">
     <Header/>
     <div className="MainPage-RoomEventListWrapper">
-      <div className="MainPage-Timeline">
-        <Timeline
-          classes={[]}
-          currentTime={currentTime}
-          hourStart={hourStart} 
-          hourEnd={hourEnd}
-        />
-      </div>
+      <Timeline
+        classes={['MainPage-Timeline']}
+        currentTime={currentTime}
+        hourStart={hourStart} 
+        hourEnd={hourEnd}
+      />
       <div className="MainPage-TimelineEvents">
+        <RoomGroupList
+          RoomComponent={Room}
+          classes={['MainPage-RoomGroupList']}
+          groups={roomGroups}
+        />
         <RoomGroupList
           RoomComponent={roomProps(RoomTimeline, {dateCurrent: currentTime, hourStart, hourEnd})}
           classes={['MainPage-RoomTimelineList']}
@@ -40,11 +43,6 @@ const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentT
           showGroupTitle={false}
         />
       </div>
-{/*         <RoomGroupList
-          RoomComponent={Room}
-          classes={['MainPage-RoomGroupList']}
-          groups={roomGroups}
-      /> */}
   </div>
   </div>
 );
