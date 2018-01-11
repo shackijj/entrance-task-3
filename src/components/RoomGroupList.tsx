@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import './RoomGroupList.css';
 
 export interface RoomGroup<RoomProps> {
   title: string;
@@ -13,7 +14,8 @@ interface RoomGroupListProps<RoomProps> {
   showGroupTitle?: boolean;
 }
 
-function RoomGroupList<T>({groups, RoomComponent, classes, showGroupTitle = true}: RoomGroupListProps<T>) {
+function RoomGroupList<T>({
+  groups, RoomComponent, classes, showGroupTitle = true}: RoomGroupListProps<T>) {
   return (
     <div className={classNames('RoomGroupList', classes)}>
       {groups.map(({title, rooms}, groupKey) => (

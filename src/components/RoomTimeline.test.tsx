@@ -119,6 +119,37 @@ describe('RoomTimeline', () => {
     });
   });
 
+  it('should be ok with other hourStart and hourEnd', () => {
+    const wrapper = shallow(
+      <RoomTimeline
+        {...room}
+        hourStart={7}
+        hourEnd={23}
+      />
+    );
+
+    const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(slots).toHaveLength(6);
+    expect(getStyleProp(slots.get(0))).toEqual({
+      width: '10.294118%' // 6h30m / 17h
+    });
+    expect(getStyleProp(slots.get(1))).toEqual({
+      width: '4.411765%' // 2h15m / 17h
+    });
+    expect(getStyleProp(slots.get(2))).toEqual({
+      width: '13.235294%' // 45m / 17h
+    });
+    expect(getStyleProp(slots.get(3))).toEqual({
+      width: '39.705882%' // 2h15m / 17h
+    });
+    expect(getStyleProp(slots.get(4))).toEqual({
+      width: '13.235294%' // 2h15m / 17h
+    });
+    expect(getStyleProp(slots.get(5))).toEqual({
+      width: '19.117647%' // 3h15m / 17h
+    });
+  });
+
   it('should set width in % for each slot when dateCurrent given', () => {
     const wrapper = shallow(
       <RoomTimeline
@@ -186,6 +217,24 @@ describe('RoomTimeline', () => {
   it('should render one free slot if events are empty', () => {
     const wrapper = shallow(
       <RoomTimeline
+        hourStart={0}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        description={'3 - 6 человек'}
+        events={[]}
+      />
+    );
+
+    const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(slots).toHaveLength(1);
+    expect(getStyleProp(slots.get(0))).toEqual({
+      width: '100.000000%'
+    });
+  });
+
+  it('should render one free slot if events are empty', () => {
+    const wrapper = shallow(
+      <RoomTimeline
         dateCurrent={new Date('2018-01-09T07:30:00.55')}
         hourStart={0}
         hourEnd={23}
@@ -196,8 +245,12 @@ describe('RoomTimeline', () => {
     );
 
     const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(slots).toHaveLength(2);
     expect(getStyleProp(slots.get(0))).toEqual({
-      width: '100.000000%'
+      width: '31.250000%'
     });
-  }); 
+    expect(getStyleProp(slots.get(1))).toEqual({
+      width: '68.750000%'
+    });
+  });
 });

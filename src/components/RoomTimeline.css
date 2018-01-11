@@ -1,3 +1,8 @@
+.RoomTimeline {
+  margin-bottom: 24px;
+  height: 28px;
+}
+
 .RoomTimeline-Slot {
   height: 28px;
   display: inline-block;
@@ -7,6 +12,7 @@
   background-color: #fff;
 }
 
-.RoomTimeline-Slot_event {
+.RoomTimeline-Slot_event,
+.RoomTimeline-Slot_past {
   background-color: #D5DFE9; 
 }
