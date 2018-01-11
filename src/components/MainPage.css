@@ -38,3 +38,8 @@
 .MainPage-Clearfix {
   clear: both;
 }
+
+.MainPage-RoomTimelineList .RoomGroupList-Group {
+  margin-top: 46px;
+  margin-bottom: 53px;
+}

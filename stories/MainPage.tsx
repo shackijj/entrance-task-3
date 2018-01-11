@@ -145,5 +145,7 @@ storiesOf('MainPage', module)
     <MainPage
       formattedDate="14 дек · Сегодня"
       roomGroups={roomGroups}
+      hourStart={7}
+      hourEnd={23}
       currentTime={new Date('2018-01-09T07:30:00.55')}
     />));
