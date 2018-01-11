@@ -30,6 +30,11 @@
 }
 
 .MainPage-TimelineEvents {
+  /* 
+  width hardcoded value should be removed or set by js 
+  Formulae: (width of timeline + width of room list) 
+  it makes srolling possible across all devices 
+  */
   width: 1367px;
   height: calc(100vh - 72px - 46px);
   overflow-y: scroll;
@@ -43,7 +48,6 @@
 }
 
 .MainPage-RoomTimelineList {
-  width: 1122px;
   margin-left: 245px;
   background-color: #E9ECEF;
 }
@@ -52,8 +56,12 @@
   margin-left: 245px;
 }
 
+/* BEM Encapsulation is broken for the next three rules */
+.MainPage-RoomTimelineList {
+  padding: 46px 0;
+}
 .MainPage-RoomTimelineList .RoomGroupList-Group {
-  padding-top: 46px;
+  margin-bottom: 53px;
 }
 .MainPage-RoomGroupList .RoomGroupList-Group {
   margin-bottom: 19px;

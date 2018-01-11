@@ -7,3 +7,4 @@
 
 TODO: 
 - Download OpenSans fonts
+- Fix Header button on android
