@@ -10,3 +10,5 @@ import './MainPage';
 import './RoundButton';
 import './DatePicker';
 import './RoomGroupList';
+import './EventTooltip';
+import './User';
