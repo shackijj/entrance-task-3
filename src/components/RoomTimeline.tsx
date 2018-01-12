@@ -31,10 +31,21 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
     const {dateStart, dateEnd} = curEvent;
 
     if (idx === 0 && hourStart < dateStart.getHours()) {
-      slotProps.push({
-        duration: (dateStart.getHours() - hourStart) * 60 + dateStart.getMinutes(),
-        type: dateCurrent ? 'past' : 'free'
-      });
+      if (dateCurrent && dateCurrent < dateStart) {
+        slotProps.push({
+          duration: getMinutes(dateCurrent) - hourStart * 60,
+          type: 'past'
+        });
+        slotProps.push({
+          duration: getMinutes(dateStart) - getMinutes(dateCurrent),
+          type: 'free'
+        });
+      } else {
+        slotProps.push({
+          duration: (dateStart.getHours() - hourStart) * 60 + dateStart.getMinutes(),
+          type: dateCurrent ? 'past' : 'free'
+        });
+      }
     }
 
     if (prevEvent && prevEvent.dateEnd < dateStart) {
@@ -67,12 +78,13 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
 
   if (events.length === 0) {
     if (dateCurrent) {
+      const pastMinues = getMinutes(dateCurrent) - hourStart * 60;
       slotProps.push({
-        duration: getMinutes(dateCurrent),
+        duration: pastMinues,
         type: 'past',
       });
       slotProps.push({
-        duration: totalMinutes - getMinutes(dateCurrent),
+        duration: totalMinutes - pastMinues,
         type: 'free',
       });
     } else {

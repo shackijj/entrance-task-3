@@ -60,6 +60,7 @@ describe('RoomTimeline', () => {
         <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
       </div>
     );
+
     expect(actual.matchesElement(expected)).toBeTruthy();
   });
 
@@ -251,6 +252,64 @@ describe('RoomTimeline', () => {
     });
     expect(getStyleProp(slots.get(1))).toEqual({
       width: '68.750000%'
+    });
+  });
+
+  it('empty events and current date width non-default start hours', () => {
+    const wrapper = shallow(
+      <RoomTimeline
+        dateCurrent={new Date('2018-01-09T07:30:00.55')}
+        hourStart={7}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        description={'3 - 6 человек'}
+        events={[]}
+      />
+    );
+
+    const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(slots).toHaveLength(2);
+    expect(getStyleProp(slots.get(0))).toEqual({
+      width: '2.941176%'
+    });
+    expect(getStyleProp(slots.get(1))).toEqual({
+      width: '97.058824%'
+    });
+  });
+
+  it('empty events and current date width non-default start hours', () => {
+    const wrapper = shallow(
+      <RoomTimeline
+        dateCurrent={new Date('2018-01-09T07:30:00.55')}
+        hourStart={7}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        description={'3 - 6 человек'}
+        events={
+          [
+            {
+              title: 'Событие 7',
+              dateStart: new Date('2018-01-09T10:00:00.55'),
+              dateEnd: new Date('2018-01-09T13:00:00.55')
+            },
+          ]
+        }
+      />
+    );
+
+    const slots = wrapper.find('.RoomTimeline-Slot');
+    expect(slots).toHaveLength(4);
+    expect(getStyleProp(slots.get(0))).toEqual({
+      width: '2.941176%'
+    });
+    expect(getStyleProp(slots.get(1))).toEqual({
+      width: '14.705882%'
+    });
+    expect(getStyleProp(slots.get(2))).toEqual({
+      width: '17.647059%'
+    });
+    expect(getStyleProp(slots.get(3))).toEqual({
+      width: '64.705882%'
     });
   });
 });
