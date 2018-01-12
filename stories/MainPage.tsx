@@ -268,6 +268,254 @@ storiesOf('MainPage', module)
           },
         ]
       },
+      {
+        title: '7 этаж',
+        rooms: [
+          {
+            title: 'Ржавый Фред',
+            description: '3 - 6 человек',
+            events: [
+              {
+                title: 'Событие 1',
+                dateStart: new Date('2018-01-09T06:30:00.55'),
+                dateEnd: new Date('2018-01-09T08:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 2',
+                dateStart: new Date('2018-01-09T09:30:00.55'),
+                dateEnd: new Date('2018-01-09T11:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T18:30:00.55'),
+                dateEnd: new Date('2018-01-09T20:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Прачечная',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T05:04:00.55'),
+                dateEnd: new Date('2018-01-09T10:04:00.55'),
+                users
+              },
+              {
+                title: 'Событие 4',
+                dateStart: new Date('2018-01-09T14:10:00.55'),
+                dateEnd: new Date('2018-01-09T14:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 5',
+                dateStart: new Date('2018-01-09T17:00:00.55'),
+                dateEnd: new Date('2018-01-09T18:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Желтый дом',
+            description: 'до 10 человек',
+            events: []
+          },
+          {
+            title: 'Оранжевый Тюльпан',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 7',
+                dateStart: new Date('2018-01-09T10:15:00.55'),
+                dateEnd: new Date('2018-01-09T13:00:00.55'),
+                users
+              },
+              {
+                title: 'Событие 9',
+                dateStart: new Date('2018-01-09T15:00:00.55'),
+                dateEnd: new Date('2018-01-09T16:15:00.55'),
+                users
+              },
+              {
+                title: 'Событие 8',
+                dateStart: new Date('2018-01-09T20:00:00.55'),
+                dateEnd: new Date('2018-01-09T21:00:00.55'),
+                users
+              },
+            ]
+          },
+        ]
+      },
+      {
+        title: '7 этаж',
+        rooms: [
+          {
+            title: 'Ржавый Фред',
+            description: '3 - 6 человек',
+            events: [
+              {
+                title: 'Событие 1',
+                dateStart: new Date('2018-01-09T06:30:00.55'),
+                dateEnd: new Date('2018-01-09T08:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 2',
+                dateStart: new Date('2018-01-09T09:30:00.55'),
+                dateEnd: new Date('2018-01-09T11:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T18:30:00.55'),
+                dateEnd: new Date('2018-01-09T20:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Прачечная',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T05:04:00.55'),
+                dateEnd: new Date('2018-01-09T10:04:00.55'),
+                users
+              },
+              {
+                title: 'Событие 4',
+                dateStart: new Date('2018-01-09T14:10:00.55'),
+                dateEnd: new Date('2018-01-09T14:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 5',
+                dateStart: new Date('2018-01-09T17:00:00.55'),
+                dateEnd: new Date('2018-01-09T18:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Желтый дом',
+            description: 'до 10 человек',
+            events: []
+          },
+          {
+            title: 'Оранжевый Тюльпан',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 7',
+                dateStart: new Date('2018-01-09T10:15:00.55'),
+                dateEnd: new Date('2018-01-09T13:00:00.55'),
+                users
+              },
+              {
+                title: 'Событие 9',
+                dateStart: new Date('2018-01-09T15:00:00.55'),
+                dateEnd: new Date('2018-01-09T16:15:00.55'),
+                users
+              },
+              {
+                title: 'Событие 8',
+                dateStart: new Date('2018-01-09T20:00:00.55'),
+                dateEnd: new Date('2018-01-09T21:00:00.55'),
+                users
+              },
+            ]
+          },
+
+        ]
+      },
+      {
+        title: '7 этаж',
+        rooms: [
+          {
+            title: 'Ржавый Фред',
+            description: '3 - 6 человек',
+            events: [
+              {
+                title: 'Событие 1',
+                dateStart: new Date('2018-01-09T06:30:00.55'),
+                dateEnd: new Date('2018-01-09T08:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 2',
+                dateStart: new Date('2018-01-09T09:30:00.55'),
+                dateEnd: new Date('2018-01-09T11:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T18:30:00.55'),
+                dateEnd: new Date('2018-01-09T20:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Прачечная',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 3',
+                dateStart: new Date('2018-01-09T05:04:00.55'),
+                dateEnd: new Date('2018-01-09T10:04:00.55'),
+                users
+              },
+              {
+                title: 'Событие 4',
+                dateStart: new Date('2018-01-09T14:10:00.55'),
+                dateEnd: new Date('2018-01-09T14:45:00.55'),
+                users
+              },
+              {
+                title: 'Событие 5',
+                dateStart: new Date('2018-01-09T17:00:00.55'),
+                dateEnd: new Date('2018-01-09T18:45:00.55'),
+                users
+              }
+            ]
+          },
+          {
+            title: 'Желтый дом',
+            description: 'до 10 человек',
+            events: []
+          },
+          {
+            title: 'Оранжевый Тюльпан',
+            description: 'до 10 человек',
+            events: [
+              {
+                title: 'Событие 7',
+                dateStart: new Date('2018-01-09T10:15:00.55'),
+                dateEnd: new Date('2018-01-09T13:00:00.55'),
+                users
+              },
+              {
+                title: 'Событие 9',
+                dateStart: new Date('2018-01-09T15:00:00.55'),
+                dateEnd: new Date('2018-01-09T16:15:00.55'),
+                users
+              },
+              {
+                title: 'Событие 8',
+                dateStart: new Date('2018-01-09T20:00:00.55'),
+                dateEnd: new Date('2018-01-09T21:00:00.55'),
+                users
+              },
+            ]
+          },
+
+        ]
+      },
     ];
     return (
       <MainPage
