@@ -5,6 +5,7 @@
   padding: 16px;
   box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28);
   border-radius: 8px;
+  min-width: 330px;
 }
 
 .EventTooltip-Title {

@@ -16,6 +16,7 @@
   margin-top: 16px;
   line-height: 13px;
   text-align: center;
+  z-index: 2;
 }
 
 .Timeline-Hour_passed {

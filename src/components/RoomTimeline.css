@@ -5,7 +5,9 @@
 
 .RoomTimeline-Slot {
   height: 28px;
+  cursor: pointer;
   display: inline-block;
+  position: relative;
 }
 
 .RoomTimeline-Slot_free {
@@ -15,4 +17,32 @@
 .RoomTimeline-Slot_event,
 .RoomTimeline-Slot_past {
   background-color: #D5DFE9; 
+}
+
+
+.RoomTimeline-Slot .EventTooltip {
+  visibility: hidden;
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.RoomTimeline-Slot:hover {
+  z-index: 3;
+}
+
+.RoomTimeline-Slot:hover .EventTooltip {
+  visibility: visible;
+}
+
+.RoomTimeline-Slot .EventTooltip:before {
+  content: "";
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  position: absolute;
+  top: -6px;
+  left: calc(50% - 10px);
+  display: block;
 }

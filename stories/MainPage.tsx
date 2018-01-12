@@ -1,6 +1,20 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import MainPage from '../src/components/MainPage';
+const users = [
+  {
+    name: 'Дарт Вейдер 1',
+    avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
+  },
+  {
+    name: 'Дарт Вейдер 2',
+    avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
+  },
+  {
+    name: 'Дарт Вейдер 3',
+    avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
+  }
+];
 
 const aFewGroups = [
   {
@@ -13,17 +27,20 @@ const aFewGroups = [
           {
             title: 'Событие 1',
             dateStart: new Date('2018-01-09T06:30:00.55'),
-            dateEnd: new Date('2018-01-09T08:45:00.55')
+            dateEnd: new Date('2018-01-09T08:45:00.55'),
+            users
           },
           {
             title: 'Событие 2',
             dateStart: new Date('2018-01-09T09:30:00.55'),
-            dateEnd: new Date('2018-01-09T11:45:00.55')
+            dateEnd: new Date('2018-01-09T11:45:00.55'),
+            users
           },
           {
             title: 'Событие 3',
             dateStart: new Date('2018-01-09T18:30:00.55'),
-            dateEnd: new Date('2018-01-09T20:45:00.55')
+            dateEnd: new Date('2018-01-09T20:45:00.55'),
+            users
           }
         ]
       },
@@ -34,17 +51,20 @@ const aFewGroups = [
           {
             title: 'Событие 3',
             dateStart: new Date('2018-01-09T05:04:00.55'),
-            dateEnd: new Date('2018-01-09T10:04:00.55')
+            dateEnd: new Date('2018-01-09T10:04:00.55'),
+            users
           },
           {
             title: 'Событие 4',
             dateStart: new Date('2018-01-09T14:10:00.55'),
-            dateEnd: new Date('2018-01-09T14:45:00.55')
+            dateEnd: new Date('2018-01-09T14:45:00.55'),
+            users
           },
           {
             title: 'Событие 5',
             dateStart: new Date('2018-01-09T17:00:00.55'),
-            dateEnd: new Date('2018-01-09T18:45:00.55')
+            dateEnd: new Date('2018-01-09T18:45:00.55'),
+            users
           }
         ]
       },
@@ -60,17 +80,20 @@ const aFewGroups = [
           {
             title: 'Событие 7',
             dateStart: new Date('2018-01-09T10:15:00.55'),
-            dateEnd: new Date('2018-01-09T13:00:00.55')
+            dateEnd: new Date('2018-01-09T13:00:00.55'),
+            users
           },
           {
             title: 'Событие 9',
             dateStart: new Date('2018-01-09T15:00:00.55'),
-            dateEnd: new Date('2018-01-09T16:15:00.55')
+            dateEnd: new Date('2018-01-09T16:15:00.55'),
+            users
           },
           {
             title: 'Событие 8',
             dateStart: new Date('2018-01-09T20:00:00.55'),
-            dateEnd: new Date('2018-01-09T21:00:00.55')
+            dateEnd: new Date('2018-01-09T21:00:00.55'),
+            users
           },
         ]
       },
@@ -91,17 +114,20 @@ storiesOf('MainPage', module)
               {
                 title: 'Событие 1',
                 dateStart: new Date('2018-01-09T06:30:00.55'),
-                dateEnd: new Date('2018-01-09T08:45:00.55')
+                dateEnd: new Date('2018-01-09T08:45:00.55'),
+                users
               },
               {
                 title: 'Событие 2',
                 dateStart: new Date('2018-01-09T09:30:00.55'),
-                dateEnd: new Date('2018-01-09T11:45:00.55')
+                dateEnd: new Date('2018-01-09T11:45:00.55'),
+                users
               },
               {
                 title: 'Событие 3',
                 dateStart: new Date('2018-01-09T18:30:00.55'),
-                dateEnd: new Date('2018-01-09T20:45:00.55')
+                dateEnd: new Date('2018-01-09T20:45:00.55'),
+                users
               }
             ]
           },
@@ -112,17 +138,20 @@ storiesOf('MainPage', module)
               {
                 title: 'Событие 3',
                 dateStart: new Date('2018-01-09T05:04:00.55'),
-                dateEnd: new Date('2018-01-09T10:00:00.55')
+                dateEnd: new Date('2018-01-09T10:04:00.55'),
+                users
               },
               {
                 title: 'Событие 4',
                 dateStart: new Date('2018-01-09T14:10:00.55'),
-                dateEnd: new Date('2018-01-09T14:45:00.55')
+                dateEnd: new Date('2018-01-09T14:45:00.55'),
+                users
               },
               {
                 title: 'Событие 5',
                 dateStart: new Date('2018-01-09T17:00:00.55'),
-                dateEnd: new Date('2018-01-09T18:45:00.55')
+                dateEnd: new Date('2018-01-09T18:45:00.55'),
+                users
               }
             ]
           },
@@ -137,82 +166,23 @@ storiesOf('MainPage', module)
             events: [
               {
                 title: 'Событие 7',
-                dateStart: new Date('2018-01-09T10:04:00.55'),
-                dateEnd: new Date('2018-01-09T13:00:00.55')
+                dateStart: new Date('2018-01-09T10:15:00.55'),
+                dateEnd: new Date('2018-01-09T13:00:00.55'),
+                users
               },
               {
                 title: 'Событие 9',
                 dateStart: new Date('2018-01-09T15:00:00.55'),
-                dateEnd: new Date('2018-01-09T16:15:00.55')
+                dateEnd: new Date('2018-01-09T16:15:00.55'),
+                users
               },
               {
                 title: 'Событие 8',
                 dateStart: new Date('2018-01-09T20:00:00.55'),
-                dateEnd: new Date('2018-01-09T21:00:00.55')
+                dateEnd: new Date('2018-01-09T21:00:00.55'),
+                users
               },
             ]
-          },
-        ]
-      },
-      {
-        title: '6 этаж',
-        rooms: [
-          {
-            title: 'Джокер',
-            description: '3 - 6 человек',
-            events: []
-          },
-          {
-            title: 'Мариванна',
-            description: '3 - 6 человек',
-            events: [
-              {
-                title: 'Событие 7',
-                dateStart: new Date('2018-01-09T10:04:00.55'),
-                dateEnd: new Date('2018-01-09T13::00.55')
-              },
-              {
-                title: 'Событие 8',
-                dateStart: new Date('2018-01-09T20:00.55'),
-                dateEnd: new Date('2018-01-09T21:00:00.55')
-              },
-              {
-                title: 'Событие 9',
-                dateStart: new Date('2018-01-09T15:00:00.55'),
-                dateEnd: new Date('2018-01-09T16:15:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Тонкий боб',
-            description: '3 - 6 человек',
-            events: [
-              {
-                title: 'Событие 1',
-                dateStart: new Date('2018-01-09T06:30:00.55'),
-                dateEnd: new Date('2018-01-09T08:45:00.55')
-              },
-              {
-                title: 'Событие 2',
-                dateStart: new Date('2018-01-09T09:30:00.55'),
-                dateEnd: new Date('2018-01-09T11:45:00.55')
-              },
-              {
-                title: 'Событие 3',
-                dateStart: new Date('2018-01-09T18:30:00.55'),
-                dateEnd: new Date('2018-01-09T20:45:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Черная вдова',
-            description: '3 - 6 человек',
-            events: [],
-          },
-          {
-            title: 'Белорусский ликёр',
-            description: '3 - 6 человек',
-            events: []
           },
         ]
       },
@@ -226,17 +196,20 @@ storiesOf('MainPage', module)
               {
                 title: 'Событие 1',
                 dateStart: new Date('2018-01-09T06:30:00.55'),
-                dateEnd: new Date('2018-01-09T08:45:00.55')
+                dateEnd: new Date('2018-01-09T08:45:00.55'),
+                users
               },
               {
                 title: 'Событие 2',
                 dateStart: new Date('2018-01-09T09:30:00.55'),
-                dateEnd: new Date('2018-01-09T11:45:00.55')
+                dateEnd: new Date('2018-01-09T11:45:00.55'),
+                users
               },
               {
                 title: 'Событие 3',
                 dateStart: new Date('2018-01-09T18:30:00.55'),
-                dateEnd: new Date('2018-01-09T20:45:00.55')
+                dateEnd: new Date('2018-01-09T20:45:00.55'),
+                users
               }
             ]
           },
@@ -247,17 +220,20 @@ storiesOf('MainPage', module)
               {
                 title: 'Событие 3',
                 dateStart: new Date('2018-01-09T05:04:00.55'),
-                dateEnd: new Date('2018-01-09T10:00:00.55')
+                dateEnd: new Date('2018-01-09T10:04:00.55'),
+                users
               },
               {
                 title: 'Событие 4',
                 dateStart: new Date('2018-01-09T14:10:00.55'),
-                dateEnd: new Date('2018-01-09T14:45:00.55')
+                dateEnd: new Date('2018-01-09T14:45:00.55'),
+                users
               },
               {
                 title: 'Событие 5',
                 dateStart: new Date('2018-01-09T17:00:00.55'),
-                dateEnd: new Date('2018-01-09T18:45:00.55')
+                dateEnd: new Date('2018-01-09T18:45:00.55'),
+                users
               }
             ]
           },
@@ -272,82 +248,23 @@ storiesOf('MainPage', module)
             events: [
               {
                 title: 'Событие 7',
-                dateStart: new Date('2018-01-09T10:04:00.55'),
-                dateEnd: new Date('2018-01-09T13:00:00.55')
+                dateStart: new Date('2018-01-09T10:15:00.55'),
+                dateEnd: new Date('2018-01-09T13:00:00.55'),
+                users
               },
               {
                 title: 'Событие 9',
                 dateStart: new Date('2018-01-09T15:00:00.55'),
-                dateEnd: new Date('2018-01-09T16:15:00.55')
+                dateEnd: new Date('2018-01-09T16:15:00.55'),
+                users
               },
               {
                 title: 'Событие 8',
                 dateStart: new Date('2018-01-09T20:00:00.55'),
-                dateEnd: new Date('2018-01-09T21:00:00.55')
+                dateEnd: new Date('2018-01-09T21:00:00.55'),
+                users
               },
             ]
-          },
-        ]
-      },
-      {
-        title: '6 этаж',
-        rooms: [
-          {
-            title: 'Джокер',
-            description: '3 - 6 человек',
-            events: []
-          },
-          {
-            title: 'Мариванна',
-            description: '3 - 6 человек',
-            events: [
-              {
-                title: 'Событие 7',
-                dateStart: new Date('2018-01-09T10:04:00.55'),
-                dateEnd: new Date('2018-01-09T13::00.55')
-              },
-              {
-                title: 'Событие 8',
-                dateStart: new Date('2018-01-09T20:00.55'),
-                dateEnd: new Date('2018-01-09T21:00:00.55')
-              },
-              {
-                title: 'Событие 9',
-                dateStart: new Date('2018-01-09T15:00:00.55'),
-                dateEnd: new Date('2018-01-09T16:15:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Тонкий боб',
-            description: '3 - 6 человек',
-            events: [
-              {
-                title: 'Событие 1',
-                dateStart: new Date('2018-01-09T06:30:00.55'),
-                dateEnd: new Date('2018-01-09T08:45:00.55')
-              },
-              {
-                title: 'Событие 2',
-                dateStart: new Date('2018-01-09T09:30:00.55'),
-                dateEnd: new Date('2018-01-09T11:45:00.55')
-              },
-              {
-                title: 'Событие 3',
-                dateStart: new Date('2018-01-09T18:30:00.55'),
-                dateEnd: new Date('2018-01-09T20:45:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Черная вдова',
-            description: '3 - 6 человек',
-            events: [],
-          },
-          {
-            title: 'Белорусский ликёр',
-            description: '3 - 6 человек',
-            events: []
           },
         ]
       },
