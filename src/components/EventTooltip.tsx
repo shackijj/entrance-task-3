@@ -5,12 +5,15 @@ import { Edit } from './GlyphIcon/GlyphIcon';
 import * as moment from 'moment';
 import './EventTooltip.css';
 
-interface EventTooltipProps {
+export interface Event {
   title: string;
   dateStart: Date;
   dateEnd: Date;
-  room: { title: string };
   users: UserProps[];
+}
+
+interface EventTooltipProps extends Event {
+  room: { title: string };
 }
 
 const EventTooltip = ({title, room, dateStart, dateEnd, users}: EventTooltipProps) => {

@@ -41,7 +41,8 @@ describe('EventTooltip', () => {
           9 января, 18:30—20:45 · Желтый дом
         </div>
         <div className="EventTooltip-Users">
-          <User {...event.users[0]}/> и еще 2 участника
+          <User {...event.users[0]}/>
+          <span className="EventTooltip-MoreUsers">и еще 2 участника</span>
         </div>
       </div>
     );

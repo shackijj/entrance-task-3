@@ -1,9 +1,16 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import RoomTimeline from './RoomTimeline';
+import EventTooltip from './EventTooltip';
 
 describe('RoomTimeline', () => {
   const dateCurrent = new Date('2018-01-09T07:30:00.55');
+  const users = [
+    {
+      name: 'Test',
+      avatarUrl: 'Fest'
+    }
+  ];
   const room = {
     title: 'Ржавый Фред',
     description: '3 - 6 человек',
@@ -11,17 +18,20 @@ describe('RoomTimeline', () => {
       {
         title: 'Событие 1',
         dateStart: new Date('2018-01-09T06:30:00.55'),
-        dateEnd: new Date('2018-01-09T08:45:00.55')
+        dateEnd: new Date('2018-01-09T08:45:00.55'),
+        users
       },
       {
         title: 'Событие 2',
         dateStart: new Date('2018-01-09T09:30:00.55'),
-        dateEnd: new Date('2018-01-09T11:45:00.55')
+        dateEnd: new Date('2018-01-09T11:45:00.55'),
+        users
       },
       {
         title: 'Событие 3',
         dateStart: new Date('2018-01-09T18:30:00.55'),
-        dateEnd: new Date('2018-01-09T20:45:00.55')
+        dateEnd: new Date('2018-01-09T20:45:00.55'),
+        users
       }
     ]
   };
@@ -41,7 +51,7 @@ describe('RoomTimeline', () => {
   });
 
   it('should render slots for timeline view', () => {
-    const actual = shallow(
+    const wrapper = shallow(
       <RoomTimeline
         {...room}
         dateCurrent={dateCurrent}
@@ -49,41 +59,26 @@ describe('RoomTimeline', () => {
         hourEnd={23}
       />
     );
-    const expected = (
-      <div className="RoomTimeline">
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_past"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-      </div>
-    );
-
-    expect(actual.matchesElement(expected)).toBeTruthy();
+    expect(wrapper.find('.RoomTimeline-Slot')).toHaveLength(7);
+    expect(wrapper.find('.RoomTimeline-Slot_past')).toHaveLength(1);
+    expect(wrapper.find('.RoomTimeline-Slot_free')).toHaveLength(3);
+    expect(wrapper.find('.RoomTimeline-Slot_event')).toHaveLength(3);
+    expect(wrapper.find(EventTooltip)).toHaveLength(3);
   });
 
   it('should work without dateCurrent', () => {
-    const actual = shallow(
+    const wrapper = shallow(
       <RoomTimeline
         {...room}
         hourStart={0}
         hourEnd={23}
       />
     );
-    const expected = (
-      <div className="RoomTimeline">
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_event"/>
-        <div className="RoomTimeline-Slot RoomTimeline-Slot_free"/>
-      </div>
-    );
-    expect(actual.matchesElement(expected)).toBeTruthy();
+
+    expect(wrapper.find('.RoomTimeline-Slot')).toHaveLength(7);
+    expect(wrapper.find('.RoomTimeline-Slot_free')).toHaveLength(4);
+    expect(wrapper.find('.RoomTimeline-Slot_event')).toHaveLength(3);
+    expect(wrapper.find(EventTooltip)).toHaveLength(3);
   });
 
   it('should set width in % for each slot', () => {
@@ -164,7 +159,8 @@ describe('RoomTimeline', () => {
             {
               title: 'Событие 1',
               dateStart: new Date('2018-01-09T06:30:00.55'),
-              dateEnd: new Date('2018-01-09T08:45:00.55')
+              dateEnd: new Date('2018-01-09T08:45:00.55'),
+              users
             },
           ]
         }
@@ -196,7 +192,8 @@ describe('RoomTimeline', () => {
             {
               title: 'Событие 3',
               dateStart: new Date('2018-01-09T05:04:00.55'),
-              dateEnd: new Date('2018-01-09T10:00:00.23')
+              dateEnd: new Date('2018-01-09T10:00:00.23'),
+              users
             },
           ]
         }
@@ -290,7 +287,8 @@ describe('RoomTimeline', () => {
             {
               title: 'Событие 7',
               dateStart: new Date('2018-01-09T10:00:00.55'),
-              dateEnd: new Date('2018-01-09T13:00:00.55')
+              dateEnd: new Date('2018-01-09T13:00:00.55'),
+              users
             },
           ]
         }

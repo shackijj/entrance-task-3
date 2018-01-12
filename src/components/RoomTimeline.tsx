@@ -1,12 +1,7 @@
 import * as React from 'react';
 import './RoomTimeline.css';
 import { RoomProps } from './Room';
-
-interface Event {
-  title: string;
-  dateStart: Date;
-  dateEnd: Date;
-}
+import EventTooltip, { Event } from './EventTooltip';
 
 export interface RoomTimelineProps extends RoomProps {
   dateCurrent?: Date;
@@ -18,9 +13,9 @@ export interface RoomTimelineProps extends RoomProps {
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
-const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourStart = 0, hourEnd = 23}) => {
+const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourStart = 0, hourEnd = 23, title}) => {
 
-  const slotProps: Array<{duration: number, type: string}> = [];
+  const slotProps: Array<{duration: number, type: string, tooltip?: JSX.Element}> = [];
 
   let prevEvent: Event | undefined;
   let length = events.length;
@@ -55,15 +50,19 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
       });
     }
 
+    const tooltip = <EventTooltip room={{title}} {...curEvent}/>;
+
     if (hourStart > dateStart.getHours()) {
       slotProps.push({
         duration: getMinutes(dateEnd) - (hourStart * 60),
-        type: 'event'
+        type: 'event',
+        tooltip
       });
     } else {
       slotProps.push({
         duration: getMinutes(dateEnd) - getMinutes(dateStart),
-        type: 'event'
+        type: 'event',
+        tooltip
       });
     }
 
@@ -96,12 +95,14 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
   }
   return (
     <div className="RoomTimeline">
-      {slotProps.map(({type, duration}, idx) => (
+      {slotProps.map(({type, duration, tooltip}, idx) => (
         <div
           key={idx}
           className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
           style={{width: `${((duration * 100 / totalMinutes).toFixed(6))}%`}}
-        />
+        >
+        {tooltip ? tooltip : ''}
+        </div>
       ))}
     </div>
   );
