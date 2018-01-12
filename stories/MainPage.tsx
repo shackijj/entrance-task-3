@@ -2,6 +2,82 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import MainPage from '../src/components/MainPage';
 
+const aFewGroups = [
+  {
+    title: '7 этаж',
+    rooms: [
+      {
+        title: 'Ржавый Фред',
+        description: '3 - 6 человек',
+        events: [
+          {
+            title: 'Событие 1',
+            dateStart: new Date('2018-01-09T06:30:00.55'),
+            dateEnd: new Date('2018-01-09T08:45:00.55')
+          },
+          {
+            title: 'Событие 2',
+            dateStart: new Date('2018-01-09T09:30:00.55'),
+            dateEnd: new Date('2018-01-09T11:45:00.55')
+          },
+          {
+            title: 'Событие 3',
+            dateStart: new Date('2018-01-09T18:30:00.55'),
+            dateEnd: new Date('2018-01-09T20:45:00.55')
+          }
+        ]
+      },
+      {
+        title: 'Прачечная',
+        description: 'до 10 человек',
+        events: [
+          {
+            title: 'Событие 3',
+            dateStart: new Date('2018-01-09T05:04:00.55'),
+            dateEnd: new Date('2018-01-09T10:04:00.55')
+          },
+          {
+            title: 'Событие 4',
+            dateStart: new Date('2018-01-09T14:10:00.55'),
+            dateEnd: new Date('2018-01-09T14:45:00.55')
+          },
+          {
+            title: 'Событие 5',
+            dateStart: new Date('2018-01-09T17:00:00.55'),
+            dateEnd: new Date('2018-01-09T18:45:00.55')
+          }
+        ]
+      },
+      {
+        title: 'Желтый дом',
+        description: 'до 10 человек',
+        events: []
+      },
+      {
+        title: 'Оранжевый Тюльпан',
+        description: 'до 10 человек',
+        events: [
+          {
+            title: 'Событие 7',
+            dateStart: new Date('2018-01-09T10:15:00.55'),
+            dateEnd: new Date('2018-01-09T13:00:00.55')
+          },
+          {
+            title: 'Событие 9',
+            dateStart: new Date('2018-01-09T15:00:00.55'),
+            dateEnd: new Date('2018-01-09T16:15:00.55')
+          },
+          {
+            title: 'Событие 8',
+            dateStart: new Date('2018-01-09T20:00:00.55'),
+            dateEnd: new Date('2018-01-09T21:00:00.55')
+          },
+        ]
+      },
+    ]
+  },
+];
+
 storiesOf('MainPage', module)
   .add('with lots of rooms', () => {
     const roomGroups = [
@@ -282,6 +358,7 @@ storiesOf('MainPage', module)
         roomGroups={roomGroups}
         hourStart={7}
         hourEnd={23}
+        showCalendar={false}
         currentTime={new Date('2018-01-09T07:30:00.55')}
       />
     );
@@ -289,85 +366,25 @@ storiesOf('MainPage', module)
 
 storiesOf('MainPage', module)
   .add('A few rooms', () => {
-    const roomGroups = [
-      {
-        title: '7 этаж',
-        rooms: [
-          {
-            title: 'Ржавый Фред',
-            description: '3 - 6 человек',
-            events: [
-              {
-                title: 'Событие 1',
-                dateStart: new Date('2018-01-09T06:30:00.55'),
-                dateEnd: new Date('2018-01-09T08:45:00.55')
-              },
-              {
-                title: 'Событие 2',
-                dateStart: new Date('2018-01-09T09:30:00.55'),
-                dateEnd: new Date('2018-01-09T11:45:00.55')
-              },
-              {
-                title: 'Событие 3',
-                dateStart: new Date('2018-01-09T18:30:00.55'),
-                dateEnd: new Date('2018-01-09T20:45:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Прачечная',
-            description: 'до 10 человек',
-            events: [
-              {
-                title: 'Событие 3',
-                dateStart: new Date('2018-01-09T05:04:00.55'),
-                dateEnd: new Date('2018-01-09T10:04:00.55')
-              },
-              {
-                title: 'Событие 4',
-                dateStart: new Date('2018-01-09T14:10:00.55'),
-                dateEnd: new Date('2018-01-09T14:45:00.55')
-              },
-              {
-                title: 'Событие 5',
-                dateStart: new Date('2018-01-09T17:00:00.55'),
-                dateEnd: new Date('2018-01-09T18:45:00.55')
-              }
-            ]
-          },
-          {
-            title: 'Желтый дом',
-            description: 'до 10 человек',
-            events: []
-          },
-          {
-            title: 'Оранжевый Тюльпан',
-            description: 'до 10 человек',
-            events: [
-              {
-                title: 'Событие 7',
-                dateStart: new Date('2018-01-09T10:15:00.55'),
-                dateEnd: new Date('2018-01-09T13:00:00.55')
-              },
-              {
-                title: 'Событие 9',
-                dateStart: new Date('2018-01-09T15:00:00.55'),
-                dateEnd: new Date('2018-01-09T16:15:00.55')
-              },
-              {
-                title: 'Событие 8',
-                dateStart: new Date('2018-01-09T20:00:00.55'),
-                dateEnd: new Date('2018-01-09T21:00:00.55')
-              },
-            ]
-          },
-        ]
-      },
-    ];
     return (
       <MainPage
         formattedDate="14 дек · Сегодня"
-        roomGroups={roomGroups}
+        roomGroups={aFewGroups}
+        showCalendar={false}
+        hourStart={7}
+        hourEnd={23}
+        currentTime={new Date('2018-01-09T07:30:00.55')}
+      />
+    );
+  });
+
+storiesOf('MainPage', module)
+  .add('Widt datepicker opened', () => {
+    return (
+      <MainPage
+        formattedDate="14 дек · Сегодня"
+        roomGroups={aFewGroups}
+        showCalendar={true}
         hourStart={7}
         hourEnd={23}
         currentTime={new Date('2018-01-09T07:30:00.55')}

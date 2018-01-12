@@ -16,16 +16,19 @@ interface MainPageProps {
     formattedDate: string;
     roomGroups: RoomGroup<RoomTimelineProps>[];
     currentTime?: Date;
+    showCalendar: boolean;
     hourStart: number;
     hourEnd: number;
 }
 
-const MainPage: React.SFC<MainPageProps> = ({formattedDate, roomGroups, currentTime, hourStart, hourEnd}) => (
+const MainPage: React.SFC<MainPageProps> =
+  ({formattedDate, roomGroups, currentTime, hourStart, hourEnd, showCalendar}) => (
   <div className="MainPage">
     <Header/>
     <div className="MainPage-SubHeader"/>
     <DatePicker
       formattedDate={formattedDate}
+      showCalendar={showCalendar}
       classes={['MainPage-DatePicker']}
     />
     <div className="MainPage-RoomEventListWrapper">

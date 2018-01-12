@@ -5,7 +5,7 @@ import DatePicker from '../src/components/DatePicker';
 storiesOf('DatePicker', module)
   .add('with different dates', () => (
     <div>
-      <DatePicker formattedDate="14 дек · Сегодня"/>
-      <DatePicker formattedDate="14 янв · Завтра"/>
-      <DatePicker formattedDate="14 янв"/>
+      <DatePicker showCalendar={false} formattedDate="14 дек · Сегодня"/>
+      <DatePicker showCalendar={false} formattedDate="14 янв · Завтра"/>
+      <DatePicker showCalendar={false} formattedDate="14 янв"/>
     </div>));

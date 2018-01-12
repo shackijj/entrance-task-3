@@ -30,3 +30,34 @@
   box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
   border-radius: 4px;
 }
+
+.DatePicker-DayPicker .DayPicker {
+  top: 12px;
+  z-index: 10;
+  box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
+  border-radius: 4px;
+}
+
+.DatePicker-DayPicker .CalendarMonth_caption {
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.DatePicker-DayPicker .CalendarMonth_caption {
+  color: #000;
+  font-size: 15px;
+  padding-bottom: 48px;
+  font-weight: 500;
+}
+
+.DatePicker-DayPicker .CalendarDay {
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.DatePicker-DayPicker .DayPickerNavigation_container {
+  display: none;
+}
