@@ -16,6 +16,7 @@ const DatePicker = ({formattedDate, classes}: DatePickerProps) => (
       {formattedDate}
     </span>
     <RoundButton classes={['DatePicker-ArrowRight']} icon={<ArrowRight/>}/>
+    <div className="DatePicker-Calendar"/>
   </div>
 );
 

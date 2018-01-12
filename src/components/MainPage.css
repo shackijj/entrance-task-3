@@ -1,19 +1,18 @@
 .MainPage {}
 
 .MainPage-SubHeader {
+  width: 100%;
+  position: absolute;
+  top: 71px;
+  height: 46px;
   border-bottom: 1px solid #E9ECEF;
-  padding: 0 calc(50% - 640px);
-  max-width: 1280px;
-  position: relative;
-  height: 46px;  
 }
 
 .MainPage-DatePicker {
+  position: absolute;
   width: 197px;
-  float: left;
-  margin-left: 24px;
-  margin-top: 10px;
-  margin-right: 24px;
+  top: 82px;
+  left: calc(50% - 640px + 24px);
 }
 
 .MainPage-RoomGroupListWrapper {
@@ -47,20 +46,18 @@
   float: left;
 }
 
-.MainPage-RoomTimelineList {
-  margin-left: 245px;
-  background-color: #E9ECEF;
-}
-
 .MainPage-Timeline {
   margin-left: 245px;
 }
 
-/* BEM Encapsulation is broken for the next three rules */
 .MainPage-RoomTimelineList {
+  margin-left: 245px;
+  background-color: #E9ECEF;
   padding-top: 46px;
   height: calc(100vh - 72px - 46px - 46px);
 }
+
+/* BEM Encapsulation is broken for the next three rules */
 .MainPage-RoomTimelineList .RoomGroupList-Group {
   margin-bottom: 53px;
 }
