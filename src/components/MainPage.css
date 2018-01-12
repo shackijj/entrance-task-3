@@ -58,11 +58,13 @@
 
 /* BEM Encapsulation is broken for the next three rules */
 .MainPage-RoomTimelineList {
-  padding: 46px 0;
+  padding-top: 46px;
+  height: calc(100vh - 72px - 46px - 46px);
 }
 .MainPage-RoomTimelineList .RoomGroupList-Group {
   margin-bottom: 53px;
 }
+
 .MainPage-RoomGroupList .RoomGroupList-Group {
   margin-bottom: 19px;
 }
