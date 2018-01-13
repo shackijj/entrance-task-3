@@ -10,6 +10,21 @@
   font-size: 0.846em;
 }
 
+
+/* 
+  This pseudo element creates background.
+*/
+.Timeline:after {
+  content: "";
+  position: absolute;
+  background-color: #E9ECEF;
+  height: calc(100vh - 72px - 46px);
+  width: 100%;
+  top: 46px;
+  left: 0px;
+  z-index: -1;
+}
+
 .Timeline-Hour {
   position: relative;
   min-width: 66px;

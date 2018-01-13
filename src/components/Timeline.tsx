@@ -34,6 +34,7 @@ const Timeline = ({hourStart = 0, hourEnd = 23, currentTime, classes}: TimelineP
 
   return (
     <ul className={classNames('Timeline', classes)}>
+      <li className="Timeline-Background"/>
       {formattedTime ?
         <li style={style} className="Timeline-CurrentTime">
           <span className="Timeline-Clock">{formattedTime}</span>

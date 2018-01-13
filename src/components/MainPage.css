@@ -52,9 +52,7 @@
 
 .MainPage-RoomTimelineList {
   margin-left: 245px;
-  background-color: #E9ECEF;
   padding-top: 46px;
-  height: calc(100vh - 72px - 46px - 46px);
 }
 
 /* BEM Encapsulation is broken for the next three rules */
