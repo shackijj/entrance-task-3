@@ -13,3 +13,4 @@ import './RoomGroupList';
 import './EventTooltip';
 import './User';
 import './EditEventPage';
+import './TextInput';
