@@ -1,6 +1,7 @@
 import * as React from 'react';
 import RoomInput from './RoomInput';
 import { shallow } from 'enzyme';
+import { Close } from './GlyphIcon/GlyphIcon';
 
 describe('RoomInput', () => {
   it('change _active modidier depending on isActive prop', () => {
@@ -35,6 +36,7 @@ describe('RoomInput', () => {
       <span className="RoomInput-TitleAndFloor">
         Оранжевый рассвет · 4 этаж
       </span>
+      <Close classes={['RoomInput-CloseIcon']}/>
     </div>
     );
     const actual = shallow(
