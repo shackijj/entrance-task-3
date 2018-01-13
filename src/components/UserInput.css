@@ -1,0 +1,14 @@
+.UserInput {
+  display: inline-flex;
+  border-radius: 100px;
+  background-color: #E9ECEF;
+  align-items: center;
+}
+
+.UserInput-Close {
+  margin-left: 1.154em;
+  margin-right: 0.692em;
+  font-size: 10px;
+  color: #AFB4B8;
+  cursor: pointer;
+}

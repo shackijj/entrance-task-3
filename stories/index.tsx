@@ -15,3 +15,4 @@ import './User';
 import './EditEventPage';
 import './TextInput';
 import './RoomInput';
+import './UserInput';

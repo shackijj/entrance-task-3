@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import * as classNames from 'classnames';
+import { Close } from './GlyphIcon/GlyphIcon';
 
 import './RoomInput.css';
 
@@ -26,6 +27,7 @@ const RoomInput: React.SFC<RoomInputProps> = ({dateStart, dateEnd, room, isActiv
       <span className="RoomInput-TitleAndFloor">
         {room.title} · {room.floor} этаж
       </span>
+      <Close classes={['RoomInput-CloseIcon']}/>
     </div>
   );
 };

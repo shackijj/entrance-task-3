@@ -5,6 +5,7 @@ import RoundButton from './RoundButton';
 import { Close } from './GlyphIcon/GlyphIcon';
 import TextInput from './TextInput';
 import InputLabel from './InputLabel';
+import UserInput from './UserInput';
 import RoomInput from './RoomInput';
 
 import './EditEventPage.css';
@@ -27,14 +28,19 @@ const EditEventPage = () => (
               label="Тема"
               placeholder="О чем будете говорить?"
             />
-            <TextInput
-              classes={['EditEventPage-Input']}
-              label="Участники"
-              placeholder="Например, Тор Одинович"
-            />
+            <div>
+              <TextInput label="Участники" classes={['EditEventPage-Input']}/>
+              <UserInput
+                name="Артур Пирожков"
+                avatarUrl="https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg"
+              />
+              <UserInput
+                name="Артур Пирожков"
+                avatarUrl="https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg"
+              />
+            </div>
           </div>
           <div className="EditEventPage-InputsColumn">
-            <TextInput label="Участники" classes={['EditEventPage-Input']}/>
 
             <div className="EditEventPage-Input">
                 <InputLabel>

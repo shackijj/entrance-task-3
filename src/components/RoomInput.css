@@ -14,3 +14,20 @@
   font-weight: bold;
   margin-right: 0.8125em;
 }
+
+.RoomInput_active {
+  background-color: #007DFF;
+  color: #fff;
+}
+
+.RoomInput-CloseIcon {
+  font-size: 10px;
+  width: 10px;
+  height: 10px;
+  visibility: hidden;
+  margin-left: auto; 
+}
+
+.RoomInput_active .RoomInput-CloseIcon {
+  visibility: visible;
+}

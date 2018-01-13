@@ -1,8 +1,18 @@
 import * as React from 'react';
 import './GlyphIcon.css';
+import * as classNames from 'classnames';
 
-export const ArrowLeft = () => (<span className="GlyphIcon GlyphIcon_ArrowLeft"/>);
-export const ArrowRight = () => (<span className="GlyphIcon GlyphIcon_ArrowRight"/>);
-export const Calendar = () => (<span className="GlyphIcon GlyphIcon_Calendar"/>);
-export const Close = () => (<span className="GlyphIcon GlyphIcon_Close"/>);
-export const Edit = () => (<span className="GlyphIcon GlyphIcon_Edit"/>);
+interface IconProps {
+  classes?: string[];
+}
+
+export const ArrowLeft: React.SFC<IconProps> =
+  ({classes}) => (<span className={classNames(['GlyphIcon', 'GlyphIcon_ArrowLeft', classes])}/>);
+export const ArrowRight: React.SFC<IconProps> =
+  ({classes}) => (<span className={classNames(['GlyphIcon', 'GlyphIcon_ArrowRight', classes])}/>);
+export const Calendar: React.SFC<IconProps> = 
+  ({classes}) => (<span className={classNames(['GlyphIcon', 'GlyphIcon_Calendar', classes])}/>);
+export const Close: React.SFC<IconProps> = 
+  ({classes}) => (<span className={classNames(['GlyphIcon', 'GlyphIcon_Close', classes])}/>);
+export const Edit: React.SFC<IconProps> =
+  ({classes}) => (<span className={classNames(['GlyphIcon', 'GlyphIcon_Edit', classes])}/>);
