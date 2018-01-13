@@ -1,13 +1,15 @@
 import * as React from 'react';
 import './TextInput.css';
+import * as classNames from 'classnames';
 
 interface TextInputProps {
   label: string;
   icon?: JSX.Element;
   placeholder?: string;
+  classes?: string[];
 }
 
-const TextInput = ({label, icon, placeholder}: TextInputProps) => {
+const TextInput = ({label, icon, placeholder, classes}: TextInputProps) => {
   let _input: HTMLInputElement | null;
   let _container: HTMLElement | null;
   const onFocus = () => {
@@ -21,7 +23,7 @@ const TextInput = ({label, icon, placeholder}: TextInputProps) => {
     }
   };
   return (
-    <div className={'TextInput'} ref={div => _container = div}>
+    <div className={classNames('TextInput', classes)} ref={div => _container = div}>
       <div className="TextInput-Label">{label}</div>
       <div className="TextInput-InputContainer">
         <input 

@@ -11,7 +11,7 @@
   border-color: #E9ECEF;
   padding: 0.615em;
   border-radius: 4px;
-  display: inline-flex;
+  display: flex;
   flex-flow: row;
   align-items: center;
 } 
@@ -21,6 +21,7 @@
 }
 
 .TextInput-Input {
+  width: 100%;
   font-size: 1em;
   letter-spacing: 0.036em;
   border: none;
