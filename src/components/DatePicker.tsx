@@ -17,7 +17,7 @@ interface DatePickerProps {
 }
 
 const DatePicker = ({formattedDate, classes, showCalendar}: DatePickerProps) => (
-  <div className={classNames('DatePicker', classes)}>
+  <div className={classNames('DatePicker', {'DatePicker_open': showCalendar}, classes)}>
     <RoundButton classes={['DatePicker-ArrowLeft']} icon={<ArrowLeft/>}/>
     <span className="DatePicker-Date">
       {formattedDate}

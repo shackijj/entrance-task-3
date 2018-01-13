@@ -1,5 +1,6 @@
 .Button {
   text-decoration: none;
+  display: inline-block;
   padding: 1.2308em;
   padding-top: 1em;
   padding-bottom: 0.7692em;

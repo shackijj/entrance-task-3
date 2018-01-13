@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.DatePicker_open .DatePicker-Date {
+  color: #0070E0;
+}
+
 .DatePicker-ArrowLeft {
   float: left;
 }
