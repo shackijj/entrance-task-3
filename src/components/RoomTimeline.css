@@ -19,6 +19,10 @@
   background-color: #D5DFE9; 
 }
 
+.RoomTimeline-Slot_event:hover {
+  background-color: #98A9B9;
+}
+
 
 .RoomTimeline-Slot .EventTooltip {
   visibility: hidden;
