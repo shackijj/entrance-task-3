@@ -1,0 +1,22 @@
+.Modal {
+  position: absolute;
+  background-color: rgba(0,16,33,0.40);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+}
+
+.Modal_open {
+  display: flex;
+}
+
+.Modal-Content {
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28);
+}
