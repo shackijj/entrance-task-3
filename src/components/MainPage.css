@@ -8,11 +8,19 @@
   border-bottom: 1px solid #E9ECEF;
 }
 
-.MainPage-DatePicker {
-  position: absolute;
-  width: 197px;
-  top: 82px;
-  left: calc(50% - 640px + 24px);
+@media screen and (max-width: 1279px) {
+  .MainPage-DatePicker {
+    margin: 12px 24px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .MainPage-DatePicker {
+    position: absolute;
+    width: 197px;
+    top: 82px;
+    left: calc(50% - 640px + 24px);
+  }
 }
 
 .MainPage-RoomGroupListWrapper {

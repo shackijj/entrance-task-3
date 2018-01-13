@@ -3,17 +3,19 @@
   padding: 0em calc(50% - 640px);
   max-width: 1280px;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  align-items: start;
   height: 71px;
 }
 
 .Header-Logo {
-  float: left;
   margin-top: 25px;
   margin-left: 24px;
 }
 
 .Header-Button {
-  float: right;
   margin-top: 18px;
   margin-right: 24px;
 }
