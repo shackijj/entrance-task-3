@@ -1,8 +1,8 @@
 .RoundButton {
   display: inline-block;
   position: relative;
-  width: 1.846em;
-  height: 1.846em;
+  width: 24px;
+  height: 24px;
   border-radius: 100px;
   color: rgba(0,0,0,0.43);
   background-color: #E9ECEF;
