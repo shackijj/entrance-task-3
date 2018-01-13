@@ -43,3 +43,20 @@
   right: 0;
   font-size: 10px;
 }
+
+.EditEventPage-Inputs {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.EditEventPage-InputsColumn {
+  width: 420px;
+}
+
+.EditEventPage-InputsColumn:first-child {
+  margin-right: 32px;
+}
+
+.EditEventPage-Input {
+  margin-bottom: 24px;
+}

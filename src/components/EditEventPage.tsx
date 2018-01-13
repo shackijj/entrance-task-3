@@ -3,6 +3,7 @@ import Header from './Header';
 import Button from './Button';
 import RoundButton from './RoundButton';
 import { Close } from './GlyphIcon/GlyphIcon';
+import TextInput from './TextInput';
 
 import './EditEventPage.css';
 
@@ -18,8 +19,21 @@ const EditEventPage = () => (
         </h1>
         <RoundButton classes={['EditEventPage-CloseButton']} icon={<Close/>}/>
         <div className="EditEventPage-Inputs">
-          <div/>
-          <div/>
+          <div className="EditEventPage-InputsColumn">
+            <TextInput
+              classes={['EditEventPage-Input']}
+              label="Тема"
+              placeholder="О чем будете говорить?"
+            />
+            <TextInput
+              classes={['EditEventPage-Input']}
+              label="Участники"
+              placeholder="Например, Тор Одинович"
+            />
+          </div>
+          <div className="EditEventPage-InputsColumn">
+            <TextInput label="Участники"/>
+          </div>
         </div>
       </div>
     </div>
