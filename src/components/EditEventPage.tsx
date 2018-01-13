@@ -4,6 +4,8 @@ import Button from './Button';
 import RoundButton from './RoundButton';
 import { Close } from './GlyphIcon/GlyphIcon';
 import TextInput from './TextInput';
+import InputLabel from './InputLabel';
+import RoomInput from './RoomInput';
 
 import './EditEventPage.css';
 
@@ -32,7 +34,21 @@ const EditEventPage = () => (
             />
           </div>
           <div className="EditEventPage-InputsColumn">
-            <TextInput label="Участники"/>
+            <TextInput label="Участники" classes={['EditEventPage-Input']}/>
+
+            <div className="EditEventPage-Input">
+                <InputLabel>
+                  Рекомендованные переговорки
+                </InputLabel>
+                <RoomInput
+                  dateStart={new Date('2018-01-13T15:24:49.265')}
+                  dateEnd={new Date('2018-01-13T15:34:49.265')}
+                  room={{
+                    title: 'Оранжевый рассвет',
+                    floor: 4,
+                  }}
+                />
+            </div>
           </div>
         </div>
       </div>

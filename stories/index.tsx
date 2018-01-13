@@ -14,3 +14,4 @@ import './EventTooltip';
 import './User';
 import './EditEventPage';
 import './TextInput';
+import './RoomInput';

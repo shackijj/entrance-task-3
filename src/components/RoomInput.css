@@ -1,0 +1,16 @@
+.RoomInput {
+  border: 2px solid;
+  border-color: #E9ECEF;
+  background-color: #E9ECEF;
+  padding: 0.615em;
+  border-radius: 4px;
+  line-height: 1.308em;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.RoomInput-StartEndTime {
+  font-weight: bold;
+  margin-right: 0.8125em;
+}

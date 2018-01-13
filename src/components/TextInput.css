@@ -1,11 +1,5 @@
 .TextInput {}
 
-.TextInput-Label {
-  font-weight: bold;
-  line-height: 1.231em;
-  margin-bottom: 4px;
-}
-
 .TextInput-InputContainer {
   border: 2px solid;
   border-color: #E9ECEF;
@@ -23,6 +17,7 @@
 .TextInput-Input {
   width: 100%;
   font-size: 1em;
+  line-height: 1.231em;
   letter-spacing: 0.036em;
   border: none;
   outline: none;

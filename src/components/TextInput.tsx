@@ -1,9 +1,10 @@
 import * as React from 'react';
+import InputLabel from './InputLabel';
 import './TextInput.css';
 import * as classNames from 'classnames';
 
 interface TextInputProps {
-  label: string;
+  label?: string;
   icon?: JSX.Element;
   placeholder?: string;
   classes?: string[];
@@ -24,7 +25,7 @@ const TextInput = ({label, icon, placeholder, classes}: TextInputProps) => {
   };
   return (
     <div className={classNames('TextInput', classes)} ref={div => _container = div}>
-      <div className="TextInput-Label">{label}</div>
+      {label ? <InputLabel>{label}</InputLabel> : ''}
       <div className="TextInput-InputContainer">
         <input 
           className="TextInput-Input"
