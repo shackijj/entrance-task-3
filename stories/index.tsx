@@ -12,3 +12,4 @@ import './DatePicker';
 import './RoomGroupList';
 import './EventTooltip';
 import './User';
+import './EditEventPage';

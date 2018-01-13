@@ -1,0 +1,21 @@
+.EditEventPage {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.EditEventPage-Main {
+  flex: 1;
+}
+
+.EditEventPage-Footer {
+  height: 76px;
+  border-top: 1px solid #E9ECEF;
+  padding: 0em calc(50% - 640px);
+  text-align: center;
+}
+
+.EditEventPage-Button {
+  margin-top: 20px;
+  margin-right: 16px;
+}
