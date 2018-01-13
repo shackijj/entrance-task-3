@@ -1,0 +1,24 @@
+.Popup {
+  text-align: center;
+  min-width: 444px;
+}
+
+.Popup-Emoji {
+  font-size: 3.077em;
+  margin-bottom: 17px;
+}
+
+.Popup-Message {
+  font-size: 1.538em;
+  line-height: 1.846em;
+  font-weight: bold;
+}
+
+.Popup-Details {
+  font-size: 1.153em;
+  line-height: 1.308em;
+}
+
+.Popup-Buttons {
+  margin-top: 24px;
+}
