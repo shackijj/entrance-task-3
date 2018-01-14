@@ -6,11 +6,6 @@ import Room from './Room';
 import RoomTimeline, { RoomTimelineProps } from './RoomTimeline';
 import './MainPage.css';
 
-import Popup from './Popup';
-import Modal from './Modal';
-import Button from './Button';
-import Header from './Header';
-
 function roomProps<T>(WrappedComponent: React.SFC<T>, sharedProps: {}) {
   return (props: T) => <WrappedComponent {...props} {...sharedProps}/>;
 }
@@ -20,15 +15,13 @@ interface MainPageProps {
     roomGroups: RoomGroup<RoomTimelineProps>[];
     currentTime?: Date;
     showCalendar: boolean;
-    modalOpen?: boolean;
     hourStart: number;
     hourEnd: number;
 }
 
 const MainPage: React.SFC<MainPageProps> =
-  ({formattedDate, roomGroups, currentTime, hourStart, hourEnd, showCalendar, modalOpen = false}) => (
+  ({formattedDate, roomGroups, currentTime, hourStart, hourEnd, showCalendar}) => (
   <div className="MainPage">
-    <Header/>
     <div className="MainPage-SubHeader"/>
     <DatePicker
       formattedDate={formattedDate}
@@ -56,14 +49,6 @@ const MainPage: React.SFC<MainPageProps> =
         />
       </div>
     </div>
-    <Modal isOpen={modalOpen}>
-      <Popup
-        emoji="🎉"
-        message="Встреча создана!"
-        details={<span>14 декабря, 15:00—17:00<br/>Готем · 4 этаж</span>}
-        buttons={[<Button key="1" classes={['Button_theme_create']}>Хорошо</Button>]}
-      />
-    </Modal>
   </div>
 );
 

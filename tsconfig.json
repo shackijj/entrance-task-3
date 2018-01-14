@@ -21,6 +21,7 @@
     "node_modules",
     "build",
     "scripts",
+    "stories",
     "acceptance-tests",
     "webpack",
     "jest",
