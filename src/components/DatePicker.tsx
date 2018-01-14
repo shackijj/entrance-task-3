@@ -13,7 +13,7 @@ import { DayPicker } from 'react-dates';
 interface DatePickerProps {
   classes?: string[];
   formattedDate: string;
-  showCalendar: boolean;
+  showCalendar?: boolean;
 }
 
 const DatePicker = ({formattedDate, classes, showCalendar}: DatePickerProps) => (
