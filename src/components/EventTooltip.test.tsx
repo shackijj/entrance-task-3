@@ -1,9 +1,6 @@
 import * as React from 'react';
 import EventTooltip from './EventTooltip';
-import User from './User';
-import RoundButton from './RoundButton';
-import { Edit } from './GlyphIcon/GlyphIcon';
-import { shallow } from 'enzyme';
+import { shallowExpect } from '../utils';
 
 describe('EventTooltip', () => {
   it('should render an event', () => {
@@ -30,22 +27,6 @@ describe('EventTooltip', () => {
       ]
     };
 
-    const actual = shallow(<EventTooltip {...event} />);
-    const expected = (
-      <div className="EventTooltip">
-        <RoundButton classes={['EventTooltip-Button']} icon={<Edit/>}/>
-        <div className="EventTooltip-Title">
-          Событие 3
-        </div>
-        <div className="EventTooltip-Info">
-          9 января, 18:30—20:45 · Желтый дом
-        </div>
-        <div className="EventTooltip-Users">
-          <User {...event.users[0]}/>
-          <span className="EventTooltip-MoreUsers">и еще 2 участника</span>
-        </div>
-      </div>
-    );
-    expect(actual.matchesElement(expected)).toBeTruthy();
+    shallowExpect(<EventTooltip {...event} />).toMatchSnapshot();
   });
 });

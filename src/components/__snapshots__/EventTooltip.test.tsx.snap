@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventTooltip should render an event 1`] = `
+<div
+  className="EventTooltip"
+>
+  <RoundButton
+    classes={
+      Array [
+        "EventTooltip-Button",
+      ]
+    }
+    icon={<Unknown />}
+  />
+  <div
+    className="EventTooltip-Title"
+  >
+    Событие 3
+  </div>
+  <div
+    className="EventTooltip-Info"
+  >
+    9 January
+    , 
+    18:30
+    —
+    20:45
+     · 
+    Желтый дом
+  </div>
+  <div
+    className="EventTooltip-Users"
+  >
+    <User
+      avatarUrl="https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg"
+      name="Дарт Вейдер 1"
+    />
+    <span
+      className="EventTooltip-MoreUsers"
+    >
+      и еще 2 участника
+    </span>
+  </div>
+</div>
+`;

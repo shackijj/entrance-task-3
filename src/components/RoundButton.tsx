@@ -3,12 +3,13 @@ import './RoundButton.css';
 import * as classNames from 'classnames';
 
 interface RoundButtonProps {
-  classes?: string[];
   icon: JSX.Element;
+  classes?: string[];
+  onClick?: () => void;
 }
 
-const RoundButton: React.SFC<RoundButtonProps> = ({classes, icon}) => (
-  <a className={classNames('RoundButton', classes)}>
+const RoundButton: React.SFC<RoundButtonProps> = ({classes, icon, onClick}) => (
+  <a className={classNames('RoundButton', classes)} onClick={onClick}>
     <span className="RoundButton-Icon">
       {icon}
     </span>

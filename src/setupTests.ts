@@ -1,6 +1,5 @@
 import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import * as moment from 'moment';
-moment.locale('ru');
+import './setupLocale';
 
 configure({ adapter: new Adapter() });
