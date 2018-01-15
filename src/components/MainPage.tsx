@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DatePicker from './DatePicker';
+// import DatePicker from './DatePicker';
 import Timeline from './Timeline';
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
 import Room from './Room';
@@ -23,11 +23,11 @@ const MainPage: React.SFC<MainPageProps> =
   ({formattedDate, roomGroups, currentTime, hourStart, hourEnd, showCalendar}) => (
   <div className="MainPage">
     <div className="MainPage-SubHeader"/>
-    <DatePicker
-      formattedDate={formattedDate}
+{/*     <DatePicker
+      dateCurrent={formattedDate}
       showCalendar={showCalendar}
       classes={['MainPage-DatePicker']}
-    />
+    /> */}
     <div className="MainPage-RoomEventListWrapper">
       <Timeline
         classes={['MainPage-Timeline']}

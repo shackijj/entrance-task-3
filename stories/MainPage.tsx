@@ -564,7 +564,6 @@ storiesOf('MainPage', module)
         formattedDate="14 дек · Сегодня"
         roomGroups={aFewGroups}
         showCalendar={false}
-        modalOpen={true}
         hourStart={7}
         hourEnd={23}
         currentTime={new Date('2018-01-09T07:30:00.55')}

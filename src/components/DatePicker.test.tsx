@@ -1,14 +1,16 @@
 import * as React from 'react';
 import DatePicker from './DatePicker';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import RountButton from './RoundButton';
 
 describe('DatePicker', () => {
+  const id = (x: string) => x;
   it('should be a div with DatePicker class', () => {
     const wrapper = shallow(
       <DatePicker
         dateCurrent={new Date('2018-01-09')}
         dateChosen={new Date('2018-01-10')}
+        onDatePick={id}
       />
     );
     expect(wrapper.find('div.DatePicker')).toHaveLength(1);
@@ -20,6 +22,7 @@ describe('DatePicker', () => {
         classes={['Test']}
         dateCurrent={new Date('2018-01-09')}
         dateChosen={new Date('2018-01-10')}
+        onDatePick={id}
       />
     );
     const div = wrapper.find('div.DatePicker');
@@ -31,6 +34,7 @@ describe('DatePicker', () => {
       <DatePicker
         dateCurrent={new Date('2018-01-09')}
         dateChosen={new Date('2018-01-10')}
+        onDatePick={id}
       />
     );
 
@@ -42,6 +46,7 @@ describe('DatePicker', () => {
       <DatePicker
         dateCurrent={new Date('2018-01-09')}
         dateChosen={new Date('2018-01-09')}
+        onDatePick={id}
       />
     );
 
@@ -86,5 +91,40 @@ describe('DatePicker', () => {
     expect(mockCb.mock.calls[0][0]).toBe('2018-01-10');
   });
 
-  it('should fire when date on calendar is clicked');
+  it('should fire onDatePick on calendary click', () => {
+    const mockCb = jest.fn();
+    const wrapper = mount(
+      <DatePicker
+        dateCurrent={new Date('2018-01-09')}
+        dateChosen={new Date('2018-01-09')}
+        onDatePick={mockCb}
+      />
+    );
+
+    wrapper
+      .find('[aria-label="Wednesday, January 10, 2018"]')
+      .first()
+      .simulate('click');
+
+    expect(mockCb.mock.calls.length).toBe(1);
+    expect(mockCb.mock.calls[0][0]).toBe('2018-01-10');
+  });
+
+  it('days previous to dateCurrent should not be clickable', () => {
+    const mockCb = jest.fn();
+    const wrapper = mount(
+      <DatePicker
+        dateCurrent={new Date('2018-01-09')}
+        dateChosen={new Date('2018-01-09')}
+        onDatePick={mockCb}
+      />
+    );
+
+    wrapper
+      .find('[aria-label="Not available. Monday, January 8, 2018"]')
+      .first()
+      .simulate('click');
+
+    expect(mockCb.mock.calls.length).toBe(0);
+  });
 });
