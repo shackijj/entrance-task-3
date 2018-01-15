@@ -22,6 +22,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
+    "server",
     "src/components/connected",
     "src/setupTests.ts",
     "src/**/*.test.tsx"
