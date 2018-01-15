@@ -12,7 +12,11 @@ import { updateCurrentDate } from './actions';
 import 'reset-css/reset.css';
 import './index.css';
 
-const store = createStore(reducer);
+const initialState = {
+  dateCurrent: new Date()
+};
+
+const store = createStore(reducer, initialState);
 
 /**
  * It's for the clock on the main page 
