@@ -102,12 +102,12 @@ describe('DatePicker', () => {
     );
 
     wrapper
-      .find('[aria-label="Wednesday, January 10, 2018"]')
+      .find('[aria-label="суббота, 20 января 2018 г."]')
       .first()
       .simulate('click');
 
     expect(mockCb.mock.calls.length).toBe(1);
-    expect(mockCb.mock.calls[0][0]).toBe('2018-01-10');
+    expect(mockCb.mock.calls[0][0]).toBe('2018-01-20');
   });
 
   it('days previous to dateCurrent should not be clickable', () => {
@@ -121,7 +121,7 @@ describe('DatePicker', () => {
     );
 
     wrapper
-      .find('[aria-label="Not available. Monday, January 8, 2018"]')
+      .find('[aria-label="Not available. воскресенье, 7 января 2018 г."]')
       .first()
       .simulate('click');
 

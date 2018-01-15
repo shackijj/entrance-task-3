@@ -35,6 +35,7 @@ const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}
       _isCalendarOpen = !_isCalendarOpen;
     }
   };
+
   return (
     <div className={classNames('DatePicker', classes)} ref={div => _container = div}>
     <RoundButton
@@ -62,8 +63,6 @@ const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}
         hideKeyboardShortcutsPanel={true}
         isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent)}
         numberOfMonths={3}
-        navPrev={<RoundButton icon={<ArrowLeft/>}/>}
-        navNext={<RoundButton icon={<ArrowRight/>}/>}
       />
     </div>
   </div>);
