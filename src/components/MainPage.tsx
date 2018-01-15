@@ -1,6 +1,6 @@
 import * as React from 'react';
-import DatePicker from './connected/DatePicker';
-import Timeline from './connected/Timeline';
+import DatePicker from './DatePicker';
+import Timeline from './Timeline';
 import './MainPage.css';
 /*
 import RoomGroupList, { RoomGroup } from './RoomGroupList';

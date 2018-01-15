@@ -20,7 +20,7 @@ exports[`EventTooltip should render an event 1`] = `
   <div
     className="EventTooltip-Info"
   >
-    9 January
+    9 января
     , 
     18:30
     —

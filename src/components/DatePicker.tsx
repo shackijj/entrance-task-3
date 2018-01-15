@@ -2,6 +2,10 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as moment from 'moment';
 
+import { connect } from 'react-redux';
+import { AppState } from '../reducers/';
+import { chooseDate } from '../actions/';
+
 import { ArrowLeft, ArrowRight } from './GlyphIcon/GlyphIcon';
 import RoundButton from './RoundButton';
 import './DatePicker.css';
@@ -21,7 +25,7 @@ export interface DatePickerProps {
 
 const FORMAT = 'YYYY-MM-DD';
 
-const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}: DatePickerProps) => {
+export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}: DatePickerProps) => {
   let _isCalendarOpen = false;
   let _container: HTMLElement | null = null;
   const onDateClick = () => {
@@ -68,4 +72,20 @@ const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}
   </div>);
 };
 
-export default DatePicker;
+interface DispatchFromProps {
+  onDatePick: (date: string) => void;
+}
+
+const DatePickerConnected = connect<AppState, DispatchFromProps, {classes: string[]}>(
+  ({dateCurrent, dateChosen}: AppState) => ({
+    dateCurrent,
+    dateChosen
+  }),
+  dispatch => ({
+    onDatePick: (date: string) => {
+      dispatch(chooseDate(new Date(date)));
+    }
+  })
+)(DatePicker);
+
+export default DatePickerConnected;

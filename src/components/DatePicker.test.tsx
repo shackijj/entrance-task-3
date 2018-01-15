@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DatePicker from './DatePicker';
+import { DatePicker } from './DatePicker';
 import { shallow, mount } from 'enzyme';
 import RountButton from './RoundButton';
 
@@ -145,7 +145,7 @@ describe('DatePicker', () => {
       .first()
       .simulate('click');
 
-    expect(wrapper.find('DatePicker')
+    expect(wrapper.find('.DatePicker')
       .getDOMNode()
       .classList
       .toString()
