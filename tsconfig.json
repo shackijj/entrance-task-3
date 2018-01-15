@@ -22,6 +22,7 @@
     "build",
     "scripts",
     "stories",
+    "server/",
     "acceptance-tests",
     "webpack",
     "jest",
