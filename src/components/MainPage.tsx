@@ -1,6 +1,6 @@
 import * as React from 'react';
-// import DatePicker from './DatePicker';
-import Timeline from './Timeline';
+import DatePicker from './connected/DatePicker';
+/* import Timeline from './Timeline';
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
 import Room from './Room';
 import RoomTimeline, { RoomTimelineProps } from './RoomTimeline';
@@ -8,27 +8,16 @@ import './MainPage.css';
 
 function roomProps<T>(WrappedComponent: React.SFC<T>, sharedProps: {}) {
   return (props: T) => <WrappedComponent {...props} {...sharedProps}/>;
-}
+} */
 
-interface MainPageProps {
-    formattedDate: string;
-    roomGroups: RoomGroup<RoomTimelineProps>[];
-    currentTime?: Date;
-    showCalendar: boolean;
-    hourStart: number;
-    hourEnd: number;
-}
-
-const MainPage: React.SFC<MainPageProps> =
-  ({formattedDate, roomGroups, currentTime, hourStart, hourEnd, showCalendar}) => (
+const MainPage: React.SFC =
+  () => (
   <div className="MainPage">
     <div className="MainPage-SubHeader"/>
-{/*     <DatePicker
-      dateCurrent={formattedDate}
-      showCalendar={showCalendar}
+    <DatePicker
       classes={['MainPage-DatePicker']}
-    /> */}
-    <div className="MainPage-RoomEventListWrapper">
+    />
+{/*     <div className="MainPage-RoomEventListWrapper">
       <Timeline
         classes={['MainPage-Timeline']}
         currentTime={currentTime}
@@ -48,7 +37,7 @@ const MainPage: React.SFC<MainPageProps> =
           showGroupTitle={false}
         />
       </div>
-    </div>
+    </div> */}
   </div>
 );
 

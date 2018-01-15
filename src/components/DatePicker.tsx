@@ -12,24 +12,37 @@ import 'react-dates/lib/css/_datepicker.css';
 /// <reference path="../contrib/react-dates.d" />
 import { DayPickerSingleDateController } from 'react-dates';
 
-interface DatePickerProps {
-  classes?: string[];
+export interface DatePickerProps {
   dateCurrent: Date;
-  dateChosen?: Date;
-  showCalendar?: boolean;
   onDatePick: (date: string) => void;
+  classes?: string[];
+  dateChosen?: Date;
 }
 
 const FORMAT = 'YYYY-MM-DD';
 
-const DatePicker = ({classes, showCalendar, dateCurrent, onDatePick, dateChosen = dateCurrent}: DatePickerProps) => (
-  <div className={classNames('DatePicker', {'DatePicker_open': showCalendar}, classes)}>
+const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateCurrent}: DatePickerProps) => {
+  let _isCalendarOpen = false;
+  let _container: HTMLElement | null = null;
+  const onDateClick = () => {
+    if (_container) {
+      if (_isCalendarOpen) {
+        _container.classList.remove('DatePicker_open');
+      } else {
+        _container.classList.add('DatePicker_open');
+      }
+
+      _isCalendarOpen = !_isCalendarOpen;
+    }
+  };
+  return (
+    <div className={classNames('DatePicker', classes)} ref={div => _container = div}>
     <RoundButton
       classes={['DatePicker-ArrowLeft']}
       icon={<ArrowLeft/>}
       onClick={() => onDatePick(moment(dateChosen).add(-1, 'days').format(FORMAT))}
     />
-    <span className="DatePicker-Date">
+    <span className="DatePicker-Date" onClick={onDateClick}>
       {moment(dateChosen).format('D MMM')}
       {
         moment(dateChosen).isSame(dateCurrent, 'day') &&
@@ -43,7 +56,7 @@ const DatePicker = ({classes, showCalendar, dateCurrent, onDatePick, dateChosen 
       icon={<ArrowRight/>}
       onClick={() => onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
     />
-    <div className="DatePicker-DayPicker" hidden={!showCalendar}>
+    <div className="DatePicker-DayPicker">
       <DayPickerSingleDateController
         onDateChange={(date: string) => onDatePick(moment(date).format(FORMAT))}
         hideKeyboardShortcutsPanel={true}
@@ -53,7 +66,7 @@ const DatePicker = ({classes, showCalendar, dateCurrent, onDatePick, dateChosen 
         navNext={<RoundButton icon={<ArrowRight/>}/>}
       />
     </div>
-  </div>
-);
+  </div>);
+};
 
 export default DatePicker;

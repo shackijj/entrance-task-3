@@ -11,9 +11,12 @@ import { updateCurrentDate } from './actions';
 
 import 'reset-css/reset.css';
 import './index.css';
+import './setupLocale';
 
+const today = new Date();
 const initialState = {
-  dateCurrent: new Date()
+  dateCurrent: today,
+  dateChosen: today,
 };
 
 const store = createStore(reducer, initialState);

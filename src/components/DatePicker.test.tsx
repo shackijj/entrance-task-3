@@ -127,4 +127,28 @@ describe('DatePicker', () => {
 
     expect(mockCb.mock.calls.length).toBe(0);
   });
+
+  it('should add _open modifier onClick DatePicker-Date', () => {
+    const mockCb = jest.fn();
+    const wrapper = mount(
+      <DatePicker
+        dateCurrent={new Date('2018-01-09')}
+        dateChosen={new Date('2018-01-09')}
+        onDatePick={mockCb}
+      />
+    );
+
+    expect(wrapper.hasClass('DatePicker_open')).toBe(false);
+
+    wrapper
+      .find('.DatePicker-Date')
+      .first()
+      .simulate('click');
+
+    expect(wrapper.find('DatePicker')
+      .getDOMNode()
+      .classList
+      .toString()
+    ).toBe('DatePicker DatePicker_open');
+  });
 });

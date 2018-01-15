@@ -9,4 +9,12 @@ describe('#updateCurrentDate', () => {
       type: types.UPDATE_CURRENT_DATE
     });
   });
+
+  it('should update current date', () => {
+    const date = new Date();
+    expect(actions.chooseDate(date)).toEqual({
+      date,
+      type: types.CHOOSE_DATE
+    });
+  });
 });

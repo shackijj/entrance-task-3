@@ -1,1 +1,2 @@
 export const UPDATE_CURRENT_DATE = 'UPDATE_CURRENT_DATE';
+export const CHOOSE_DATE = 'CHOOSE_DATE';

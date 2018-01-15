@@ -4,7 +4,6 @@ import '../src/setupLocale';
 
 import './GlyphIcon';
 import './Button';
-// import './MainPage';
 import './RoundButton';
 import './DatePicker';
 import './RoomGroupList';
