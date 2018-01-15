@@ -3,13 +3,11 @@ import { AppState } from '../../reducers/';
 import DatePicker from '../DatePicker';
 import { chooseDate } from '../../actions/';
 
-interface StateFromProps extends AppState {}
-
 interface DispatchFromProps {
   onDatePick: (date: string) => void;
 }
 
-const DatePickerConnected = connect<StateFromProps, DispatchFromProps, {classes: string[]}>(
+const DatePickerConnected = connect<AppState, DispatchFromProps, {classes: string[]}>(
   ({dateCurrent, dateChosen}: AppState) => ({
     dateCurrent,
     dateChosen

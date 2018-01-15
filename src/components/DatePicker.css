@@ -11,12 +11,6 @@
   cursor: pointer;
 }
 
-.DatePicker-Close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-}
-
 .DatePicker_open .DatePicker-Date {
   color: #0070E0;
 }
@@ -30,6 +24,7 @@
 }
 
 .DatePicker-DayPicker {
+  position: absolute;
   visibility: hidden;
 }
 
