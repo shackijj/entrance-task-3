@@ -1,6 +1,6 @@
 import * as React from 'react';
 import EventTooltip from './EventTooltip';
-import { shallowExpect } from '../utils';
+import shallowExpect from '../utils/shallowExpect';
 
 describe('EventTooltip', () => {
   it('should render an event', () => {

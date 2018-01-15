@@ -1,5 +1,6 @@
 import * as React from 'react';
 import RoomGroupList from './RoomGroupList';
+import groupRoomsByFloor from '../utils/groupRoomsbyFloor';
 import Room from './Room';
 
 import { graphql } from 'react-apollo';
@@ -36,26 +37,8 @@ const FloorGroupedRooms = withRooms(({classes, data: {error, loading, rooms}}) =
     return <div>error</div>;
   }
 
-  const groups = {};
-  rooms.forEach((room) => {
-    const { floor } = room;
-    if (groups[floor]) {
-      groups[floor].push(room);
-    } else {
-      groups[floor] = [room];
-    }
-  });
-
-  let roomGroups = [];
-  for (let key in groups) {
-    if (groups.hasOwnProperty(key)) {
-      roomGroups.push({
-        title: key,
-        rooms: groups[key]
-      });
-    }
-  }
-
+  const roomGroups = groupRoomsByFloor(rooms);
+  
   return (
     <RoomGroupList
       RoomComponent={Room}
