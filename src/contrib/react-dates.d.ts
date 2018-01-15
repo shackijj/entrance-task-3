@@ -10,7 +10,7 @@ declare module 'react-dates' {
     onDateChange?: (date: string) => void;
     hideKeyboardShortcutsPanel?: boolean;
     isOutsideRange?: (moment: moment.Moment) => boolean;
-    numberOfMonth?: number;
+    numberOfMonths?: number;
   }
 
   class DayPickerSingleDateController extends React.Component<DayPickerSingleDateControllerProps> {

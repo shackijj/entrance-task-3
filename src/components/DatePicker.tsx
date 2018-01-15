@@ -12,8 +12,6 @@ import './DatePicker.css';
 
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-
-/// <reference path="../contrib/react-dates.d" />
 import { DayPickerSingleDateController } from 'react-dates';
 
 export interface DatePickerProps {

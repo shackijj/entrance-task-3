@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DatePicker from './DatePicker';
 import Timeline from './Timeline';
+import FloorGroupedRooms from './FloorGroupedRooms';
 import './MainPage.css';
 /*
 import RoomGroupList, { RoomGroup } from './RoomGroupList';
@@ -21,6 +22,7 @@ const MainPage: React.SFC =
     <div className="MainPage-RoomEventListWrapper">
       <Timeline classes={['MainPage-Timeline']}/>
         <div className="MainPage-TimelineEvents">
+          <FloorGroupedRooms classes={['MainPage-RoomGroupList']}/>
 {/*           <RoomGroupList
             RoomComponent={Room}
             classes={['MainPage-RoomGroupList']}
