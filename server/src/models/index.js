@@ -9,8 +9,7 @@ module.exports = function (sequelize) {
 
   const Room = sequelize.define('Room', {
     title: Sequelize.STRING,
-    capacity: Sequelize.SMALLINT,
-    floor: Sequelize.TINYINT
+    capacity: Sequelize.SMALLINT
   })
 
   const Event = sequelize.define('Event', {
@@ -19,11 +18,16 @@ module.exports = function (sequelize) {
     dateEnd: Sequelize.DATE
   })
 
+  const Floor = sequelize.define('Floor', {
+    floor: Sequelize.TINYINT
+  })
+
   Event.belongsToMany(User, {through: 'Events_Users'})
   User.belongsToMany(Event, {through: 'Events_Users'})
   Event.belongsTo(Room)
+  Room.belongsTo(Floor)
 
   return {
-    Room, Event, User
+    Room, Event, User, Floor
   }
 }
