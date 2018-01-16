@@ -35,7 +35,6 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
   };
 
   const _onDatePick = (date: string) => {
-    console.log('HERE', typeof _container);
     if (_container) {
       _isCalendarOpen = false;
       _container.classList.remove('DatePicker_open');
