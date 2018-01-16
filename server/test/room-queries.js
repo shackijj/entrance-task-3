@@ -14,16 +14,43 @@ describe('Room queries', () => {
       .then(clearDatabase)
       .then(() => {
         const {sequelize: {models}} = server
-        return models.Room.bulkCreate([
-          { title: 'Room1', floor: 1, capacity: 2 },
-          { title: 'Room2', floor: 1, capacity: 2 }
+
+        const HOUR = 60 * 60 * 1000
+        let now = new Date()
+        let oneHourLater = new Date(now.getTime() + HOUR)
+        let twoHoursLater = new Date(oneHourLater.getTime() + HOUR)
+
+        let eventsPromise = models.Event.bulkCreate([
+          {
+            title: 'Event1',
+            dateStart: now,
+            dateEnd: oneHourLater
+          },
+          {
+            title: 'Event2',
+            dateStart: oneHourLater,
+            dateEnd: twoHoursLater
+          }
         ])
-          .then(() => {
-            return models.Room.findAll()
+
+        let roomsPromise = models.Room.bulkCreate([
+          { title: 'Room1', floor: 1, capacity: 2 },
+          { title: 'Room2', floor: 1, capacity: 2 },
+          { title: 'Room3', floor: 1, capacity: 2 }
+        ])
+
+        return Promise.all([roomsPromise, eventsPromise])
+          .then(() => Promise.all([
+            models.Room.findAll(),
+            models.Event.findAll()
+          ]))
+          .then(([rooms, events]) => {
+            let promises = []
+            room = rooms[0]
+            promises.push(events[0].setRoom(rooms[0]))
+            promises.push(events[1].setRoom(rooms[1]))
+            return Promise.all(promises)
           })
-      })
-      .then(([r1]) => {
-        room = r1.get()
       })
   })
 
@@ -64,7 +91,41 @@ describe('Room queries', () => {
           expect(errors).to.equal(undefined)
           expect(rooms).to.eql([
             { title: 'Room1', floor: 1, capacity: 2 },
-            { title: 'Room2', floor: 1, capacity: 2 }
+            { title: 'Room2', floor: 1, capacity: 2 },
+            { title: 'Room3', floor: 1, capacity: 2 }
+          ])
+        })
+    })
+
+    it('should return an array of rooms with events', () => {
+      return runQuery(server, `{
+        rooms {
+          events {
+            title
+          }
+        }
+      }`)
+        .then(({body: {data: {rooms}, errors}}) => {
+          expect(errors).to.equal(undefined)
+          console.log(rooms)
+          expect(rooms).to.eql([
+            {
+              events: [
+                {
+                  title: 'Event1'
+                }
+              ]
+            },
+            {
+              events: [
+                {
+                  title: 'Event2'
+                }
+              ]
+            },
+            {
+              events: []
+            }
           ])
         })
     })

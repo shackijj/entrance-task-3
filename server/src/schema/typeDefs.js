@@ -35,6 +35,7 @@ type Room {
     title: String!
     capacity: Int!
     floor: Int!
+    events: [Event!]
 }
 
 input CreateRoomInput {

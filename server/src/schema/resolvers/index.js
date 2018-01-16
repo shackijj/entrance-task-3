@@ -9,6 +9,16 @@ module.exports = function resolvers () {
 
     Mutation: mutation,
 
+    Room: {
+      events ({id}, _, {sequelize: {Event}}) {
+        return Event.findAll({
+          where: {
+            roomId: id
+          }
+        })
+      }
+    },
+
     Event: {
       users (event) {
         return event.getUsers()
