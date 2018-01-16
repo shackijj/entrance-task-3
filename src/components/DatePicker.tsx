@@ -34,46 +34,46 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
     }
   };
 
-  const _closeCalendar = () => {
-    _isCalendarOpen = false;
-    _container.classList.remove('DatePicker_open');
-  };
-
   const _onDatePick = (date: string) => {
-    _closeCalendar();
+    console.log('HERE', typeof _container);
+    if (_container) {
+      _isCalendarOpen = false;
+      _container.classList.remove('DatePicker_open');
+    }
     onDatePick(date);
   };
 
   return (
     <div className={classNames('DatePicker', classes)} ref={div => _container = div}>
-    <RoundButton
-      classes={['DatePicker-ArrowLeft']}
-      icon={<ArrowLeft/>}
-      onClick={() => _onDatePick(moment(dateChosen).add(-1, 'days').format(FORMAT))}
-    />
-    <span className="DatePicker-Date" onClick={onDateClick}>
-      {moment(dateChosen).format('D MMM')}
-      {
-        moment(dateChosen).isSame(dateCurrent, 'day') &&
-        moment(dateChosen).isSame(dateCurrent, 'month') &&
-        moment(dateChosen).isSame(dateCurrent, 'year') &&
-        ' · Сегодня'
-      }
-    </span>
-    <RoundButton
-      classes={['DatePicker-ArrowRight']}
-      icon={<ArrowRight/>}
-      onClick={() => _onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
-    />
-    <div className="DatePicker-DayPicker">
-      <DayPickerSingleDateController
-        onDateChange={(date: string) => _onDatePick(moment(date).format(FORMAT))}
-        hideKeyboardShortcutsPanel={true}
-        isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent)}
-        numberOfMonths={3}
+      <RoundButton
+        classes={['DatePicker-ArrowLeft']}
+        icon={<ArrowLeft/>}
+        onClick={() => _onDatePick(moment(dateChosen).add(-1, 'days').format(FORMAT))}
       />
+      <span className="DatePicker-Date" onClick={onDateClick}>
+        {moment(dateChosen).format('D MMM')}
+        {
+          moment(dateChosen).isSame(dateCurrent, 'day') &&
+          moment(dateChosen).isSame(dateCurrent, 'month') &&
+          moment(dateChosen).isSame(dateCurrent, 'year') &&
+          ' · Сегодня'
+        }
+      </span>
+      <RoundButton
+        classes={['DatePicker-ArrowRight']}
+        icon={<ArrowRight/>}
+        onClick={() => _onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
+      />
+      <div className="DatePicker-DayPicker">
+        <DayPickerSingleDateController
+          onDateChange={(date: string) => _onDatePick(moment(date).format(FORMAT))}
+          hideKeyboardShortcutsPanel={true}
+          isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent)}
+          numberOfMonths={3}
+        />
+      </div>
     </div>
-  </div>);
+  );
 };
 
 export default DatePicker;

@@ -151,4 +151,39 @@ describe('DatePicker', () => {
       .toString()
     ).toBe('DatePicker DatePicker_open');
   });
+
+  it('should close the calendar if the date is chosen', () => {
+    const mockCb = jest.fn();
+    const wrapper = mount(
+      <DatePicker
+        dateCurrent={new Date('2018-01-09')}
+        dateChosen={new Date('2018-01-09')}
+        onDatePick={mockCb}
+      />
+    );
+
+    wrapper
+      .find('.DatePicker-Date')
+      .first()
+      .simulate('click');
+
+    expect(wrapper.find('.DatePicker')
+      .getDOMNode()
+      .classList
+      .toString()
+    ).toBe('DatePicker DatePicker_open');
+
+    wrapper
+      .find('[aria-label="суббота, 20 января 2018 г."]')
+      .first()
+      .simulate('click');
+
+    expect(mockCb.mock.calls.length).toBe(1);
+
+    expect(wrapper.find('.DatePicker')
+      .getDOMNode()
+      .classList
+      .toString()
+    ).toBe('DatePicker');
+  });
 });
