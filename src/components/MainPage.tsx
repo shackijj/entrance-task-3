@@ -4,14 +4,6 @@ import DatePicker from './DatePicker';
 import './MainPage.css';
 
 import { RouteComponentProps, withRouter } from 'react-router';
-/*
-import RoomGroupList, { RoomGroup } from './RoomGroupList';
-import Room from './Room';
-import RoomTimeline, { RoomTimelineProps } from './RoomTimeline';
-function roomProps<T>(WrappedComponent: React.SFC<T>, sharedProps: {}) {
-  return (props: T) => <WrappedComponent {...props} {...sharedProps}/>;
-} 
-*/
 
 interface MainPageProps {
   date: string;
