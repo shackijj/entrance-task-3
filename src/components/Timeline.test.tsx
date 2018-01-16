@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Timeline, mapStateToProps } from './Timeline';
+import Timeline from './Timeline';
 import { shallow } from 'enzyme';
 
 describe('Timeline', () => {
@@ -54,30 +54,5 @@ describe('Timeline', () => {
     const currentTime = new Date('2018-01-09T02:00:00.55');
     const wrapper = shallow(<Timeline currentTime={currentTime} hourStart={0} hourEnd={23}/>);
     expect(wrapper.find('.Timeline-Hour_passed')).toHaveLength(2);
-  });
-});
-
-describe('mapStateToProps', () => {
-  it('should return current time if dateCurrent and dateChosen are the same day', () => {
-    const currentTime = new Date('2018-01-01');
-    const input = {
-      dateCurrent: new Date('2018-01-01'),
-      dateChosen: new Date('2018-01-01')
-    };
-    
-    expect(mapStateToProps(input)).toEqual({
-      currentTime,
-    });
-  });
-
-  it('should return undefined if they are different', () => {
-    const input = {
-      dateCurrent: new Date('2018-01-01'),
-      dateChosen: new Date('2018-02-01')
-    };
-    
-    expect(mapStateToProps(input)).toEqual({
-      currentTime: undefined
-    });
   });
 });

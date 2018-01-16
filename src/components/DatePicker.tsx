@@ -2,10 +2,6 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as moment from 'moment';
 
-import { connect } from 'react-redux';
-import { AppState } from '../reducers/';
-import { chooseDate } from '../actions/';
-
 import { ArrowLeft, ArrowRight } from './GlyphIcon/GlyphIcon';
 import RoundButton from './RoundButton';
 import './DatePicker.css';
@@ -38,12 +34,22 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
     }
   };
 
+  const _closeCalendar = () => {
+    _isCalendarOpen = false;
+    _container.classList.remove('DatePicker_open');
+  };
+
+  const _onDatePick = (date: string) => {
+    _closeCalendar();
+    onDatePick(date);
+  };
+
   return (
     <div className={classNames('DatePicker', classes)} ref={div => _container = div}>
     <RoundButton
       classes={['DatePicker-ArrowLeft']}
       icon={<ArrowLeft/>}
-      onClick={() => onDatePick(moment(dateChosen).add(-1, 'days').format(FORMAT))}
+      onClick={() => _onDatePick(moment(dateChosen).add(-1, 'days').format(FORMAT))}
     />
     <span className="DatePicker-Date" onClick={onDateClick}>
       {moment(dateChosen).format('D MMM')}
@@ -57,11 +63,11 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
     <RoundButton
       classes={['DatePicker-ArrowRight']}
       icon={<ArrowRight/>}
-      onClick={() => onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
+      onClick={() => _onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
     />
     <div className="DatePicker-DayPicker">
       <DayPickerSingleDateController
-        onDateChange={(date: string) => onDatePick(moment(date).format(FORMAT))}
+        onDateChange={(date: string) => _onDatePick(moment(date).format(FORMAT))}
         hideKeyboardShortcutsPanel={true}
         isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent)}
         numberOfMonths={3}
@@ -70,20 +76,4 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
   </div>);
 };
 
-interface DispatchFromProps {
-  onDatePick: (date: string) => void;
-}
-
-const DatePickerConnected = connect<AppState, DispatchFromProps, {classes: string[]}>(
-  ({dateCurrent, dateChosen}: AppState) => ({
-    dateCurrent,
-    dateChosen
-  }),
-  dispatch => ({
-    onDatePick: (date: string) => {
-      dispatch(chooseDate(new Date(date)));
-    }
-  })
-)(DatePicker);
-
-export default DatePickerConnected;
+export default DatePicker;

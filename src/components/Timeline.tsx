@@ -1,10 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import { connect } from 'react-redux';
-import { AppState } from '../reducers/';
-import * as moment from 'moment';
-
 import './Timeline.css';
 
 export interface TimelineProps {
@@ -14,7 +10,7 @@ export interface TimelineProps {
   classes?: string[];
 }
 
-export const Timeline = ({hourStart = 7, hourEnd = 23, currentTime, classes}: TimelineProps) => {
+const Timeline = ({hourStart = 7, hourEnd = 23, currentTime, classes}: TimelineProps) => {
   const hours = [];
   for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);
@@ -58,10 +54,4 @@ export const Timeline = ({hourStart = 7, hourEnd = 23, currentTime, classes}: Ti
   );
 };
 
-export const mapStateToProps = ({dateCurrent, dateChosen}: AppState) => ({
-  currentTime: moment(dateCurrent).isSame(dateChosen, 'day') ? dateCurrent : undefined,
-});
-
-export default connect<TimelineProps, {}, {classes: string[]}>(
-  mapStateToProps
-)(Timeline);
+export default Timeline;
