@@ -1,3 +1,5 @@
+const { DEFAULT_ORDER } = require('../../constants')
+
 module.exports = {
   event (root, { id }, {sequelize: {Event}}) {
     return Event.findById(id)
@@ -17,7 +19,11 @@ module.exports = {
   rooms (root, args, {sequelize: {Room}}) {
     return Room.findAll()
   },
-  floors (root, args, {sequelize: {Floor}}) {
-    return Floor.findAll()
+  floors (root, {order = DEFAULT_ORDER}, {sequelize: {Floor}}) {
+    return Floor.findAll({
+      order: [
+        ['floor', order]
+      ]
+    })
   }
 }

@@ -86,4 +86,45 @@ describe('#floors', () => {
         ])
       })
   })
+
+  it('should get a list of floors', () => {
+    return runQuery(server, `{
+      floors(order: DESC) {
+        floor
+        rooms {
+          title
+        }
+      }
+    }`)
+      .then((result) => {
+        const {body: {data: {floors}, errors}} = result
+        expect(errors).to.equal(undefined)
+        expect(floors).to.eql([
+          {
+            floor: 3,
+            rooms: [
+              {
+                title: 'Room3'
+              }
+            ]
+          },
+          {
+            floor: 2,
+            rooms: [
+              {
+                title: 'Room2'
+              }
+            ]
+          },
+          {
+            floor: 1,
+            rooms: [
+              {
+                title: 'Room1'
+              }
+            ]
+          }
+        ])
+      })
+  })
 })
