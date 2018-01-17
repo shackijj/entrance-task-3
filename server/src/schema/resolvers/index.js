@@ -22,6 +22,16 @@ module.exports = function resolvers () {
       }
     },
 
+    Floor: {
+      rooms ({id}, _, {sequelize: {Room}}) {
+        return Room.findAll({
+          where: {
+            floorId: id
+          }
+        })
+      }
+    },
+
     User: {
       floor (user) {
         return user.getFloor()

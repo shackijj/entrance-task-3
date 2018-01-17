@@ -32,7 +32,7 @@ describe('#floors', () => {
           ])
         ])
       })
-      .then((rooms, floors) => {
+      .then(([rooms, floors]) => {
         const promises = []
         promises.push(rooms[0].setFloor(floors[0]))
         promises.push(rooms[1].setFloor(floors[1]))

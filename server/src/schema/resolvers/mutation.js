@@ -57,8 +57,11 @@ module.exports = {
   },
 
   // Room
-  createRoom (root, { input }, {sequelize: {Room}}) {
-    return Room.create(input)
+  createRoom (root, { input }, {sequelize: {Room, Floor}}) {
+    const {floor} = input
+    return assertTypeFound(Floor, 'Floor', 'floor', floor)
+      .then(() => Room.create(input))
+      .then(room => room.setFloor(floor))
   },
 
   updateRoom (root, { input }, {sequelize: {Room}}) {
