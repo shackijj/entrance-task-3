@@ -16,5 +16,8 @@ module.exports = {
   },
   rooms (root, args, {sequelize: {Room}}) {
     return Room.findAll()
+  },
+  floors (root, args, {sequelize: {Floor}}) {
+    return Floor.findAll()
   }
 }

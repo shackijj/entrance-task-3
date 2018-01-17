@@ -3,7 +3,6 @@ const Sequelize = require('sequelize')
 module.exports = function (sequelize) {
   const User = sequelize.define('User', {
     login: Sequelize.STRING,
-    homeFloor: Sequelize.TINYINT,
     avatarUrl: Sequelize.STRING
   })
 
@@ -26,6 +25,7 @@ module.exports = function (sequelize) {
   User.belongsToMany(Event, {through: 'Events_Users'})
   Event.belongsTo(Room)
   Room.belongsTo(Floor)
+  User.belongsTo(Floor)
 
   return {
     Room, Event, User, Floor

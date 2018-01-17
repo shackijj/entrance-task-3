@@ -16,6 +16,15 @@ module.exports = function resolvers () {
             roomId: id
           }
         })
+      },
+      floor (room) {
+        return room.getFloor()
+      }
+    },
+
+    User: {
+      floor (user) {
+        return user.getFloor()
       }
     },
 

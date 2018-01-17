@@ -61,7 +61,7 @@ type Event {
     dateStart: Date!
     dateEnd: Date!
     users: [User!]
-    room: Room
+    room: Room!
 }
 
 input CreateEventInput {
@@ -107,7 +107,7 @@ type Query {
   events: [Event!]
   room(id: ID!): Room
   rooms: [Room!]
-  floors(order: SortTypes): [Floor!]
+  floors(order: SortTypes): [Floor]
 }
 
 input AddUserToEventInput {

@@ -94,6 +94,10 @@ function createData ({models}) {
       promises.push(rooms[3].setFloor(floors[1]))
       promises.push(rooms[4].setFloor(floors[2]))
 
+      promises.push(users[0].setFloor(floors[0]))
+      promises.push(users[1].setFloor(floors[1]))
+      promises.push(users[2].setFloor(floors[2]))
+
       promises.push(events[0].setRoom(rooms[0]))
       promises.push(events[1].setRoom(rooms[1]))
       promises.push(events[2].setRoom(rooms[2]))

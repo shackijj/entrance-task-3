@@ -34,21 +34,29 @@ describe('Room queries', () => {
         ])
 
         let roomsPromise = models.Room.bulkCreate([
-          { title: 'Room1', floor: 1, capacity: 2 },
-          { title: 'Room2', floor: 1, capacity: 2 },
-          { title: 'Room3', floor: 1, capacity: 2 }
+          { title: 'Room1', capacity: 2 },
+          { title: 'Room2', capacity: 2 },
+          { title: 'Room3', capacity: 2 }
         ])
 
-        return Promise.all([roomsPromise, eventsPromise])
+        let floorsPromise = models.Floor.bulkCreate([
+          { floor: 1 }
+        ])
+
+        return Promise.all([roomsPromise, eventsPromise, floorsPromise])
           .then(() => Promise.all([
             models.Room.findAll(),
-            models.Event.findAll()
+            models.Event.findAll(),
+            models.Floor.findAll()
           ]))
-          .then(([rooms, events]) => {
+          .then(([rooms, events, floors]) => {
             let promises = []
             room = rooms[0]
             promises.push(events[0].setRoom(rooms[0]))
             promises.push(events[1].setRoom(rooms[1]))
+
+            promises.push(rooms[0].setFloor(floors[0]))
+            promises.push(rooms[1].setFloor(floors[0]))
             return Promise.all(promises)
           })
       })
@@ -64,7 +72,9 @@ describe('Room queries', () => {
         room(id: "${room.id}") {
           title
           capacity
-          floor
+          floor {
+            floor
+          }
         }
       }`)
         .then(({body: {data: {room}, errors}}) => {
@@ -72,7 +82,9 @@ describe('Room queries', () => {
           expect(room).to.eql({
             title: 'Room1',
             capacity: 2,
-            floor: 1
+            floor: {
+              floor: 1
+            }
           })
         })
     })
@@ -84,15 +96,14 @@ describe('Room queries', () => {
         rooms {
           title
           capacity
-          floor
         }
       }`)
         .then(({body: {data: {rooms}, errors}}) => {
           expect(errors).to.equal(undefined)
           expect(rooms).to.eql([
-            { title: 'Room1', floor: 1, capacity: 2 },
-            { title: 'Room2', floor: 1, capacity: 2 },
-            { title: 'Room3', floor: 1, capacity: 2 }
+            { title: 'Room1', capacity: 2 },
+            { title: 'Room2', capacity: 2 },
+            { title: 'Room3', capacity: 2 }
           ])
         })
     })
@@ -107,7 +118,6 @@ describe('Room queries', () => {
       }`)
         .then(({body: {data: {rooms}, errors}}) => {
           expect(errors).to.equal(undefined)
-          console.log(rooms)
           expect(rooms).to.eql([
             {
               events: [
