@@ -68,7 +68,7 @@ describe('#removeEvent', () => {
         expect(errors.length).to.equal(1)
         expect(errors[0].name).to.equal('TransactionError')
         expect(errors[0].data).to.eql({
-          id: `Event with "Unexpected" not found`
+          id: `Event with id "Unexpected" not found`
         })
       })
   })

@@ -18,8 +18,8 @@ describe('Event queries', () => {
       .then(() => {
         const {sequelize: {models}} = server
         return models.User.bulkCreate([
-          { login: 'user1', homeFloor: 1, avatarUrl: 'http://user1.com' },
-          { login: 'user2', homeFloor: 1, avatarUrl: 'http://user2.com' }
+          { login: 'user1', avatarUrl: 'http://user1.com' },
+          { login: 'user2', avatarUrl: 'http://user2.com' }
         ])
           .then(() => {
             return models.User.findAll()
@@ -32,7 +32,7 @@ describe('Event queries', () => {
       .then(() => {
         const {sequelize: {models}} = server
         return models.Room.bulkCreate([
-          { title: 'Test', capacity: 2, floor: 2 }
+          { title: 'Test', capacity: 2 }
         ])
           .then(() => {
             return models.Room.findAll()
@@ -83,13 +83,11 @@ describe('Event queries', () => {
           dateEnd
           users {
             login
-            homeFloor
             avatarUrl
           }
           room {
             title
             capacity
-            floor
           }
         }
       }`)
@@ -100,13 +98,12 @@ describe('Event queries', () => {
             dateStart: '2018-01-03T05:48:13.043Z',
             dateEnd: '2018-01-03T06:48:13.043Z',
             users: [
-              { login: 'user1', homeFloor: 1, avatarUrl: 'http://user1.com' },
-              { login: 'user2', homeFloor: 1, avatarUrl: 'http://user2.com' }
+              { login: 'user1', avatarUrl: 'http://user1.com' },
+              { login: 'user2', avatarUrl: 'http://user2.com' }
             ],
             room: {
               title: 'Test',
-              capacity: 2,
-              floor: 2
+              capacity: 2
             }
           })
         })
@@ -121,13 +118,11 @@ describe('Event queries', () => {
             dateEnd
             users {
               login
-              homeFloor
               avatarUrl
             }
             room {
               title
               capacity
-              floor
             }
           }
         }`)
@@ -139,13 +134,12 @@ describe('Event queries', () => {
                 dateStart: '2018-01-03T05:48:13.043Z',
                 dateEnd: '2018-01-03T06:48:13.043Z',
                 users: [
-                  { login: 'user1', homeFloor: 1, avatarUrl: 'http://user1.com' },
-                  { login: 'user2', homeFloor: 1, avatarUrl: 'http://user2.com' }
+                  { login: 'user1', avatarUrl: 'http://user1.com' },
+                  { login: 'user2', avatarUrl: 'http://user2.com' }
                 ],
                 room: {
                   title: 'Test',
-                  capacity: 2,
-                  floor: 2
+                  capacity: 2
                 }
               },
               {
@@ -153,13 +147,12 @@ describe('Event queries', () => {
                 dateStart: '2018-02-03T05:48:13.043Z',
                 dateEnd: '2018-02-03T06:48:13.043Z',
                 users: [
-                  { login: 'user1', homeFloor: 1, avatarUrl: 'http://user1.com' },
-                  { login: 'user2', homeFloor: 1, avatarUrl: 'http://user2.com' }
+                  { login: 'user1', avatarUrl: 'http://user1.com' },
+                  { login: 'user2', avatarUrl: 'http://user2.com' }
                 ],
                 room: {
                   title: 'Test',
-                  capacity: 2,
-                  floor: 2
+                  capacity: 2
                 }
               }
             ])

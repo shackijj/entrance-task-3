@@ -116,7 +116,7 @@ describe('#updateEvent', () => {
         expect(errors[0].name).to.eql(
           'TransactionError')
         expect(errors[0].data).to.eql({
-          id: `Event with "Baz" not found`
+          id: `Event with id "Baz" not found`
         })
       })
   })

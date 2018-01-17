@@ -17,7 +17,7 @@ function assertTypeFound (model, type, field, id) {
       if (!result) {
         throw new TransactionError({
           data: {
-            [field]: `${type} with "${id}" not found`
+            [field]: `${type} with id "${id}" not found`
           }
         })
       }
@@ -80,7 +80,7 @@ module.exports = {
   createEvent (root, { input }, {sequelize: {Event, Room, User}}) {
     const {roomId, userIds, dateStart, dateEnd} = input
     assertDatesOrder(dateStart, dateEnd)
-    return assertTypeFound(Room, 'Room', 'room', roomId)
+    return assertTypeFound(Room, 'Room', 'roomId', roomId)
       .then(() => {
         if (!userIds) {
           return
