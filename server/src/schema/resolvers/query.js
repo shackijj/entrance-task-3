@@ -1,11 +1,24 @@
 const { DEFAULT_ORDER } = require('../../constants')
+const moment = require('moment')
 
 module.exports = {
   event (root, { id }, {sequelize: {Event}}) {
     return Event.findById(id)
   },
-  events (root, args, {sequelize: {Event}}) {
-    return Event.findAll(args)
+  events (root, {filter}, {sequelize: {Event}}) {
+    const where = {}
+    if (filter && filter.onDate) {
+      const date = moment(filter.onDate)
+      where.dateStart = {
+        $and: {
+          $gt: date.startOf('day').toDate(),
+          $lt: date.endOf('day').toDate()
+        }
+      }
+    }
+    return Event.findAll({
+      where
+    })
   },
   user (root, { id }, {sequelize: {User}}) {
     return User.findById(id)

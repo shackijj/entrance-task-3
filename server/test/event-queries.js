@@ -53,20 +53,26 @@ describe('Event queries', () => {
             title: 'Event2',
             dateStart: new Date('2018-02-03T05:48:13.043Z'),
             dateEnd: new Date('2018-02-03T06:48:13.043Z')
+          },
+          {
+            title: 'Event3',
+            dateStart: new Date('2018-02-04T05:48:13.043Z'),
+            dateEnd: new Date('2018-02-04T06:48:13.043Z')
           }
         ])
           .then(() => {
             return models.Event.findAll()
           })
       })
-      .then(([e1, e2]) => {
-        event1 = e1.get()
+      .then((events) => {
+        event1 = events[0].get()
         const users = [user1.id, user2.id]
-        const p1 = e1.setRoom(room.id)
-        const p2 = e2.setRoom(room.id)
-        const p3 = e1.setUsers(users)
-        const p4 = e2.setUsers(users)
-        return Promise.all([p1, p2, p3, p4])
+        const promises = events.map((event) => Promise.all([
+          event.setRoom(room.id),
+          event.setUsers(users)
+        ]))
+
+        return Promise.all(promises)
       })
   })
 
@@ -154,6 +160,41 @@ describe('Event queries', () => {
                   title: 'Test',
                   capacity: 2
                 }
+              },
+              {
+                title: 'Event3',
+                dateStart: '2018-02-04T05:48:13.043Z',
+                dateEnd: '2018-02-04T06:48:13.043Z',
+                users: [
+                  { login: 'user1', avatarUrl: 'http://user1.com' },
+                  { login: 'user2', avatarUrl: 'http://user2.com' }
+                ],
+                room: {
+                  title: 'Test',
+                  capacity: 2
+                }
+              }
+            ])
+          })
+      })
+
+      it('should return an array of events filtered by dateStart', () => {
+        return runQuery(server, `{
+          events(filter: {
+            onDate: "2018-01-03T13:48:13.043Z"
+          }) {
+            title
+            dateStart
+            dateEnd
+          }
+        }`)
+          .then(({body: {data: {events}, errors}}) => {
+            expect(errors).to.equal(undefined)
+            expect(events).to.eql([
+              {
+                title: 'Event1',
+                dateStart: '2018-01-03T05:48:13.043Z',
+                dateEnd: '2018-01-03T06:48:13.043Z'
               }
             ])
           })

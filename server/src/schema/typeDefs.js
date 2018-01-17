@@ -64,6 +64,10 @@ type Event {
     room: Room!
 }
 
+input EventsFilter {
+    onDate: Date
+}
+
 input CreateEventInput {
     title: String!
     dateStart: Date!
@@ -104,7 +108,7 @@ type Query {
   user(id: ID!): User
   users: [User!]
   event(id: ID!): Event
-  events: [Event!]
+  events(filter: EventsFilter): [Event!]
   room(id: ID!): Room
   rooms: [Room!]
   floors(order: SortTypes): [Floor]
