@@ -1,34 +1,51 @@
 import * as React from 'react';
-import RoomGroupList from './RoomGroupList';
-import groupRoomsByFloor from '../utils/groupRoomsbyFloor';
-import Room from './Room';
-
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const FEED_QUERY = gql`
-query RoomQuery {
-  rooms {
-    title
+query FloorGroupedRoomEvents($date: Date) {
+  floors {
     floor
-    capacity
+    rooms {
+      title
+      capacity
+      events(filter: {onDate: $date}, sort: {field: "dateStart", order: DESC}) {
+        dateStart
+        dateEnd
+      }
+    }
   }
 }
 `;
+
+type Event = {
+  dateStart: string;
+  dateEnd: string;
+};
 
 type Room = {
   title: string;
   floor: number;
   capacity: number;
+  events: Event[];
+};
+
+type Floor = {
+  floor: number;
+  rooms: Room[]
 };
 
 type Response = {
-  rooms: Room[];
+  floors: Floor[];
 };
 
-const withRooms = graphql<Response, {classes?: string[]}>(FEED_QUERY);
+const withRooms = graphql<Response, {classes?: string[]}>(FEED_QUERY, {
+  options: () => ({
+    variables: { date: new Date() }
+  })
+});
 
-const FloorGroupedRooms = withRooms(({classes, data: {error, loading, rooms}}) => {
+const FloorGroupedRooms = withRooms(({classes, data: {error, loading, floors}}) => {
   if (loading) {
     return <div>loading</div>;
   }
@@ -37,15 +54,7 @@ const FloorGroupedRooms = withRooms(({classes, data: {error, loading, rooms}}) =
     return <div>error</div>;
   }
 
-  const roomGroups = groupRoomsByFloor(rooms);
-  
-  return (
-    <RoomGroupList
-      RoomComponent={Room}
-      classes={classes}
-      groups={roomGroups}
-    />
-  );
+  return <div>{JSON.stringify(floors, null, 2)}</div>;
 });
 
 export default FloorGroupedRooms;
