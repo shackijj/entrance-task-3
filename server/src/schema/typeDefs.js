@@ -34,7 +34,7 @@ type Room {
     id: ID!
     title: String!
     capacity: Int!
-    events: [Event!]
+    events(filter: EventsFilter, sort: Sort): [Event!]
     floor: Floor!
 }
 
@@ -93,6 +93,11 @@ input ChangeEventRoomInput {
     eventId: ID!
 }
 
+input Sort {
+    field: String!
+    order: SortTypes
+}
+
 type Floor {
     id: ID!
     floor: Int!
@@ -108,7 +113,7 @@ type Query {
   user(id: ID!): User
   users: [User!]
   event(id: ID!): Event
-  events(filter: EventsFilter): [Event!]
+  events(filter: EventsFilter, sort: Sort): [Event!]
   room(id: ID!): Room
   rooms: [Room!]
   floors(order: SortTypes): [Floor]

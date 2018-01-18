@@ -3,6 +3,8 @@ const GraphQLDate = require('graphql-date')
 const query = require('./query')
 const mutation = require('./mutation')
 
+const onDateFilter = require('../../utils/onDateFilter')
+
 module.exports = function resolvers () {
   return {
     Query: query,
@@ -10,11 +12,21 @@ module.exports = function resolvers () {
     Mutation: mutation,
 
     Room: {
-      events ({id}, _, {sequelize: {Event}}) {
+      events ({id}, {filter, sort}, {sequelize: {Event}}) {
+        let where = {}
+        let order = []
+        if (filter && filter.onDate) {
+          where.dateStart = onDateFilter(filter.onDate)
+        }
+        if (sort && sort.field && sort.order) {
+          order.push([sort.field, sort.order])
+        }
         return Event.findAll({
           where: {
-            roomId: id
-          }
+            roomId: id,
+            ...where
+          },
+          order
         })
       },
       floor (room) {

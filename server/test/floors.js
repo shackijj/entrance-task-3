@@ -29,15 +29,40 @@ describe('#floors', () => {
             {
               floor: 3
             }
+          ]),
+          models.Event.bulkCreate([
+            {
+              title: 'Event1',
+              dateStart: new Date('2017-12-29T06:13:17.304Z'),
+              dateEnd: new Date('2017-12-29T06:13:17.304Z')
+            },
+            {
+              title: 'Event2',
+              dateStart: new Date('2017-12-30T06:13:17.304Z'),
+              dateEnd: new Date('2017-12-30T06:13:17.304Z')
+            },
+            {
+              title: 'Event3',
+              dateStart: new Date('2017-12-28T08:13:17.304Z'),
+              dateEnd: new Date('2017-12-28T09:13:17.304Z')
+            },
+            {
+              title: 'Event4',
+              dateStart: new Date('2017-12-28T05:13:17.304Z'),
+              dateEnd: new Date('2017-12-28T12:13:17.304Z')
+            }
           ])
         ])
       })
-      .then(([rooms, floors]) => {
+      .then(([rooms, floors, events]) => {
         const promises = []
         promises.push(rooms[0].setFloor(floors[0]))
         promises.push(rooms[1].setFloor(floors[1]))
         promises.push(rooms[2].setFloor(floors[2]))
-
+        promises.push(events[0].setRoom(rooms[0]))
+        promises.push(events[1].setRoom(rooms[1]))
+        promises.push(events[2].setRoom(rooms[2]))
+        promises.push(events[3].setRoom(rooms[2]))
         return Promise.all(promises)
       })
   })
@@ -93,6 +118,9 @@ describe('#floors', () => {
         floor
         rooms {
           title
+          events {
+            title
+          }
         }
       }
     }`)
@@ -104,7 +132,15 @@ describe('#floors', () => {
             floor: 3,
             rooms: [
               {
-                title: 'Room3'
+                title: 'Room3',
+                events: [
+                  {
+                    title: 'Event3'
+                  },
+                  {
+                    title: 'Event4'
+                  }
+                ]
               }
             ]
           },
@@ -112,7 +148,12 @@ describe('#floors', () => {
             floor: 2,
             rooms: [
               {
-                title: 'Room2'
+                title: 'Room2',
+                events: [
+                  {
+                    title: 'Event2'
+                  }
+                ]
               }
             ]
           },
@@ -120,7 +161,66 @@ describe('#floors', () => {
             floor: 1,
             rooms: [
               {
-                title: 'Room1'
+                title: 'Room1',
+                events: [
+                  {
+                    title: 'Event1'
+                  }
+                ]
+              }
+            ]
+          }
+        ])
+      })
+  })
+
+  it('should get a list of floors with sorted rooms events', () => {
+    return runQuery(server, ` {
+      floors(order: DESC) {
+        floor
+        rooms {
+          title
+          events(filter: {onDate: "2017-12-28T05:13:17.304Z"}, sort: {field: "dateStart", order: ASC}) {
+            title
+          }
+        }
+      }
+    }`)
+      .then((result) => {
+        const {body: {data: {floors}, errors}} = result
+        expect(errors).to.equal(undefined)
+        expect(floors).to.eql([
+          {
+            floor: 3,
+            rooms: [
+              {
+                title: 'Room3',
+                events: [
+                  {
+                    title: 'Event4'
+                  },
+                  {
+                    title: 'Event3'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            floor: 2,
+            rooms: [
+              {
+                title: 'Room2',
+                events: []
+              }
+            ]
+          },
+          {
+            floor: 1,
+            rooms: [
+              {
+                title: 'Room1',
+                events: []
               }
             ]
           }

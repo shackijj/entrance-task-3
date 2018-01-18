@@ -180,9 +180,10 @@ describe('Event queries', () => {
 
       it('should return an array of events filtered by dateStart', () => {
         return runQuery(server, `{
-          events(filter: {
-            onDate: "2018-01-03T13:48:13.043Z"
-          }) {
+          events(
+            filter: { onDate: "2018-01-03T13:48:13.043Z" },
+            sort: { field: "dateStart", order: ASC }
+          ) {
             title
             dateStart
             dateEnd

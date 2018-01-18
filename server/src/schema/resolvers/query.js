@@ -1,5 +1,5 @@
 const { DEFAULT_ORDER } = require('../../constants')
-const moment = require('moment')
+const onDateFilter = require('../../utils/onDateFilter')
 
 module.exports = {
   event (root, { id }, {sequelize: {Event}}) {
@@ -8,13 +8,7 @@ module.exports = {
   events (root, {filter}, {sequelize: {Event}}) {
     const where = {}
     if (filter && filter.onDate) {
-      const date = moment(filter.onDate)
-      where.dateStart = {
-        $and: {
-          $gt: date.startOf('day').toDate(),
-          $lt: date.endOf('day').toDate()
-        }
-      }
+      where.dateStart = onDateFilter(filter.onDate)
     }
     return Event.findAll({
       where
