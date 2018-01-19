@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 const roomGroups = [
   {
-    title: '7 этаж',
+    floor: 7,
     rooms: [
       {
         title: 'Ржавый Фред',

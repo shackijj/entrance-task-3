@@ -7,30 +7,31 @@ describe('RoomTimeline', () => {
   const dateCurrent = new Date('2018-01-09T07:30:00.55');
   const users = [
     {
-      name: 'Test',
+      login: 'Test',
       avatarUrl: 'Fest'
     }
   ];
   const room = {
     title: 'Ржавый Фред',
     description: '3 - 6 человек',
+    capacity: 6,
     events: [
       {
         title: 'Событие 1',
-        dateStart: new Date('2018-01-09T06:30:00.55'),
-        dateEnd: new Date('2018-01-09T08:45:00.55'),
+        dateStart: '2018-01-09T06:30:00.55',
+        dateEnd: '2018-01-09T08:45:00.55',
         users
       },
       {
         title: 'Событие 2',
-        dateStart: new Date('2018-01-09T09:30:00.55'),
-        dateEnd: new Date('2018-01-09T11:45:00.55'),
+        dateStart: '2018-01-09T09:30:00.55',
+        dateEnd: '2018-01-09T11:45:00.55',
         users
       },
       {
         title: 'Событие 3',
-        dateStart: new Date('2018-01-09T18:30:00.55'),
-        dateEnd: new Date('2018-01-09T20:45:00.55'),
+        dateStart: '2018-01-09T18:30:00.55',
+        dateEnd: '2018-01-09T20:45:00.55',
         users
       }
     ]
@@ -153,13 +154,13 @@ describe('RoomTimeline', () => {
         hourStart={0}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={6}
         events={
           [
             {
               title: 'Событие 1',
-              dateStart: new Date('2018-01-09T06:30:00.55'),
-              dateEnd: new Date('2018-01-09T08:45:00.55'),
+              dateStart: '2018-01-09T06:30:00.55',
+              dateEnd: '2018-01-09T08:45:00.55',
               users
             },
           ]
@@ -186,13 +187,13 @@ describe('RoomTimeline', () => {
         hourStart={0}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={6}
         events={
           [
             {
               title: 'Событие 3',
-              dateStart: new Date('2018-01-09T05:04:00.55'),
-              dateEnd: new Date('2018-01-09T10:00:00.23'),
+              dateStart: '2018-01-09T05:04:00.55',
+              dateEnd: '2018-01-09T10:00:00.23',
               users
             },
           ]
@@ -218,7 +219,7 @@ describe('RoomTimeline', () => {
         hourStart={0}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={4}
         events={[]}
       />
     );
@@ -237,7 +238,7 @@ describe('RoomTimeline', () => {
         hourStart={0}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={4}
         events={[]}
       />
     );
@@ -259,7 +260,7 @@ describe('RoomTimeline', () => {
         hourStart={7}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={4}
         events={[]}
       />
     );
@@ -281,13 +282,13 @@ describe('RoomTimeline', () => {
         hourStart={7}
         hourEnd={23}
         title={'Ржавый Фред'}
-        description={'3 - 6 человек'}
+        capacity={4}
         events={
           [
             {
               title: 'Событие 7',
-              dateStart: new Date('2018-01-09T10:00:00.55'),
-              dateEnd: new Date('2018-01-09T13:00:00.55'),
+              dateStart: '2018-01-09T10:00:00.55',
+              dateEnd: '2018-01-09T13:00:00.55',
               users
             },
           ]
