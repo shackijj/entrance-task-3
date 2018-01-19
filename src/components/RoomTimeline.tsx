@@ -13,8 +13,7 @@ export interface RoomTimelineProps extends RoomProps {
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
-const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourStart = 0, hourEnd = 23, title}) => {
-
+const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourStart = 7, hourEnd = 23, title}) => {
   const slotProps: Array<{duration: number, type: string, tooltip?: JSX.Element}> = [];
 
   let prevEvent: Event | undefined;
@@ -26,7 +25,7 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
     const dateStart = new Date(curEvent.dateStart);
     const dateEnd = new Date(curEvent.dateEnd);
 
-    if (idx === 0 && hourStart < dateStart.getHours()) {
+    if (idx === 0 && hourStart <= dateStart.getHours()) {
       if (dateCurrent && dateCurrent < dateStart) {
         slotProps.push({
           duration: getMinutes(dateCurrent) - hourStart * 60,
@@ -94,6 +93,7 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
       });
     }
   }
+
   return (
     <div className="RoomTimeline">
       {slotProps.map(({type, duration, tooltip}, idx) => (
