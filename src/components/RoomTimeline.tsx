@@ -23,7 +23,8 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
   const totalMinutes = (hourEnd - hourStart + 1) * 60;
 
   events.forEach((curEvent, idx, arr) => {
-    const {dateStart, dateEnd} = curEvent;
+    const dateStart = new Date(curEvent.dateStart);
+    const dateEnd = new Date(curEvent.dateEnd);
 
     if (idx === 0 && hourStart < dateStart.getHours()) {
       if (dateCurrent && dateCurrent < dateStart) {
@@ -43,9 +44,9 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = ({dateCurrent, events, hourSt
       }
     }
 
-    if (prevEvent && prevEvent.dateEnd < dateStart) {
+    if (prevEvent && new Date(prevEvent.dateEnd) < dateStart) {
       slotProps.push({
-        duration: getMinutes(dateStart) - getMinutes(prevEvent.dateEnd),
+        duration: getMinutes(dateStart) - getMinutes(new Date(prevEvent.dateEnd)),
         type: 'free'
       });
     }

@@ -7,8 +7,8 @@ import './EventTooltip.css';
 
 export interface Event {
   title: string;
-  dateStart: Date;
-  dateEnd: Date;
+  dateStart: string;
+  dateEnd: string;
   users: UserProps[];
 }
 

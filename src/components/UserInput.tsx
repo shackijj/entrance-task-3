@@ -5,9 +5,9 @@ import './UserInput.css';
 
 interface UserInputProps extends UserProps {}
 
-const UserInput: React.SFC<UserInputProps> = ({avatarUrl, name}) => (
+const UserInput: React.SFC<UserInputProps> = ({avatarUrl, login}) => (
   <div className="UserInput">
-    <User name={name} avatarUrl={avatarUrl}/>
+    <User login={login} avatarUrl={avatarUrl}/>
     <Close classes={['UserInput-Close']}/>
   </div>
 );

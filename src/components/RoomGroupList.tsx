@@ -3,7 +3,7 @@ import * as classNames from 'classnames';
 import './RoomGroupList.css';
 
 export interface RoomGroup<RoomProps> {
-  title: string;
+  floor: number;
   rooms: RoomProps[];
 }
 
@@ -18,9 +18,10 @@ function RoomGroupList<T>({
   groups, RoomComponent, classes, showGroupTitle = true}: RoomGroupListProps<T>) {
   return (
     <div className={classNames('RoomGroupList', classes)}>
-      {groups.map(({title, rooms}, groupKey) => (
+      {groups &&
+        groups.map(({floor, rooms}, groupKey) => (
         <div key={groupKey} className="RoomGroupList-Group">
-          {showGroupTitle ? <h3 className="RoomGroupList-GroupTitle">{title}</h3> : ''}
+          {showGroupTitle ? <h3 className="RoomGroupList-GroupTitle">{floor} этаж</h3> : ''}
           {rooms.map((room, itemKey) => {
             return <RoomComponent {...room} key={itemKey}/>;
           })}
