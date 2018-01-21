@@ -80,21 +80,21 @@ const MainPage = withFloors(({data, history, match: {params: {date}}}) => (
       onDatePick={dateStr => history.push(`/events/${dateStr}`)}
     />
     <div className="MainPage-RoomEventListWrapper">
-        <Timeline classes={['MainPage-Timeline']}/>
-        <div className="MainPage-TimelineEvents">
-          <RoomGroupList
-            RoomComponent={Room}
-            classes={['MainPage-RoomGroupList']}
-            groups={data.floors}
-          />
-          <RoomGroupList
-            RoomComponent={RoomTimeline}
-            classes={['MainPage-RoomTimelineList']}
-            groups={data.floors}
-            showGroupTitle={false}
-          />
-        </div>
+      <Timeline classes={['MainPage-Timeline']}/>
+      <div className="MainPage-TimelineEvents">
+        <RoomGroupList
+          RoomComponent={Room}
+          classes={['MainPage-RoomGroupList']}
+          groups={data.floors}
+        />
+        <RoomGroupList
+          RoomComponent={RoomTimeline}
+          classes={['MainPage-RoomTimelineList']}
+          groups={data.floors}
+          showGroupTitle={false}
+        />
       </div>
+    </div>
   </div>
 ));
 

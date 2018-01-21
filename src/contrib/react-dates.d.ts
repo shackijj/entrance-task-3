@@ -11,6 +11,9 @@ declare module 'react-dates' {
     hideKeyboardShortcutsPanel?: boolean;
     isOutsideRange?: (moment: moment.Moment) => boolean;
     numberOfMonths?: number;
+    focused?: boolean;
+    isFocused?: boolean;
+    orientation?: string;
   }
 
   class DayPickerSingleDateController extends React.Component<DayPickerSingleDateControllerProps> {

@@ -23,46 +23,47 @@
   float: right;
 }
 
-.DatePicker-DayPicker {
-  position: absolute;
+.DatePicker .DayPicker {
   visibility: hidden;
 }
 
-.DatePicker_open .DatePicker-DayPicker {
+.DatePicker_open .DayPicker {
   visibility: visible;
 }
 
-.DatePicker-DayPicker .DayPicker {
-  top: 12px;
+.DatePicker .DayPicker {
+  position: absolute;
+  top: 36px;
   z-index: 10;
   box-shadow: 0 1px 8px 0 rgba(0,44,92,0.28);
   border-radius: 4px;
+  padding-bottom: 8px;
 }
 
-.DatePicker-DayPicker .CalendarMonth_caption {
+.DatePicker .CalendarMonth_caption {
   color: #000;
   font-size: 15px;
   font-weight: 500;
 }
 
-.DatePicker-DayPicker .CalendarMonth_caption {
+.DatePicker .CalendarMonth_caption {
   color: #000;
   font-size: 15px;
   padding-bottom: 48px;
   font-weight: 500;
 }
 
-.DatePicker-DayPicker .CalendarDay__blocked_out_of_range {
+.DatePicker .CalendarDay__blocked_out_of_range {
   color: #858E98 !important;
 }
 
-.DatePicker-DayPicker .CalendarDay {
+.DatePicker .CalendarDay {
   color: #000;
   font-size: 11px;
   font-weight: bold;
   vertical-align: middle;
 }
 
-.DatePicker-DayPicker .DayPickerNavigation_container {
+.DatePicker .DayPickerNavigation_container {
   display: none;
 }
