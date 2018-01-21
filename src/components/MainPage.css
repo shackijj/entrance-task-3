@@ -8,6 +8,10 @@
   border-bottom: 1px solid #E9ECEF;
 }
 
+.MainPage-DatePicker {
+  z-index: 10;
+}
+
 @media screen and (max-width: 1279px) {
   .MainPage-DatePicker {
     margin: 12px 24px;

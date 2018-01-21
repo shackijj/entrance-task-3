@@ -23,11 +23,12 @@ const EventsDiagram: React.SFC<EventsDiagramProps> = ({floors, classes}) => (
       />
 
       <div className="EventsDiagram-VerticalScrollContainer">
-        {floors.map((floor, idx) => (
-          <div className="EventDiagram-Floor" key={idx}>
+        {floors.map((floor, floorIdx) => (
+          <div className="EventDiagram-Floor" key={floorIdx}>
+            <div className="EventDiagram-FloorTitle">{floor.floor} этаж</div>
             {
-              floor.rooms.map((room) => (
-                <div className="EventDiagram-Room">
+              floor.rooms.map((room, roomIdx) => (
+                <div className="EventDiagram-Room" key={roomIdx}>
                   <Room {...room}/>
                   <RoomTimeline
                     hourStart={HOUR_START}
