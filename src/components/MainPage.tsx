@@ -114,6 +114,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
             currentTime={isToday ? dateCurrent : undefined}
             classes={['MainPage-Timeline']}
           />
+          {data && data.floors &&
           <div className="MainPage-TimelineEvents">
             <RoomGroupList
               RoomComponent={Room}
@@ -127,6 +128,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
               showGroupTitle={false}
             />
           </div>
+          }
         </div>
       </div>
     );
