@@ -13,3 +13,4 @@ import './EditEventPage';
 import './TextInput';
 import './RoomInput';
 import './UserInput';
+import './EventsDiagram';

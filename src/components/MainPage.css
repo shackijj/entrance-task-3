@@ -8,6 +8,10 @@
   border-bottom: 1px solid #E9ECEF;
 }
 
+.MainPage-DatePicker {
+  z-index: 10;
+}
+
 @media screen and (max-width: 1279px) {
   .MainPage-DatePicker {
     margin: 12px 24px;
@@ -23,51 +27,7 @@
   }
 }
 
-.MainPage-RoomGroupListWrapper {
-  width: 244px;
-  border-right: 1px solid #E9ECEF;
-  float: left;
-}
-
-.MainPage-RoomEventListWrapper {
-  max-width: 1280px;
-  padding: 0 calc(50% - 640px);
-  height: calc(100vh - 72px);
-  overflow-y: hidden;
-}
-
-.MainPage-TimelineEvents {
-  /* 
-  width hardcoded value should be removed or set by js 
-  Formulae: (width of timeline + width of room list) 
-  it makes srolling possible across all devices 
-  */
-  width: 1367px;
-  height: calc(100vh - 72px - 46px);
-  overflow-y: scroll;
-}
-
-.MainPage-RoomGroupList {
-  margin-left: 25px;
-  margin-top: 23px;
-  width: 220px;
-  float: left;
-}
-
-.MainPage-Timeline {
-  margin-left: 245px;
-}
-
-.MainPage-RoomTimelineList {
-  margin-left: 245px;
-  padding-top: 46px;
-}
-
-/* BEM Encapsulation is broken for the next three rules */
-.MainPage-RoomTimelineList .RoomGroupList-Group {
-  margin-bottom: 53px;
-}
-
-.MainPage-RoomGroupList .RoomGroupList-Group {
-  margin-bottom: 19px;
+.MainPage-EventsDiagram {
+  height: calc(100vh - 71px);
+  padding-left: calc(50% - 640px);
 }

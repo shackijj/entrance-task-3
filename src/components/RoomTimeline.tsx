@@ -3,20 +3,18 @@ import './RoomTimeline.css';
 import { RoomProps } from './Room';
 import EventTooltip, { Event } from './EventTooltip';
 
-import { HOUR_START, HOUR_END } from '../constants';
-
 export interface RoomTimelineProps extends RoomProps {
   dateCurrent?: Date;
   title: string;
-  hourStart?: number;
-  hourEnd?: number;
+  hourStart: number;
+  hourEnd: number;
   events: Event[];
 }
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
-  ({dateCurrent, events, hourStart = HOUR_START, hourEnd = HOUR_END, title}) => {
+  ({dateCurrent, events, hourStart, hourEnd, title}) => {
     const slotProps: Array<{duration: number, type: string, tooltip?: JSX.Element}> = [];
 
     let prevEvent: Event | undefined;

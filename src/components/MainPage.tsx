@@ -1,10 +1,6 @@
-import Timeline from './Timeline';
 import DatePicker from './DatePicker';
-import RoomGroupList from './RoomGroupList';
-import Room from './Room';
-import RoomTimeline from './RoomTimeline';
+import EventDiagram from './EventsDiagram';
 import './MainPage.css';
-import * as moment from 'moment';
 
 import { RouteComponentProps, withRouter } from 'react-router';
 
@@ -33,28 +29,27 @@ query FloorGroupedRoomEvents($date: Date) {
 }
 `;
 
-type User = {
+export type User = {
   login: string;
   avatarUrl: string;
 };
 
-type Event = {
+export type Event = {
   title: string;
   dateStart: string;
   dateEnd: string;
   users: User[];
 };
 
-type Room = {
+export type Room = {
   title: string;
-  floor: number;
   capacity: number;
   events: Event[];
 };
 
-type Floor = {
+export type Floor = {
   floor: number;
-  rooms: Room[]
+  rooms: Room[];
 };
 
 type Response = {
@@ -98,8 +93,6 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
   }
   render() {
     const {data, history} = this.props;
-    const {dateCurrent, dateChosen} = this.state;
-    const isToday = moment(dateCurrent).isSame(dateChosen, 'day');
     return (
       <div className="MainPage">
         <div className="MainPage-SubHeader"/>
@@ -109,27 +102,12 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
           dateChosen={this.state.dateChosen}
           onDatePick={dateStr => history.push(`/events/${dateStr}`)}
         />
-        <div className="MainPage-RoomEventListWrapper">
-          <Timeline
-            currentTime={isToday ? dateCurrent : undefined}
-            classes={['MainPage-Timeline']}
+        {data && data.floors &&
+          <EventDiagram
+            floors={data.floors}
+            classes={['MainPage-EventsDiagram']}
           />
-          {data && data.floors &&
-          <div className="MainPage-TimelineEvents">
-            <RoomGroupList
-              RoomComponent={Room}
-              classes={['MainPage-RoomGroupList']}
-              groups={data.floors}
-            />
-            <RoomGroupList
-              RoomComponent={RoomTimeline}
-              classes={['MainPage-RoomTimelineList']}
-              groups={data.floors}
-              showGroupTitle={false}
-            />
-          </div>
-          }
-        </div>
+        }
       </div>
     );
   }

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDiagram should render a floors list 1`] = `
+<div
+  className="EventsDiagram EventDiagram-Story"
+>
+  <div
+    className="EventsDiagram-HorizontalScrollContainer"
+  >
+    <Timeline
+      classes={
+        Array [
+          "EventsDiagram-Timeline",
+        ]
+      }
+      hourEnd={23}
+      hourStart={7}
+    />
+    <div
+      className="EventsDiagram-VerticalScrollContainer"
+    >
+      <div
+        className="EventDiagram-Floor"
+        key="0"
+      >
+        <div
+          className="EventDiagram-FloorTitle"
+        >
+          7
+           этаж
+        </div>
+        <div
+          className="EventDiagram-Room"
+          key="0"
+        >
+          <Room
+            capacity={7}
+            events={
+              Array [
+                Object {
+                  "dateEnd": "2018-01-09T08:45:00.55",
+                  "dateStart": "2018-01-09T06:30:00.55",
+                  "title": "Событие 1",
+                  "users": Array [],
+                },
+                Object {
+                  "dateEnd": "2018-01-09T11:45:00.55",
+                  "dateStart": "2018-01-09T09:30:00.55",
+                  "title": "Событие 2",
+                  "users": Array [],
+                },
+                Object {
+                  "dateEnd": "2018-01-09T20:45:00.55",
+                  "dateStart": "2018-01-09T18:30:00.55",
+                  "title": "Событие 3",
+                  "users": Array [],
+                },
+              ]
+            }
+            title="Ржавый Фред"
+          />
+          <RoomTimeline
+            capacity={7}
+            events={
+              Array [
+                Object {
+                  "dateEnd": "2018-01-09T08:45:00.55",
+                  "dateStart": "2018-01-09T06:30:00.55",
+                  "title": "Событие 1",
+                  "users": Array [],
+                },
+                Object {
+                  "dateEnd": "2018-01-09T11:45:00.55",
+                  "dateStart": "2018-01-09T09:30:00.55",
+                  "title": "Событие 2",
+                  "users": Array [],
+                },
+                Object {
+                  "dateEnd": "2018-01-09T20:45:00.55",
+                  "dateStart": "2018-01-09T18:30:00.55",
+                  "title": "Событие 3",
+                  "users": Array [],
+                },
+              ]
+            }
+            hourEnd={23}
+            hourStart={7}
+            title="Ржавый Фред"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

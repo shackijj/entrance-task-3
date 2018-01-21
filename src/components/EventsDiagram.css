@@ -1,0 +1,46 @@
+.EventsDiagram {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  position: relative;
+}
+
+.EventsDiagram-Timeline {
+  margin-left: 255px;
+}
+
+.EventDiagram-Room {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 44px;
+}
+
+.EventsDiagram-HorizontalScrollContainer {
+  display: inline-block;
+  height: 100%;
+}
+
+.EventsDiagram-VerticalScrollContainer {
+  height: calc(100% - 45px);
+  overflow-y: scroll;
+}
+
+.EventDiagram-FloorTitle {
+  margin-top: 21px;
+  margin-left: 24px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #858E98;
+  font-size: 0.846em;
+}
+
+.EventDiagram-Room .Room {
+  margin-left: 24px;
+  width: 231px;
+}
+
+.EventDiagram-Room .RoomTimeline {
+  flex: 1;
+}
+
