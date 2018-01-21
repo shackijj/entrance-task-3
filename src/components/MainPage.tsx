@@ -9,7 +9,7 @@ import * as moment from 'moment';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import * as React from 'react';
-import { graphql, ChildProps } from 'react-apollo';
+import { graphql, compose, ChildProps } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export const FEED_QUERY = gql`
@@ -70,9 +70,13 @@ interface MainPageState {
   dateCurrent: Date;
 }
 
+const propsToDate = ({match: {params: {date}}}: RouteComponentProps<MainPageProps>) => {
+  return date === 'today' ? new Date() : new Date(date);
+};
+
 const withFloors = graphql<Response, RouteComponentProps<MainPageProps>>(FEED_QUERY, {
-  options: () => ({
-    variables: { date: new Date() }
+  options: (props) => ({
+    variables: { date: propsToDate(props) }
   })
 });
 
@@ -80,16 +84,15 @@ type MainPagePropsConnected = ChildProps<RouteComponentProps<MainPageProps>, Res
 
 class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
   constructor(props: MainPagePropsConnected) {
-    const {match: {params: {date}}} = props;
     super(props);
     this.state = {
-      dateChosen: date === 'today' ? new Date() : new Date(date),
+      dateChosen: propsToDate(props),
       dateCurrent: new Date()
     };
   }
-  componentWillReceiveProps({match: {params: {date}}}: MainPagePropsConnected) {
+  componentWillReceiveProps(props: MainPagePropsConnected) {
     this.setState({
-      dateChosen: date === 'today' ? new Date() : new Date(date),
+      dateChosen: propsToDate(props),
       dateCurrent: new Date()
     });
   }
@@ -130,4 +133,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
   }
 }
 
-export default withRouter(withFloors(MainPage));
+export default compose(
+  withRouter,
+  withFloors
+)(MainPage);
