@@ -4,13 +4,13 @@ import './Room.css';
 
 export interface RoomProps {
   title: string;
-  description: string;
+  capacity: number;
   isHovered?: boolean;
   isPressed?: boolean;
   isDisabled?: boolean;
 }
 
-const Room = ({isHovered, isPressed, isDisabled, title, description}: RoomProps) => (
+const Room = ({isHovered, isPressed, isDisabled, title, capacity}: RoomProps) => (
   <div
     className={classNames(['Room', {
       'Room_hover': isHovered,
@@ -22,7 +22,7 @@ const Room = ({isHovered, isPressed, isDisabled, title, description}: RoomProps)
       {title}
     </div>
     <div className="Room-Description">
-      {description}
+      до {capacity} человек
     </div>
   </div>
 );

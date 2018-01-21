@@ -1,13 +1,11 @@
 import * as React from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import MainPage from './components/MainPage';
 import EditEventPage from './components/EditEventPage';
 
 const App = () => (
-  <BrowserRouter>
     <div className="App">
       <Header/>
       <Switch>
@@ -18,7 +16,6 @@ const App = () => (
         <Route exact={true} path="/edit/:id" component={EditEventPage} />
       </Switch>
     </div>
-  </BrowserRouter>
 );
 
 export default App;

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
+import { HOUR_START, HOUR_END } from '../constants';
+
 import './Timeline.css';
 
 export interface TimelineProps {
@@ -10,7 +12,7 @@ export interface TimelineProps {
   classes?: string[];
 }
 
-const Timeline = ({hourStart = 7, hourEnd = 23, currentTime, classes}: TimelineProps) => {
+const Timeline = ({hourStart = HOUR_START, hourEnd = HOUR_END, currentTime, classes}: TimelineProps) => {
   const hours = [];
   for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);

@@ -63,12 +63,13 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
         icon={<ArrowRight/>}
         onClick={() => _onDatePick(moment(dateChosen).add(1, 'days').format(FORMAT))}
       />
-      <div className="DatePicker-DayPicker">
+      <div className="DatePicker-DayPickerContainer">
         <DayPickerSingleDateController
           onDateChange={(date: string) => _onDatePick(moment(date).format(FORMAT))}
           hideKeyboardShortcutsPanel={true}
-          isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent)}
+          isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent, 'day')}
           numberOfMonths={3}
+          noBorder={true}
         />
       </div>
     </div>

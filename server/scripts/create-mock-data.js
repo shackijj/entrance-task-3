@@ -19,31 +19,38 @@ function createData ({models}) {
     }
   ])
 
-  let roomsPromise = models.Room.bulkCreate([
+  let floorsPromise = models.Floor.bulkCreate([
     {
-      title: '404',
-      capacity: 5,
       floor: 4
     },
     {
-      title: 'Деньги',
-      capacity: 4,
       floor: 2
+    },
+    {
+      floor: 3
+    }
+  ])
+
+  let roomsPromise = models.Room.bulkCreate([
+    {
+      title: '404',
+      capacity: 5
+    },
+    {
+      title: 'Деньги',
+      capacity: 4
     },
     {
       title: 'Карты',
-      capacity: 4,
-      floor: 2
+      capacity: 4
     },
     {
       title: 'Ствола',
-      capacity: 2,
-      floor: 2
+      capacity: 2
     },
     {
       title: '14',
-      capacity: 6,
-      floor: 3
+      capacity: 6
     }
   ])
 
@@ -66,19 +73,31 @@ function createData ({models}) {
     },
     {
       title: '🍨 Пробуем kefir.js',
-      dateStart: threeHoursLater,
-      dateEnd: twoHoursLater
+      dateStart: twoHoursLater,
+      dateEnd: threeHoursLater
     }
   ])
 
-  Promise.all([usersPromise, roomsPromise, eventsPromise])
+  Promise.all([usersPromise, roomsPromise, eventsPromise, floorsPromise])
     .then(() => Promise.all([
       models.User.findAll(),
       models.Room.findAll(),
-      models.Event.findAll()
+      models.Event.findAll(),
+      models.Floor.findAll()
     ]))
-    .then(function ([users, rooms, events]) {
+    .then(function ([users, rooms, events, floors]) {
       let promises = []
+
+      promises.push(rooms[0].setFloor(floors[0]))
+      promises.push(rooms[1].setFloor(floors[1]))
+      promises.push(rooms[2].setFloor(floors[1]))
+      promises.push(rooms[3].setFloor(floors[1]))
+      promises.push(rooms[4].setFloor(floors[2]))
+
+      promises.push(users[0].setFloor(floors[0]))
+      promises.push(users[1].setFloor(floors[1]))
+      promises.push(users[2].setFloor(floors[2]))
+
       promises.push(events[0].setRoom(rooms[0]))
       promises.push(events[1].setRoom(rooms[1]))
       promises.push(events[2].setRoom(rooms[2]))

@@ -33,7 +33,7 @@ exports[`EventTooltip should render an event 1`] = `
   >
     <User
       avatarUrl="https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg"
-      name="Дарт Вейдер 1"
+      login="Дарт Вейдер 1"
     />
     <span
       className="EventTooltip-MoreUsers"

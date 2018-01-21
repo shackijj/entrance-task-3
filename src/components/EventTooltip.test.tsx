@@ -6,22 +6,22 @@ describe('EventTooltip', () => {
   it('should render an event', () => {
     const event = {
       title: 'Событие 3',
-      dateStart: new Date('2018-01-09T18:30:00.55'),
-      dateEnd: new Date('2018-01-09T20:45:00.55'),
+      dateStart: '2018-01-09T18:30:00.55',
+      dateEnd: '2018-01-09T20:45:00.55',
       room: {
         title: 'Желтый дом'
       },
       users: [
         {
-          name: 'Дарт Вейдер 1',
+          login: 'Дарт Вейдер 1',
           avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
         },
         {
-          name: 'Дарт Вейдер 2',
+          login: 'Дарт Вейдер 2',
           avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
         },
         {
-          name: 'Дарт Вейдер 3',
+          login: 'Дарт Вейдер 3',
           avatarUrl: 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg'
         }
       ]
