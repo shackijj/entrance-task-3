@@ -5,25 +5,25 @@ import Room from '../src/components/Room';
 
 const roomGroups = [
   {
-    title: '7 этаж',
+    floor: 7,
     rooms: [
       {
         title: 'Ржавый Фред',
-        description: '3 - 6 человек',
+        capacity: 3,
       },
       {
         title: 'Прачечная',
-        description: 'до 10 человек',
+        capacity: 3,
         isHovered: true
       },
       {
         title: 'Желтый дом',
-        description: 'до 10 человек',
+        capacity: 3,
         isDisabled: true
       },
       {
         title: 'Оранжевый Тюльпан',
-        description: 'до 10 человек',
+        capacity: 3,
         isPressed: true
       },
     ]
