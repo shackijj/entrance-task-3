@@ -1,18 +1,16 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 
-import { HOUR_START, HOUR_END } from '../constants';
-
 import './Timeline.css';
 
 export interface TimelineProps {
-  hourStart?: number;
-  hourEnd?: number;
+  hourStart: number;
+  hourEnd: number;
   currentTime?: Date;
   classes?: string[];
 }
 
-const Timeline = ({hourStart = HOUR_START, hourEnd = HOUR_END, currentTime, classes}: TimelineProps) => {
+const Timeline = ({hourStart, hourEnd, currentTime = new Date(), classes}: TimelineProps) => {
   const hours = [];
   for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);
@@ -30,7 +28,7 @@ const Timeline = ({hourStart = HOUR_START, hourEnd = HOUR_END, currentTime, clas
       const currentMinutes = (hourCurrent - hourStart) * 60 + hourMinutes;
       const offset = (currentMinutes / totalMinutes) * 100;
       style = {
-        left: `${offset.toFixed(6)}%`
+        left: `${offset.toFixed(6)}%`,
       };
     }
   }
@@ -40,17 +38,18 @@ const Timeline = ({hourStart = HOUR_START, hourEnd = HOUR_END, currentTime, clas
       <li className="Timeline-Background"/>
       {formattedTime ?
         <li style={style} className="Timeline-CurrentTime">
+          <span className="Timeline-ClockBorder"/>
           <span className="Timeline-Clock">{formattedTime}</span>
         </li> : ''}
       {hours.map((hour, idx) => (
-          <li
-            key={idx}
-            className={classNames('Timeline-Hour', {
-              'Timeline-Hour_passed': (hourCurrent && hour <= hourCurrent) ? true : false
-            })}
-          >
-            {hour}
-          </li>
+        <li
+          key={idx}
+          className={classNames('Timeline-Hour', {
+            'Timeline-Hour_passed': (hourCurrent && hour <= hourCurrent) ? true : false
+          })}
+        >
+          {hour}
+        </li>
       ))}
     </ul>
   );

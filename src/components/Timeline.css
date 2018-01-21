@@ -2,23 +2,20 @@
   position: relative;
   display: inline-flex;
   flex-flow: row nowrap;
-  height: 45px;
   color: #252525;
   font-weight: bold;
+  height: 45px;
   letter-spacing: 0.4px;
   padding: 0 33px;
   font-size: 0.846em;
 }
 
-
-/* 
-  This pseudo element creates background.
-*/
 .Timeline:after {
   content: "";
   position: absolute;
+  display: block;
   background-color: #E9ECEF;
-  height: calc(100vh - 72px - 46px);
+  height: 10000px;
   width: 100%;
   top: 46px;
   left: 0px;
@@ -36,17 +33,6 @@
 
 .Timeline-Hour_passed {
   color: #858E98;
-}
-
-.Timeline-Hour:after {
-  content: "";
-  position: absolute;
-  display: block;
-  background-color: rgba(19,100,205,0.10);
-  width: 1px;
-  height: calc(100vh - 72px - 46px);
-  left: 50%;
-  top: 30px;
 }
 
 .Timeline-CurrentTime {
@@ -70,12 +56,32 @@
   width: 49px;
 }
 
-.Timeline-CurrentTime:before {
-  content: "";
+.Timeline-ClockBorder {
   z-index: 1;
   background-color: #007DFF;
   position: absolute;
   left: 50%;
   width: 1px;
-  min-height: calc(100vh - 71px - 46px + 19px + 13px);
+  min-height: 10000px;
+}
+
+.Timeline-HourBorder {
+  min-width: 66px;
+}
+
+.Timeline-Markup {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 1122px;
+}
+
+.Timeline-Hour:after {
+  content: "";
+  position: absolute;
+  display: block;
+  background-color: rgba(19,100,205,0.10);
+  width: 1px;
+  min-height: 10000px;
+  left: 50%;
+  top: 30px;
 }
