@@ -14,6 +14,7 @@ declare module 'react-dates' {
     focused?: boolean;
     isFocused?: boolean;
     orientation?: string;
+    noBorder?: boolean;
   }
 
   class DayPickerSingleDateController extends React.Component<DayPickerSingleDateControllerProps> {
