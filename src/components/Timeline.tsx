@@ -6,11 +6,11 @@ import './Timeline.css';
 export interface TimelineProps {
   hourStart: number;
   hourEnd: number;
-  currentTime?: Date;
+  dateCurrent?: Date;
   classes?: string[];
 }
 
-const Timeline = ({hourStart, hourEnd, currentTime = new Date(), classes}: TimelineProps) => {
+const Timeline = ({hourStart, hourEnd, dateCurrent, classes}: TimelineProps) => {
   const hours = [];
   for (let i = hourStart; i < hourEnd; i++) {
     hours.push(i + 1);
@@ -19,9 +19,9 @@ const Timeline = ({hourStart, hourEnd, currentTime = new Date(), classes}: Timel
   let formattedTime;
   let style;
   let hourCurrent: number | undefined;
-  if (currentTime) {
-    hourCurrent = currentTime.getHours();
-    const hourMinutes = currentTime.getMinutes();
+  if (dateCurrent) {
+    hourCurrent = dateCurrent.getHours();
+    const hourMinutes = dateCurrent.getMinutes();
     if (hourCurrent >= hourStart && hourCurrent <= hourEnd) {
       formattedTime = `${hourCurrent}:${(hourMinutes < 10) ? '0' : ''}${hourMinutes}`;
       const totalMinutes = ((hourEnd + 1 - hourStart) * 60);

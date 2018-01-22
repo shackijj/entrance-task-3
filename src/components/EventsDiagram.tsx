@@ -11,15 +11,17 @@ import './EventsDiagram.css';
 interface EventsDiagramProps {
   floors: Floor[];
   classes: string[];
+  dateCurrent?: Date;
 }
 
-const EventsDiagram: React.SFC<EventsDiagramProps> = ({floors, classes}) => (
+const EventsDiagram: React.SFC<EventsDiagramProps> = ({floors, classes, dateCurrent}) => (
   <div className={classNames('EventsDiagram', classes)}>
     <div className="EventsDiagram-HorizontalScrollContainer">
       <Timeline 
         classes={['EventsDiagram-Timeline']}
         hourStart={HOUR_START}
         hourEnd={HOUR_END}
+        dateCurrent={dateCurrent}
       />
 
       <div className="EventsDiagram-VerticalScrollContainer">
@@ -31,6 +33,7 @@ const EventsDiagram: React.SFC<EventsDiagramProps> = ({floors, classes}) => (
                 <div className="EventDiagram-Room" key={roomIdx}>
                   <Room {...room}/>
                   <RoomTimeline
+                    dateCurrent={dateCurrent}
                     hourStart={HOUR_START}
                     hourEnd={HOUR_END}
                     {...room}

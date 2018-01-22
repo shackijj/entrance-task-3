@@ -8,6 +8,8 @@ import * as React from 'react';
 import { graphql, compose, ChildProps } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import * as moment from 'moment';
+
 export const FEED_QUERY = gql`
 query FloorGroupedRoomEvents($date: Date) {
   floors {
@@ -93,18 +95,21 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
   }
   render() {
     const {data, history} = this.props;
+    const {dateCurrent, dateChosen} = this.state;
+    const isToday = moment(dateCurrent).isSame(dateChosen, 'day');
     return (
       <div className="MainPage">
         <div className="MainPage-SubHeader"/>
         <DatePicker
           classes={['MainPage-DatePicker']}
-          dateCurrent={this.state.dateCurrent}
-          dateChosen={this.state.dateChosen}
+          dateCurrent={dateCurrent}
+          dateChosen={dateChosen}
           onDatePick={dateStr => history.push(`/events/${dateStr}`)}
         />
         {data && data.floors &&
           <EventDiagram
             floors={data.floors}
+            dateCurrent={isToday ? dateCurrent : undefined}
             classes={['MainPage-EventsDiagram']}
           />
         }
