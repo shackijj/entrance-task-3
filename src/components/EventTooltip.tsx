@@ -10,13 +10,14 @@ export interface Event {
   dateStart: string;
   dateEnd: string;
   users: UserProps[];
+  style?: React.CSSProperties;
 }
 
 interface EventTooltipProps extends Event {
   room: { title: string };
 }
 
-const EventTooltip = ({title, room, dateStart, dateEnd, users}: EventTooltipProps) => {
+const EventTooltip = ({title, room, dateStart, dateEnd, users, style}: EventTooltipProps) => {
   const momentStart = moment(dateStart);
   const momentEnd = moment(dateEnd);
   const date = momentStart.format('D MMMM');
@@ -42,7 +43,7 @@ const EventTooltip = ({title, room, dateStart, dateEnd, users}: EventTooltipProp
   } 
 
   return (
-    <div className="EventTooltip">
+    <div className="EventTooltip" style={style}>
       <RoundButton classes={['EventTooltip-Button']} icon={<Edit/>}/>
       <div className="EventTooltip-Title">{title}</div>
       <div className="EventTooltip-Info">

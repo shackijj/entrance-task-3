@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './RoomTimeline.css';
 import { RoomProps } from './Room';
-import EventTooltip, { Event } from './EventTooltip';
+import { Event } from './EventTooltip';
 
 export interface RoomTimelineProps extends RoomProps {
   dateCurrent?: Date;
@@ -9,7 +9,7 @@ export interface RoomTimelineProps extends RoomProps {
   hourStart: number;
   hourEnd: number;
   events: Event[];
-  onEventClick?: () => void;
+  onEventClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
@@ -52,19 +52,15 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
         });
       }
 
-      const tooltip = <EventTooltip room={{title}} {...curEvent}/>;
-
       if (hourStart > dateStart.getHours()) {
         slotProps.push({
           duration: getMinutes(dateEnd) - (hourStart * 60),
           type: 'event',
-          tooltip
         });
       } else {
         slotProps.push({
           duration: getMinutes(dateEnd) - getMinutes(dateStart),
           type: 'event',
-          tooltip
         });
       }
 
@@ -104,9 +100,7 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
             className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
             onClick={type === 'event' && onEventClick ? onEventClick : undefined}
             style={{width: `${((duration * 100 / totalMinutes).toFixed(6))}%`}}
-          >
-          {tooltip ? tooltip : ''}
-          </div>
+          />
         ))}
       </div>
     );
