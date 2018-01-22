@@ -1,20 +1,32 @@
 import * as React from 'react';
-import User, { UserProps } from './User';
+import User from './User';
 import RoundButton from './RoundButton';
 import { Edit } from './GlyphIcon/GlyphIcon';
 import * as moment from 'moment';
 import './EventTooltip.css';
 
-export interface Event {
+import { graphql, ChildProps } from 'react-apollo';
+import gql from 'graphql-tag';
+
+type User = {
+  login: string;
+  avatarUrl: string;
+};
+
+type Room = {
+  title: string;
+};
+
+type Event = {
   title: string;
   dateStart: string;
   dateEnd: string;
-  users: UserProps[];
-  style?: React.CSSProperties;
-}
+  room: Room;
+  users: User[];
+};
 
 interface EventTooltipProps extends Event {
-  room: { title: string };
+  style?: React.CSSProperties;
 }
 
 const EventTooltip = ({title, room, dateStart, dateEnd, users, style}: EventTooltipProps) => {
@@ -56,5 +68,33 @@ const EventTooltip = ({title, room, dateStart, dateEnd, users, style}: EventTool
     </div>
   );
 };
+
+const TOOLTIP_QUERY = gql`
+  query EventQuery($id: string) {
+    event(id: $id) {
+      dateStart
+      dateEnd
+      room {
+        title
+      }
+      users {
+        login
+        avatarUrl
+      }
+    }
+  }
+`;
+
+type Response = {
+  event: Event;
+};
+
+type Props = ChildProps<Response, {id: string, style?: React.CSSProperties}>;
+
+export const withGraphQL = graphql<Response, Props>(TOOLTIP_QUERY, {
+  options: (props) => ({
+    variables: {}
+  })
+});
 
 export default EventTooltip;
