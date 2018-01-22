@@ -9,12 +9,13 @@ export interface RoomTimelineProps extends RoomProps {
   hourStart: number;
   hourEnd: number;
   events: Event[];
+  onEventClick?: () => void;
 }
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
-  ({dateCurrent, events, hourStart, hourEnd, title}) => {
+  ({dateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
     const slotProps: Array<{duration: number, type: string, tooltip?: JSX.Element}> = [];
 
     let prevEvent: Event | undefined;
@@ -101,6 +102,7 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
           <div
             key={idx}
             className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
+            onClick={type === 'event' && onEventClick ? onEventClick : undefined}
             style={{width: `${((duration * 100 / totalMinutes).toFixed(6))}%`}}
           >
           {tooltip ? tooltip : ''}

@@ -311,4 +311,34 @@ describe('RoomTimeline', () => {
       width: '64.705882%'
     });
   });
+
+  it('should fire onEventClick when an event is clicked', () => {
+    const spy = jest.fn();
+    const wrapper = shallow(
+      <RoomTimeline
+        dateCurrent={new Date('2018-01-09T07:30:00.55')}
+        hourStart={7}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        onEventClick={spy}
+        capacity={4}
+        events={
+          [
+            {
+              title: 'Событие 7',
+              dateStart: '2018-01-09T10:00:00.55',
+              dateEnd: '2018-01-09T13:00:00.55',
+              users
+            },
+          ]
+        }
+      />
+    );
+
+    wrapper
+      .find('.RoomTimeline-Slot_event')
+      .simulate('click');
+
+    expect(spy.mock.calls.length).toEqual(1);
+  });
 });
