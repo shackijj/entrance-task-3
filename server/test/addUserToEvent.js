@@ -98,11 +98,7 @@ describe('#addUserToEvent', () => {
     }`)
       .then(({body: {data: {addUserToEvent}, errors}}) => {
         expect(errors).to.equal(undefined)
-<<<<<<< HEAD
         expect(addUserToEvent.users.length).to.eql(2)
-=======
-        expect(addUserToEvent.users.length).to.equal(2)
->>>>>>> entrance-task-3-dev
       })
   })
 
