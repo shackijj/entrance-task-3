@@ -77,18 +77,21 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
 
   private _onEventClick(event: React.MouseEvent<HTMLDivElement>) {
     if (this._container) {
-      const rect = this._container.getBoundingClientRect();
+      const cr = this._container.getBoundingClientRect();
+      const er = event.currentTarget.getBoundingClientRect();
+      const left = er.left - cr.left + er.width / 2 + this._container.scrollLeft - 362 / 2;
+      const lk = cr.width - (left + 362) + this._container.scrollLeft;
+
       this.setState({
         tooltip: {
           id: '1',
           style: {
-            top: event.pageY - rect.top,
-            left: event.pageX - rect.left,
+            top: er.top - cr.top + er.height + this._container.scrollTop,
+            left: lk < 0 ? left + lk : left,
           }
         }
       });
     }
-
   }
 }
 

@@ -31,3 +31,9 @@
   height: calc(100vh - 71px);
   padding-left: calc(50% - 640px);
 }
+
+@media screen and (max-width: 1279px) {
+  .MainPage-EventsDiagram {
+    height: calc(100vh - 71px - 46px);
+  }
+}
