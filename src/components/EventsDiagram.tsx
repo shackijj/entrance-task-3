@@ -2,11 +2,10 @@ import * as React from 'react';
 import Timeline from './Timeline';
 import Room from './Room';
 import RoomTimeline from './RoomTimeline';
+import EventTooltip from './EventTooltip';
 import * as classNames from 'classnames';
 import { Floor } from './MainPage';
 import { HOUR_START, HOUR_END } from '../constants';
-
-import EventTooltip from './EventTooltip';
 
 import './EventsDiagram.css';
 
@@ -17,9 +16,8 @@ interface EventsDiagramProps {
 }
 
 type Tooltip = {
-  eventId: string;
-  x: number;
-  y: number;
+  id: string;
+  style: React.CSSProperties;
 };
 
 interface EventsDiagramState {
@@ -28,7 +26,7 @@ interface EventsDiagramState {
 
 class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramState> {
   public onEventClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-
+  private _container: HTMLDivElement | null;
   constructor(props: EventsDiagramProps) {
     super(props);
     this.state = {
@@ -39,8 +37,9 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
 
   public render() {
     const {floors, classes, dateCurrent} = this.props;
+    const { tooltip }  = this.state;
     return (
-      <div className={classNames('EventsDiagram', classes)}>
+      <div className={classNames('EventsDiagram', classes)} ref={div => this._container = div}>
         <div className="EventsDiagram-HorizontalScrollContainer">
           <Timeline 
             classes={['EventsDiagram-Timeline']}
@@ -71,18 +70,25 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
             ))}
           </div>
         </div>
+        {tooltip && <EventTooltip {...tooltip}/>}
       </div>
     );
   }
 
-  private _onEventClick() {
-    this.setState({
-      tooltip: {
-        eventId: '1',
-        x: 1,
-        y: 1
-      }
-    });
+  private _onEventClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (this._container) {
+      const rect = this._container.getBoundingClientRect();
+      this.setState({
+        tooltip: {
+          id: '1',
+          style: {
+            top: event.pageY - rect.top,
+            left: event.pageX - rect.left,
+          }
+        }
+      });
+    }
+
   }
 }
 

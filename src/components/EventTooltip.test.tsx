@@ -1,10 +1,10 @@
 import * as React from 'react';
-import EventTooltip from './EventTooltip';
+import { EventTooltip } from './EventTooltip';
 import shallowExpect from '../utils/shallowExpect';
 
 describe('EventTooltip', () => {
   it('should render an event', () => {
-    const event = {
+    const props = {
       title: 'Событие 3',
       dateStart: '2018-01-09T18:30:00.55',
       dateEnd: '2018-01-09T20:45:00.55',
@@ -27,6 +27,6 @@ describe('EventTooltip', () => {
       ]
     };
 
-    shallowExpect(<EventTooltip {...event} />).toMatchSnapshot();
+    shallowExpect(<EventTooltip {...props} />).toMatchSnapshot();
   });
 });

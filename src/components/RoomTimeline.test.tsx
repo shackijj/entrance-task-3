@@ -158,10 +158,8 @@ describe('RoomTimeline', () => {
         events={
           [
             {
-              title: 'Событие 1',
               dateStart: '2018-01-09T06:30:00.55',
               dateEnd: '2018-01-09T08:45:00.55',
-              users
             },
           ]
         }
@@ -191,10 +189,8 @@ describe('RoomTimeline', () => {
         events={
           [
             {
-              title: 'Событие 3',
               dateStart: '2018-01-09T05:04:00.55',
               dateEnd: '2018-01-09T10:00:00.23',
-              users
             },
           ]
         }
@@ -286,10 +282,8 @@ describe('RoomTimeline', () => {
         events={
           [
             {
-              title: 'Событие 7',
               dateStart: '2018-01-09T10:00:00.55',
               dateEnd: '2018-01-09T13:00:00.55',
-              users
             },
           ]
         }
@@ -325,10 +319,8 @@ describe('RoomTimeline', () => {
         events={
           [
             {
-              title: 'Событие 7',
               dateStart: '2018-01-09T10:00:00.55',
               dateEnd: '2018-01-09T13:00:00.55',
-              users
             },
           ]
         }

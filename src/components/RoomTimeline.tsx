@@ -1,7 +1,11 @@
 import * as React from 'react';
 import './RoomTimeline.css';
 import { RoomProps } from './Room';
-import { Event } from './EventTooltip';
+
+interface Event {
+  dateStart: string;
+  dateEnd: string;
+}
 
 export interface RoomTimelineProps extends RoomProps {
   dateCurrent?: Date;

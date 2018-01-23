@@ -1,5 +1,5 @@
 .EventTooltip {
-  position: relative;
+  position: absolute;
   display: inline-block;
   background: #FFFFFF;
   padding: 16px;

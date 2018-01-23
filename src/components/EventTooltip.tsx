@@ -5,7 +5,7 @@ import { Edit } from './GlyphIcon/GlyphIcon';
 import * as moment from 'moment';
 import './EventTooltip.css';
 
-import { graphql, ChildProps } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 type User = {
@@ -29,7 +29,7 @@ interface EventTooltipProps extends Event {
   style?: React.CSSProperties;
 }
 
-const EventTooltip = ({title, room, dateStart, dateEnd, users, style}: EventTooltipProps) => {
+export const EventTooltip: React.SFC<EventTooltipProps> = ({title, room, dateStart, dateEnd, users, style}) => {
   const momentStart = moment(dateStart);
   const momentEnd = moment(dateEnd);
   const date = momentStart.format('D MMMM');
@@ -70,7 +70,7 @@ const EventTooltip = ({title, room, dateStart, dateEnd, users, style}: EventTool
 };
 
 const TOOLTIP_QUERY = gql`
-  query EventQuery($id: string) {
+  query EventQuery($id: ID!) {
     event(id: $id) {
       dateStart
       dateEnd
@@ -89,12 +89,21 @@ type Response = {
   event: Event;
 };
 
-type Props = ChildProps<Response, {id: string, style?: React.CSSProperties}>;
+type InputProps = {
+  id: string;
+  style?: React.CSSProperties;
+};
 
-export const withGraphQL = graphql<Response, Props>(TOOLTIP_QUERY, {
-  options: (props) => ({
-    variables: {}
+export const withGraphQL = graphql<Response, InputProps>(TOOLTIP_QUERY, {
+  options: ({id}) => ({
+    variables: { id }
   })
 });
 
-export default EventTooltip;
+export default withGraphQL(({data, style}) => {
+  if (data && data.event) {
+    return <EventTooltip {...data.event} style={style}/>;
+    
+  }
+  return <div/>;
+});
