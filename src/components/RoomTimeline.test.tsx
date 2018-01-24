@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import RoomTimeline from './RoomTimeline';
-import EventTooltip from './EventTooltip';
 
 describe('RoomTimeline', () => {
   const dateCurrent = new Date('2018-01-09T07:30:00.55');
@@ -17,18 +16,21 @@ describe('RoomTimeline', () => {
     capacity: 6,
     events: [
       {
+        id: '1',
         title: 'Событие 1',
         dateStart: '2018-01-09T06:30:00.55',
         dateEnd: '2018-01-09T08:45:00.55',
         users
       },
       {
+        id: '2',
         title: 'Событие 2',
         dateStart: '2018-01-09T09:30:00.55',
         dateEnd: '2018-01-09T11:45:00.55',
         users
       },
       {
+        id: '3',
         title: 'Событие 3',
         dateStart: '2018-01-09T18:30:00.55',
         dateEnd: '2018-01-09T20:45:00.55',
@@ -64,7 +66,6 @@ describe('RoomTimeline', () => {
     expect(wrapper.find('.RoomTimeline-Slot_past')).toHaveLength(1);
     expect(wrapper.find('.RoomTimeline-Slot_free')).toHaveLength(3);
     expect(wrapper.find('.RoomTimeline-Slot_event')).toHaveLength(3);
-    expect(wrapper.find(EventTooltip)).toHaveLength(3);
   });
 
   it('should work without dateCurrent', () => {
@@ -79,7 +80,6 @@ describe('RoomTimeline', () => {
     expect(wrapper.find('.RoomTimeline-Slot')).toHaveLength(7);
     expect(wrapper.find('.RoomTimeline-Slot_free')).toHaveLength(4);
     expect(wrapper.find('.RoomTimeline-Slot_event')).toHaveLength(3);
-    expect(wrapper.find(EventTooltip)).toHaveLength(3);
   });
 
   it('should set width in % for each slot', () => {
@@ -158,6 +158,7 @@ describe('RoomTimeline', () => {
         events={
           [
             {
+              id: '1',
               dateStart: '2018-01-09T06:30:00.55',
               dateEnd: '2018-01-09T08:45:00.55',
             },
@@ -189,6 +190,7 @@ describe('RoomTimeline', () => {
         events={
           [
             {
+              id: '1',
               dateStart: '2018-01-09T05:04:00.55',
               dateEnd: '2018-01-09T10:00:00.23',
             },
@@ -282,6 +284,7 @@ describe('RoomTimeline', () => {
         events={
           [
             {
+              id: '1',
               dateStart: '2018-01-09T10:00:00.55',
               dateEnd: '2018-01-09T13:00:00.55',
             },
@@ -308,7 +311,7 @@ describe('RoomTimeline', () => {
 
   it('should fire onEventClick when an event is clicked', () => {
     const spy = jest.fn();
-    const wrapper = shallow(
+    const wrapper = mount(
       <RoomTimeline
         dateCurrent={new Date('2018-01-09T07:30:00.55')}
         hourStart={7}
@@ -319,6 +322,7 @@ describe('RoomTimeline', () => {
         events={
           [
             {
+              id: '1',
               dateStart: '2018-01-09T10:00:00.55',
               dateEnd: '2018-01-09T13:00:00.55',
             },

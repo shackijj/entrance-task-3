@@ -18,13 +18,9 @@ query FloorGroupedRoomEvents($date: Date) {
       title
       capacity
       events(filter: {onDate: $date}, sort: {field: "dateStart", order: DESC}) {
-        title
+        id
         dateStart
         dateEnd
-        users {
-          login
-          avatarUrl
-        }
       }
     }
   }
@@ -37,10 +33,9 @@ export type User = {
 };
 
 export type Event = {
-  title: string;
+  id: string;
   dateStart: string;
   dateEnd: string;
-  users: User[];
 };
 
 export type Room = {

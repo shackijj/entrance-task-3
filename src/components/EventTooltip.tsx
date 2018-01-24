@@ -25,11 +25,7 @@ type Event = {
   users: User[];
 };
 
-interface EventTooltipProps extends Event {
-  style?: React.CSSProperties;
-}
-
-export const EventTooltip: React.SFC<EventTooltipProps> = ({title, room, dateStart, dateEnd, users, style}) => {
+export const EventTooltip: React.SFC<Event> = ({title, room, dateStart, dateEnd, users}) => {
   const momentStart = moment(dateStart);
   const momentEnd = moment(dateEnd);
   const date = momentStart.format('D MMMM');
@@ -55,7 +51,7 @@ export const EventTooltip: React.SFC<EventTooltipProps> = ({title, room, dateSta
   } 
 
   return (
-    <div className="EventTooltip" style={style}>
+    <div className="EventTooltip">
       <RoundButton classes={['EventTooltip-Button']} icon={<Edit/>}/>
       <div className="EventTooltip-Title">{title}</div>
       <div className="EventTooltip-Info">
@@ -92,7 +88,6 @@ type Response = {
 
 type InputProps = {
   id: string;
-  style?: React.CSSProperties;
 };
 
 export const withGraphQL = graphql<Response, InputProps>(TOOLTIP_QUERY, {
@@ -101,10 +96,9 @@ export const withGraphQL = graphql<Response, InputProps>(TOOLTIP_QUERY, {
   })
 });
 
-export default withGraphQL(({data, style}) => {
+export default withGraphQL(({data}) => {
   if (data && data.event) {
-    return <EventTooltip {...data.event} style={style}/>;
-    
+    return <EventTooltip {...data.event}/>;
   }
   return <div/>;
 });

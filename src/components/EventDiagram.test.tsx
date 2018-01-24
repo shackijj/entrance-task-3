@@ -2,6 +2,7 @@ import * as React from 'react';
 import EventsDiagram from './EventsDiagram';
 import EventTooltip from './EventTooltip';
 import shallowExpect from '../utils/shallowExpect';
+import { MockedProvider } from 'react-apollo/test-utils';
 import { mount } from 'enzyme';
 
 describe('EventDiagram', () => {
@@ -15,18 +16,21 @@ describe('EventDiagram', () => {
             capacity: 7,
             events: [
               {
+                id: '1',
                 title: 'Событие 1',
                 dateStart: '2018-01-09T06:30:00.55',
                 dateEnd: '2018-01-09T08:45:00.55',
                 users: [],
               },
               {
+                id: '2',
                 title: 'Событие 2',
                 dateStart: '2018-01-09T09:30:00.55',
                 dateEnd: '2018-01-09T11:45:00.55',
                 users: [],
               },
               {
+                id: '3',
                 title: 'Событие 3',
                 dateStart: '2018-01-09T18:30:00.55',
                 dateEnd: '2018-01-09T20:45:00.55',
@@ -38,10 +42,12 @@ describe('EventDiagram', () => {
       }
     ];
     shallowExpect(
-      <EventsDiagram
-        floors={floor}
-        classes={['EventDiagram-Story']}
-      />)
+      <MockedProvider>
+        <EventsDiagram
+          floors={floor}
+          classes={['EventDiagram-Story']}
+        />
+      </MockedProvider>)
       .toMatchSnapshot();
   });
 
@@ -55,6 +61,7 @@ describe('EventDiagram', () => {
             capacity: 7,
             events: [
               {
+                id: '1',
                 title: 'Событие 1',
                 dateStart: '2018-01-09T06:30:00.55',
                 dateEnd: '2018-01-09T08:45:00.55',
@@ -66,10 +73,12 @@ describe('EventDiagram', () => {
       }
     ];
     const wrapper = mount(
-      <EventsDiagram
-        floors={floor}
-        classes={['EventDiagram-Story']}
-      />
+      <MockedProvider>
+        <EventsDiagram
+          floors={floor}
+          classes={['EventDiagram-Story']}
+        />
+      </MockedProvider>
     );
 
     wrapper

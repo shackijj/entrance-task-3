@@ -3,6 +3,7 @@ import './RoomTimeline.css';
 import { RoomProps } from './Room';
 
 interface Event {
+  id: string;
   dateStart: string;
   dateEnd: string;
 }
@@ -13,21 +14,30 @@ export interface RoomTimelineProps extends RoomProps {
   hourStart: number;
   hourEnd: number;
   events: Event[];
-  onEventClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onEventClick?: (id: string, e: HTMLDivElement) => void;
 }
 
 const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
   ({dateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
-    const slotProps: Array<{duration: number, type: string, tooltip?: JSX.Element}> = [];
+    const slotProps: Array<{duration: number, type: string, id?: string}> = [];
 
     let prevEvent: Event | undefined;
     let length = events.length;
 
     const totalMinutes = (hourEnd - hourStart + 1) * 60;
 
+    const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLDivElement;
+        const eventId = target.getAttribute('data-event-id');
+        if (onEventClick && target && eventId) {
+          onEventClick(eventId as string, target);
+        }
+    };
+
     events.forEach((curEvent, idx, arr) => {
+      const {id} = curEvent;
       const dateStart = new Date(curEvent.dateStart);
       const dateEnd = new Date(curEvent.dateEnd);
 
@@ -59,11 +69,13 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
       if (hourStart > dateStart.getHours()) {
         slotProps.push({
           duration: getMinutes(dateEnd) - (hourStart * 60),
+          id,
           type: 'event',
         });
       } else {
         slotProps.push({
           duration: getMinutes(dateEnd) - getMinutes(dateStart),
+          id,
           type: 'event',
         });
       }
@@ -97,12 +109,12 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
     }
 
     return (
-      <div className="RoomTimeline">
-        {slotProps.map(({type, duration, tooltip}, idx) => (
+      <div className="RoomTimeline" onClick={onClick}>
+        {slotProps.map(({type, duration, id}, idx) => (
           <div
             key={idx}
             className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
-            onClick={type === 'event' && onEventClick ? onEventClick : undefined}
+            data-event-id={id}
             style={{width: `${((duration * 100 / totalMinutes).toFixed(6))}%`}}
           />
         ))}
