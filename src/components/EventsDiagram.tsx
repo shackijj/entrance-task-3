@@ -39,8 +39,12 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
   public render() {
     const {floors, classes, dateCurrent} = this.props;
     const { tooltip }  = this.state;
+    const isScrollDisabled = !!tooltip;
     return (
-      <div className={classNames('EventsDiagram', classes)} ref={div => this._container = div}>
+      <div
+        className={classNames('EventsDiagram', {'EventsDiagram_noscroll': isScrollDisabled }, classes)}
+        ref={div => this._container = div}
+      >
         <div className="EventsDiagram-HorizontalScrollContainer">
           <Timeline 
             classes={['EventsDiagram-Timeline']}
@@ -49,7 +53,11 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
             dateCurrent={dateCurrent}
           />
 
-          <div className="EventsDiagram-VerticalScrollContainer">
+          <div
+            className={classNames('EventsDiagram-VerticalScrollContainer', {
+              'EventsDiagram-VerticalScrollContainer_noscroll': isScrollDisabled
+            })}
+          >
             {floors.map((floor, floorIdx) => (
               <div className="EventDiagram-Floor" key={floorIdx}>
                 <div className="EventDiagram-FloorTitle">{floor.floor} этаж</div>

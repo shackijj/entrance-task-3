@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.EventsDiagram_noscroll {
+  overflow-x: hidden;
+}
+
 .EventsDiagram-Timeline {
   margin-left: 255px;
 }
@@ -23,6 +27,10 @@
 .EventsDiagram-VerticalScrollContainer {
   height: calc(100% - 45px);
   overflow-y: scroll;
+}
+
+.EventsDiagram_noscroll .EventsDiagram-VerticalScrollContainer {
+  overflow-y: hidden;
 }
 
 .EventDiagram-FloorTitle {

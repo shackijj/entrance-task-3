@@ -81,10 +81,18 @@ describe('EventDiagram', () => {
       </MockedProvider>
     );
 
+    expect(wrapper
+      .find('.EventsDiagram')
+      .hasClass('EventsDiagram_noscroll')).toBeFalsy();
+
     wrapper
       .find('.RoomTimeline-Slot_event')
       .simulate('click');
 
     expect(wrapper.find(EventTooltip)).toHaveLength(1);
+
+    expect(wrapper
+      .find('.EventsDiagram')
+      .hasClass('EventsDiagram_noscroll')).toBeTruthy();
   });
 });
