@@ -1,7 +1,7 @@
 import * as React from 'react';
 import User from './User';
 import RoundButton from './RoundButton';
-import { Edit } from './GlyphIcon/GlyphIcon';
+import { Edit, Close } from './GlyphIcon/GlyphIcon';
 import * as moment from 'moment';
 import './EventTooltip.css';
 
@@ -23,9 +23,11 @@ type Event = {
   dateEnd: string;
   room: Room;
   users: User[];
+  onCloseClick?: () => void;
+  onEditClick?: () => void;
 };
 
-export const EventTooltip: React.SFC<Event> = ({title, room, dateStart, dateEnd, users}) => {
+export const EventTooltip: React.SFC<Event> = ({title, room, dateStart, dateEnd, users, onCloseClick, onEditClick}) => {
   const momentStart = moment(dateStart);
   const momentEnd = moment(dateEnd);
   const date = momentStart.format('D MMMM');
@@ -52,7 +54,10 @@ export const EventTooltip: React.SFC<Event> = ({title, room, dateStart, dateEnd,
 
   return (
     <div className="EventTooltip">
-      <RoundButton classes={['EventTooltip-Button']} icon={<Edit/>}/>
+      <div className="EventTooltip-ButtonContainer">
+        <RoundButton onClick={onEditClick}classes={['EventTooltip-EditButton']} icon={<Edit/>}/>
+        <RoundButton onClick={onCloseClick} classes={['EventTooltip-CloseButton']} icon={<Close/>}/>
+      </div>
       <div className="EventTooltip-Title">{title}</div>
       <div className="EventTooltip-Info">
         {date}, {start}—{end} · {room.title}
@@ -88,6 +93,8 @@ type Response = {
 
 type InputProps = {
   id: string;
+  onCloseClick?: () => void;
+  onEditClick?: () => void;
 };
 
 export const withGraphQL = graphql<Response, InputProps>(TOOLTIP_QUERY, {
@@ -96,9 +103,15 @@ export const withGraphQL = graphql<Response, InputProps>(TOOLTIP_QUERY, {
   })
 });
 
-export default withGraphQL(({data}) => {
+export default withGraphQL(({data, onCloseClick, onEditClick}) => {
   if (data && data.event) {
-    return <EventTooltip {...data.event}/>;
+    return (
+      <EventTooltip
+        {...data.event}
+        onCloseClick={onCloseClick}
+        onEditClick={onEditClick}
+      />
+    );
   }
   return <div/>;
 });

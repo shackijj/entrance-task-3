@@ -54,7 +54,7 @@
 
 .EventsDiagram-TooltipContainer {
   position: absolute;
-  z-index: 10;
+  z-index: 9;
   min-width: 330px;
   min-height: 115px;
 }

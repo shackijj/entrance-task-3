@@ -4,14 +4,26 @@ exports[`EventTooltip should render an event 1`] = `
 <div
   className="EventTooltip"
 >
-  <RoundButton
-    classes={
-      Array [
-        "EventTooltip-Button",
-      ]
-    }
-    icon={<Unknown />}
-  />
+  <div
+    className="EventTooltip-ButtonContainer"
+  >
+    <RoundButton
+      classes={
+        Array [
+          "EventTooltip-EditButton",
+        ]
+      }
+      icon={<Unknown />}
+    />
+    <RoundButton
+      classes={
+        Array [
+          "EventTooltip-CloseButton",
+        ]
+      }
+      icon={<Unknown />}
+    />
+  </div>
   <div
     className="EventTooltip-Title"
   >

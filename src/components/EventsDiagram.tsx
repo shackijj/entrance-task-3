@@ -25,7 +25,6 @@ interface EventsDiagramState {
 }
 
 class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramState> {
-  public onEventClick: (id: string, divEvent: HTMLDivElement) => void;
   private _container: HTMLDivElement | null;
   private _tooltip: HTMLDivElement | null;
   constructor(props: EventsDiagramProps) {
@@ -33,7 +32,14 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
     this.state = {
       tooltip: null
     };
-    this.onEventClick = this._onEventClick.bind(this);
+    this._onEventClick = this._onEventClick.bind(this);
+    this._closeTooltip = this._closeTooltip.bind(this);
+  }
+
+  public componentWillReceiveProps(nextProps: EventsDiagramProps) {
+    if (this.props.dateCurrent !== nextProps.dateCurrent) {
+      this._closeTooltip();
+    } 
   }
 
   public render() {
@@ -69,7 +75,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                         dateCurrent={dateCurrent}
                         hourStart={HOUR_START}
                         hourEnd={HOUR_END}
-                        onEventClick={this.onEventClick}
+                        onEventClick={this._onEventClick}
                         {...room}
                       />
                     </div>
@@ -84,10 +90,15 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
           ref={div => this._tooltip = div}
           style={tooltip && tooltip.style || {}}
         >
-          {tooltip && <EventTooltip {...tooltip}/>}
+          {tooltip && <EventTooltip {...tooltip} onCloseClick={this._closeTooltip}/>}
         </div>
       </div>
     );
+  }
+
+  private _closeTooltip() {
+    const newState = Object.assign({}, this.state, { tooltip: null });
+    this.setState(newState);
   }
 
   private _onEventClick(id: string, divEvent: HTMLDivElement) {

@@ -19,10 +19,15 @@
   align-items: center;
 }
 
-.EventTooltip-Button {
+.EventTooltip-ButtonContainer {
   position: absolute;
   top: 8px;
   right: 8px;
+}
+
+.EventTooltip-EditButton,
+.EventTooltip-CloseButton {
+  margin-left: 5px;
 }
 
 .EventTooltip-MoreUsers {
