@@ -288,6 +288,248 @@ describe('#generateSlots', () => {
     const actual = generateSlots(events, hourStart, hourEnd);
     expect(actual).toEqual(expected);
   });
+
+  it('past slots should be created before the first event', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T07:59:59.999Z';
+    
+    const dateCurrent = '2018-01-09T07:31:00.000Z';
+
+    const pastStart = hourStart;
+    const pastEnd = '2018-01-09T07:29:59.999Z';
+
+    const event1Start = '2018-01-09T07:30:00.000Z';
+    const event1End = '2018-01-09T07:44:54.208Z';
+
+    const free1Start = '2018-01-09T07:44:54.209Z';
+    const free1End = '2018-01-09T07:59:59.999Z';
+
+    const events = [
+      {
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+      },
+    ];
+
+    const expected = [
+      {
+        type: 'past',
+        dateStart: pastStart,
+        dateEnd: pastEnd,
+        duration: getDuration(pastStart, pastEnd)
+      },
+      {
+        type: 'event',
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+        duration: getDuration(event1Start, event1End)
+      },
+      {
+        type: 'free',
+        dateStart: free1Start,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd, dateCurrent);
+    expect(actual).toEqual(expected);
+  });
+
+  it('past slots should be created before the first free slots', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T07:59:59.999Z';
+    
+    const dateCurrent = '2018-01-09T07:12:00.000Z';
+
+    const pastStart = hourStart;
+    const pastEnd = dateCurrent;
+
+    const free1Start = '2018-01-09T07:12:00.001Z';
+    const free1End = '2018-01-09T07:29:59.999Z';
+
+    const event1Start = '2018-01-09T07:30:00.000Z';
+    const event1End = '2018-01-09T07:44:54.208Z';
+
+    const free2Start = '2018-01-09T07:44:54.209Z';
+    const free2End = '2018-01-09T07:59:59.999Z';
+
+    const events = [
+      {
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+      },
+    ];
+
+    const expected = [
+      {
+        type: 'past',
+        dateStart: pastStart,
+        dateEnd: pastEnd,
+        duration: getDuration(pastStart, pastEnd)
+      },
+      {
+        type: 'free',
+        dateStart: free1Start,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+      {
+        type: 'event',
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+        duration: getDuration(event1Start, event1End)
+      },
+      {
+        type: 'free',
+        dateStart: free2Start,
+        dateEnd: free2End,
+        duration: getDuration(free2Start, free2End)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd, dateCurrent);
+    expect(actual).toEqual(expected);
+  });
+
+  it('past slots should be created before the first free slots if events are empty', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T07:59:59.999Z';
+    
+    const dateCurrent = '2018-01-09T07:12:00.000Z';
+
+    const pastStart = hourStart;
+    const pastEnd = dateCurrent;
+
+    const free1Start = '2018-01-09T07:12:00.001Z';
+    const free1End = hourEnd;
+
+    const events: Event[] = [];
+
+    const expected = [
+      {
+        type: 'past',
+        dateStart: pastStart,
+        dateEnd: pastEnd,
+        duration: getDuration(pastStart, pastEnd)
+      },
+      {
+        type: 'free',
+        dateStart: free1Start,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd, dateCurrent);
+    expect(actual).toEqual(expected);
+  });
+
+  it('past slots should be created between two sibling events', () => {
+    const hourStart = '2018-01-09T06:00:00.000Z';
+    const hourEnd = '2018-01-09T09:59:59.999Z';
+    
+    const dateCurrent = '2018-01-09T09:10:00.000Z';
+
+    const past1Start = hourStart;
+    const past1End = '2018-01-09T07:29:59.999Z';
+
+    const event1Start = '2018-01-09T07:00:00.000Z';
+    const event1End = '2018-01-09T07:30:00.000Z';
+
+    const past2Start = '2018-01-09T07:30:00.001Z';
+    const past2End = '2018-01-09T08:59:59.999Z';
+
+    const event2Start = '2018-01-09T09:00:00.000Z';
+    const event2End = '2018-01-09T08:15:00.000Z';
+
+    const past3Start = '2018-01-09T08:15:00.001Z';
+    const past3End = dateCurrent;
+
+    const free1Start = '2018-01-09T09:10:00.001Z';
+    const free1End = hourEnd;
+
+    const event3Start = '2018-01-09T09:30:00.000Z';
+    const event3End = '2018-01-09T9:45:00.000Z';
+
+    const free3Start = '2018-01-09T09:45:00.001Z';
+    const free3End = hourEnd;
+
+    const events = [
+      {
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+      },
+      {
+        id: '2',
+        dateStart: event2Start,
+        dateEnd: event2End,
+      },
+      {
+        id: '3',
+        dateStart: event3Start,
+        dateEnd: event3End,
+      },
+    ];
+
+    const expected = [
+      {
+        type: 'past',
+        dateStart: past1Start,
+        dateEnd: past1End,
+        duration: getDuration(past1Start, past1End)
+      },
+      {
+        type: 'event',
+        id: '1',
+        dateStart: event1Start,
+        dateEnd: event1End,
+        duration: getDuration(event1Start, event1End)
+      },
+      {
+        type: 'past',
+        dateStart: past2Start,
+        dateEnd: past2End,
+        duration: getDuration(past2Start, past2End)
+      },
+      {
+        type: 'event',
+        id: '2',
+        dateStart: event2Start,
+        dateEnd: event2End,
+        duration: getDuration(event2Start, event2End)
+      },
+      {
+        type: 'past',
+        dateStart: past3Start,
+        dateEnd: past3End,
+        duration: getDuration(past3Start, past3End)
+      },
+      {
+        type: 'free',
+        dateStart: free1Start,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+      {
+        type: 'event',
+        id: '3',
+        dateStart: event3Start,
+        dateEnd: event3End,
+        duration: getDuration(event3Start, event3End)
+      },
+      {
+        type: 'free',
+        dateStart: free3Start,
+        dateEnd: free3End,
+        duration: getDuration(free3Start, free3End)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd, dateCurrent);
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe('RoomTimeline', () => {

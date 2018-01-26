@@ -58,19 +58,33 @@ export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
 export const generateSlots = (events: Event[], hourStart: string, hourEnd: string, dateCurrent?: string) => {
   const slots: Slot[] = [];
   const pushSlot = (slot: Slot) => slots.push(slot);
-
+  const startOfPeriod = moment(hourStart);
+  const endOfPeriod = moment(hourEnd);
+  
   if (events.length === 0) {
-    generateFreeSlots(
-      hourStart,
-      hourEnd)
-    .map(pushSlot);
+    if (dateCurrent) {
+      const current = moment(dateCurrent);
+      slots.push({
+        type: 'past',
+        dateStart: hourStart,
+        dateEnd: current.toISOString(),
+        duration: +current - +startOfPeriod
+      });
+      generateFreeSlots(
+        current.clone().add(1, 'ms').toISOString(),
+        hourEnd)
+      .map(pushSlot);
+    } else {
+      generateFreeSlots(
+        hourStart,
+        hourEnd)
+      .map(pushSlot);
+    }
   }
 
   events.forEach((event, idx, ary) => {
     const startOfEvent = moment(event.dateStart);
     const endOfEvent = moment(event.dateEnd);
-    const startOfPeriod = moment(hourStart);
-    const endOfPeriod = moment(hourEnd);
 
     if (endOfEvent.isBefore(startOfPeriod)) {
       return;
@@ -78,10 +92,34 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
 
     if (idx === 0) {
       if (startOfEvent.isAfter(startOfPeriod)) {
-        generateFreeSlots(
-          startOfPeriod.toISOString(),
-          startOfEvent.clone().add(-1, 'ms').toISOString(),
-        ).map(pushSlot);
+        if (dateCurrent) {
+          const current = moment(dateCurrent);
+          if (current.isBefore(startOfEvent)) {
+            slots.push({
+              type: 'past',
+              dateStart: startOfPeriod.toISOString(),
+              dateEnd: current.toISOString(),
+              duration: +current - +startOfPeriod
+            });
+            generateFreeSlots(
+              current.clone().add(1, 'ms').toISOString(),
+              startOfEvent.clone().add(-1, 'ms').toISOString(),
+            ).map(pushSlot);
+          } else {
+            const pastEnd = startOfEvent.clone().add(-1, 'ms');
+            slots.push({
+              type: 'past',
+              dateStart: startOfPeriod.toISOString(),
+              dateEnd: pastEnd.toISOString(),
+              duration: +pastEnd - +startOfPeriod
+            });
+          }
+        } else {
+          generateFreeSlots(
+            startOfPeriod.toISOString(),
+            startOfEvent.clone().add(-1, 'ms').toISOString(),
+          ).map(pushSlot);
+        }
       }
     }
 
