@@ -86,6 +86,17 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
       }
     }
 
+    const prevEvent = ary[idx - 1];
+    if (prevEvent) {
+      const endOfPrevEvent = moment.utc(prevEvent.dateEnd);
+      if (endOfPrevEvent.isBefore(startOfEvent)) {
+        generateFreeSlots(
+          endOfPrevEvent.clone().add(1, 'minute').startOf('minute').toISOString(),
+          startOfEvent.clone().add(-1, 'minute').endOf('minute').toISOString(),
+        ).map(pushSlot);
+      }
+    }
+
     if (startOfEvent.isBefore(startOfPeriod)) {
       slots.push({
         type: 'event',
@@ -117,11 +128,11 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
   ({dateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
-    const dateStart = moment(dateCurrent).startOf('day').add(hourStart, 'hours').toISOString();
-    const dateEnd = moment(dateCurrent).startOf('day').add(hourEnd, 'hours').toISOString();
-    const slotProps = generateSlots(events, dateStart, dateEnd, dateCurrent);
+    const dateStart = moment.utc(dateCurrent).startOf('day').add(hourStart, 'hours');
+    const dateEnd = moment.utc(dateCurrent).startOf('day').add(hourEnd, 'hours').endOf('hour');
+    const slots = generateSlots(events, dateStart.toISOString(), dateEnd.toISOString(), dateCurrent);
 
-    const totalMinutes = (hourEnd - hourStart + 1) * 60;
+    const total = +dateEnd - +dateStart;
 
     const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const target = event.target as HTMLDivElement;
@@ -133,12 +144,12 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
 
     return (
       <div className="RoomTimeline" onClick={onClick}>
-        {slotProps.map(({type, duration, id}, idx) => (
+        {slots.map(({type, duration, id}, idx) => (
           <div
             key={idx}
             className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
             data-event-id={id}
-            style={{width: `${(duration * 100 / totalMinutes)}%`}}
+            style={{width: `${(duration / total) * 100}%`}}
           />
         ))}
       </div>

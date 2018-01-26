@@ -54,7 +54,7 @@ function createData ({models}) {
     }
   ])
 
-  const HOUR = 60 * 60 * 1000
+  const HOUR = (60 * 60 * 1000 - 1)
   let now = new Date()
   let oneHourLater = new Date(now.getTime() + HOUR)
   let twoHoursLater = new Date(oneHourLater.getTime() + HOUR)
