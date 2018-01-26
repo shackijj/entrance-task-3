@@ -3,11 +3,19 @@ import './RoomTimeline.css';
 import { RoomProps } from './Room';
 import * as moment from 'moment';
 
-interface Event {
+export interface Event {
   id: string;
   dateStart: string;
   dateEnd: string;
 }
+
+export type Slot = {
+  duration: number,
+  type: string,
+  id?: string,
+  dateStart: string,
+  dateEnd: string
+};
 
 export interface RoomTimelineProps extends RoomProps {
   dateCurrent?: Date;
@@ -18,7 +26,7 @@ export interface RoomTimelineProps extends RoomProps {
   onEventClick?: (id: string, e: HTMLDivElement) => void;
 }
 
-const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
+// const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
 export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
   const rc: Array<{type: 'free', dateStart: string, dateEnd: string, duration: number}> = [];
@@ -48,93 +56,70 @@ export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
   return rc;
 };
 
-export const generateSlots = (events: Event[], hourStart: number, hourEnd: number, dateCurrent?: Date) => {
-  const slotProps: Array<{duration: number, type: string, id?: string}> = [];
+export const generateSlots = (events: Event[], hourStart: string, hourEnd: string, dateCurrent?: Date) => {
+  const slots: Slot[] = [];
+  const pushSlot = (slot: Slot) => slots.push(slot);
 
-  let prevEvent: Event | undefined;
-  let length = events.length;
+  if (events.length === 0) {
+    generateFreeSlots(
+      hourStart,
+      hourEnd)
+    .map(pushSlot);
+  }
 
-  events.forEach((curEvent, idx, arr) => {
-    const {id} = curEvent;
-    const dateStart = new Date(curEvent.dateStart);
-    const dateEnd = new Date(curEvent.dateEnd);
-    let startOfDay = moment(dateStart).startOf('day');
+  events.forEach((event, idx, ary) => {
+    const startOfEvent = moment.utc(event.dateStart);
+    const endOfEvent = moment.utc(event.dateEnd);
+    const startOfPeriod = moment.utc(hourStart);
+    const endOfPeriod = moment.utc(hourEnd);
 
-    if (idx === 0 && hourStart <= dateStart.getHours()) {
-      if (dateCurrent && dateCurrent < dateStart) {
-        slotProps.push({
-          duration: getMinutes(dateCurrent) - hourStart * 60,
-          type: 'past'
-        });
-        generateFreeSlots(dateCurrent.toISOString(), dateStart.toISOString())
-          .map((slot) => slotProps.push(slot));
-      } else {
-        if (dateCurrent) {
-          slotProps.push({
-            duration: (dateStart.getHours() - hourStart) * 60 + dateStart.getMinutes(),
-            type: 'past',
-          });
-        } else {
-          generateFreeSlots(startOfDay.clone().add(hourStart, 'hours').toISOString(), dateStart.toISOString())
-            .map((slot) => slotProps.push(slot));
-        }
+    if (endOfEvent.isBefore(startOfPeriod)) {
+      return;
+    }
+
+    if (idx === 0) {
+      if (startOfEvent.isAfter(startOfPeriod)) {
+        generateFreeSlots(
+          startOfPeriod.toISOString(),
+          startOfEvent.clone().add(-1, 'minute').endOf('minute').toISOString(),
+        ).map(pushSlot);
       }
     }
 
-    if (prevEvent && new Date(prevEvent.dateEnd) < dateStart) {
-      generateFreeSlots(prevEvent.dateEnd, dateStart.toISOString())
-        .map((slot) => slotProps.push(slot));
-    }
-
-    if (hourStart > dateStart.getHours()) {
-      slotProps.push({
-        duration: getMinutes(dateEnd) - (hourStart * 60),
-        id,
+    if (startOfEvent.isBefore(startOfPeriod)) {
+      slots.push({
         type: 'event',
+        id:  event.id,
+        dateStart: event.dateStart,
+        dateEnd: event.dateEnd,
+        duration: +endOfEvent - +startOfPeriod,
       });
     } else {
-      slotProps.push({
-        duration: getMinutes(dateEnd) - getMinutes(dateStart),
-        id,
+      slots.push({
         type: 'event',
-      });
+        id: event.id,
+        dateStart: event.dateStart,
+        dateEnd: event.dateEnd,
+        duration: +endOfEvent - +startOfEvent
+      });  
     }
 
-    if (idx === length - 1 && dateEnd.getHours() < hourEnd) {
+    if (idx === ary.length - 1 && endOfEvent.isBefore(endOfPeriod)) {
       generateFreeSlots(
-        dateEnd.toISOString(),
-        startOfDay.clone().add(hourEnd, 'hours').add(59, 'minutes').toISOString())
-        .map((slot) => slotProps.push(slot));
+        endOfEvent.clone().add(1, 'minute').startOf('minute').toISOString(),
+        endOfPeriod.toISOString()
+      ).map(pushSlot);
     }
-    prevEvent = curEvent;
   });
 
-  if (events.length === 0) {
-    if (dateCurrent) {
-      let startOfDay = moment(dateCurrent).startOf('day');
-      const pastMinues = getMinutes(dateCurrent) - hourStart * 60;
-      slotProps.push({
-        duration: pastMinues,
-        type: 'past',
-      });
-      generateFreeSlots(
-        dateCurrent.toISOString(),
-        startOfDay.clone().add(hourEnd, 'hours').add(59, 'minutes').toISOString())
-        .map((slot) => slotProps.push(slot));
-    } else {
-      let startOfDay = moment(new Date()).startOf('day');
-      generateFreeSlots(
-        startOfDay.clone().add(hourStart, 'hours').toISOString(),
-        startOfDay.clone().add(hourEnd, 'hours').add(59, 'minutes').toISOString())
-        .map((slot) => slotProps.push(slot));
-    }
-  }
-  return slotProps;
+  return slots;
 };
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
   ({dateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
-    const slotProps = generateSlots(events, hourStart, hourEnd, dateCurrent);
+    const dateStart = moment(dateCurrent).startOf('day').add(hourStart, 'hours').toISOString();
+    const dateEnd = moment(dateCurrent).startOf('day').add(hourEnd, 'hours').toISOString();
+    const slotProps = generateSlots(events, dateStart, dateEnd, dateCurrent);
 
     const totalMinutes = (hourEnd - hourStart + 1) * 60;
 

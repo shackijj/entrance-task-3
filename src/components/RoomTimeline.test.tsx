@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { shallow, mount } from 'enzyme';
-import RoomTimeline, { generateFreeSlots, generateSlots } from './RoomTimeline';
+import { mount } from 'enzyme';
+import RoomTimeline, { generateFreeSlots, generateSlots, Event } from './RoomTimeline';
 
 const getDuration = (start: string, end: string) => (new Date(end)).getTime() - (new Date(start)).getTime();
 
@@ -46,10 +46,8 @@ describe('#generateFreeSlots', () => {
 
 describe('#generateSlots', () => {
   it('duration of the first event is calculated according to hourStart', () => {
-    const hourStart = 7;
-    const hourStartDate = '2018-01-09T07:00:00.000Z';
-    const hourEnd = 9;
-    const hourEndDate = '2018-01-09T09:59:59.999Z';
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T09:59:59.999Z';
 
     const eventStart = '2018-01-09T06:30:00.000Z';
     const eventEnd = '2018-01-09T08:44:59.999Z';
@@ -73,7 +71,7 @@ describe('#generateSlots', () => {
         id: '1',
         dateStart: eventStart,
         dateEnd: eventEnd,
-        duration: getDuration(hourStartDate, eventEnd)
+        duration: getDuration(hourStart, eventEnd)
       },
       {
         type: 'free',
@@ -84,13 +82,166 @@ describe('#generateSlots', () => {
       {
         type: 'free',
         dateStart: free2Start,
-        dateEnd: hourEndDate,
-        duration: getDuration(free2Start, hourEndDate)
+        dateEnd: hourEnd,
+        duration: getDuration(free2Start, hourEnd)
       },
     ];
     const actual = generateSlots(events, hourStart, hourEnd);
     expect(actual).toEqual(expected);
   });
+
+  it('time before the first event should be filled with free slots', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T09:59:59.999Z';
+
+    const free1Start = hourStart;
+    const free1End = '2018-01-09T07:29:59.999Z';
+
+    const eventStart = '2018-01-09T07:30:00.000Z';
+    const eventEnd = '2018-01-09T08:44:59.999Z';
+
+    const free2Start = '2018-01-09T08:45:00.000Z';
+    const free2End = '2018-01-09T08:59:59.999Z';
+
+    const free3Start = '2018-01-09T09:00:00.000Z';
+
+    const events = [
+      {
+        id: '1',
+        dateStart: eventStart,
+        dateEnd: eventEnd,
+      },
+    ];
+
+    const expected = [
+      {
+        type: 'free',
+        dateStart: hourStart,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+      {
+        type: 'event',
+        id: '1',
+        dateStart: eventStart,
+        dateEnd: eventEnd,
+        duration: getDuration(eventStart, eventEnd)
+      },
+      {
+        type: 'free',
+        dateStart: free2Start,
+        dateEnd: free2End,
+        duration: getDuration(free2Start, free2End)
+      },
+      {
+        type: 'free',
+        dateStart: free3Start,
+        dateEnd: hourEnd,
+        duration: getDuration(free3Start, hourEnd)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should be filled with empty slots if events are not given', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T08:59:59.999Z';
+
+    const free1Start = hourStart;
+    const free1End = '2018-01-09T07:59:59.999Z';
+
+    const free2Start = '2018-01-09T08:00:00.000Z';
+    const free2End = hourEnd;
+
+    const events: Event[] = [];
+
+    const expected = [
+      {
+        type: 'free',
+        dateStart: hourStart,
+        dateEnd: free1End,
+        duration: getDuration(free1Start, free1End)
+      },
+      {
+        type: 'free',
+        dateStart: free2Start,
+        dateEnd: free2End,
+        duration: getDuration(free2Start, free2End)
+      },
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd);
+    expect(actual).toEqual(expected);
+  });
+
+  it('time between two events should be filled with free slots', () => {
+      const hourStart = '2018-01-09T07:00:00.000Z';
+      const hourEnd = '2018-01-09T08:59:59.999Z';
+  
+      const free1Start = hourStart;
+      const free1End = '2018-01-09T07:29:59.999Z';
+  
+      const event1Start = '2018-01-09T07:30:00.000Z';
+      const event1End = '2018-01-09T07:44:59.999Z';
+  
+      const free2Start = '2018-01-09T07:45:00.000Z';
+      const free2End = '2018-01-09T07:59:59.999Z';
+
+      const event2Start = '2018-01-09T08:00:00.000Z';
+      const event2End = '2018-01-09T08:44:59.999Z';
+
+      const free3Start = '2018-01-09T08:45:00.000Z';
+  
+      const events = [
+        {
+          id: '1',
+          dateStart: event1Start,
+          dateEnd: event1End,
+        },
+        {
+          id: '2',
+          dateStart: event2Start,
+          dateEnd: event2End,
+        },
+      ];
+  
+      const expected = [
+        {
+          type: 'free',
+          dateStart: hourStart,
+          dateEnd: free1End,
+          duration: getDuration(free1Start, free1End)
+        },
+        {
+          type: 'event',
+          id: '1',
+          dateStart: event1Start,
+          dateEnd: event1End,
+          duration: getDuration(event1Start, event1End)
+        },
+        {
+          type: 'free',
+          dateStart: free2Start,
+          dateEnd: free2End,
+          duration: getDuration(free2Start, free2End)
+        },
+        {
+          type: 'event',
+          id: '2',
+          dateStart: event2Start,
+          dateEnd: event2End,
+          duration: getDuration(event2Start, event2End)
+        },
+        {
+          type: 'free',
+          dateStart: free3Start,
+          dateEnd: hourEnd,
+          duration: getDuration(free3Start, hourEnd)
+        },
+      ];
+      const actual = generateSlots(events, hourStart, hourEnd);
+      expect(actual).toEqual(expected);
+    });
 });
 
 describe('RoomTimeline', () => {
