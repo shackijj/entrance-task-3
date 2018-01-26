@@ -40,4 +40,10 @@ const floor = [
 
 storiesOf('EventsDiagram', module)
   .add('default', () => (
-      <EventsDiagram floors={floor} classes={['EventDiagram-Story']}/>));
+      <EventsDiagram
+        floors={floor}
+        classes={['EventDiagram-Story']}
+        isDateCurrent={false}
+        date={'2018-01-09T18:30:00.55'}
+      />
+  ));

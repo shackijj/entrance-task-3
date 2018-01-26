@@ -44,6 +44,8 @@ describe('EventDiagram', () => {
     shallowExpect(
       <MockedProvider>
         <EventsDiagram
+          date={'2017-01-09T12:00:00.000Z'}
+          isDateCurrent={false}
           floors={floor}
           classes={['EventDiagram-Story']}
         />
@@ -76,6 +78,8 @@ describe('EventDiagram', () => {
       <MockedProvider>
         <EventsDiagram
           floors={floor}
+          date={'2017-01-09T12:00:00.000Z'}
+          isDateCurrent={false}
           classes={['EventDiagram-Story']}
         />
       </MockedProvider>

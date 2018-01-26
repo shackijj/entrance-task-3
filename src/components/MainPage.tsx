@@ -104,7 +104,8 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
         {data && data.floors &&
           <EventDiagram
             floors={data.floors}
-            dateCurrent={isToday ? dateCurrent : undefined}
+            date={isToday ? dateCurrent.toISOString() : dateChosen.toISOString()}
+            isDateCurrent={isToday}
             classes={['MainPage-EventsDiagram']}
           />
         }

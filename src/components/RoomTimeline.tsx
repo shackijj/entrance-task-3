@@ -18,15 +18,14 @@ export type Slot = {
 };
 
 export interface RoomTimelineProps extends RoomProps {
-  dateCurrent?: Date;
+  date: string;
+  isDateCurrent: boolean;
   title: string;
   hourStart: number;
   hourEnd: number;
   events: Event[];
   onEventClick?: (id: string, e: HTMLDivElement) => void;
 }
-
-// const getMinutes = (date: Date) => date.getHours() * 60 + date.getMinutes();
 
 export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
   const rc: Array<{type: 'free', dateStart: string, dateEnd: string, duration: number}> = [];
@@ -56,7 +55,7 @@ export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
   return rc;
 };
 
-export const generateSlots = (events: Event[], hourStart: string, hourEnd: string, dateCurrent?: Date) => {
+export const generateSlots = (events: Event[], hourStart: string, hourEnd: string, dateCurrent?: string) => {
   const slots: Slot[] = [];
   const pushSlot = (slot: Slot) => slots.push(slot);
 
@@ -68,10 +67,10 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
   }
 
   events.forEach((event, idx, ary) => {
-    const startOfEvent = moment.utc(event.dateStart);
-    const endOfEvent = moment.utc(event.dateEnd);
-    const startOfPeriod = moment.utc(hourStart);
-    const endOfPeriod = moment.utc(hourEnd);
+    const startOfEvent = moment(event.dateStart);
+    const endOfEvent = moment(event.dateEnd);
+    const startOfPeriod = moment(hourStart);
+    const endOfPeriod = moment(hourEnd);
 
     if (endOfEvent.isBefore(startOfPeriod)) {
       return;
@@ -81,7 +80,7 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
       if (startOfEvent.isAfter(startOfPeriod)) {
         generateFreeSlots(
           startOfPeriod.toISOString(),
-          startOfEvent.clone().add(-1, 'minute').endOf('minute').toISOString(),
+          startOfEvent.clone().add(-1, 'ms').toISOString(),
         ).map(pushSlot);
       }
     }
@@ -91,8 +90,8 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
       const endOfPrevEvent = moment.utc(prevEvent.dateEnd);
       if (endOfPrevEvent.isBefore(startOfEvent)) {
         generateFreeSlots(
-          endOfPrevEvent.clone().add(1, 'minute').startOf('minute').toISOString(),
-          startOfEvent.clone().add(-1, 'minute').endOf('minute').toISOString(),
+          endOfPrevEvent.clone().add(1, 'ms').toISOString(),
+          startOfEvent.clone().add(-1, 'ms').toISOString(),
         ).map(pushSlot);
       }
     }
@@ -117,7 +116,7 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
 
     if (idx === ary.length - 1 && endOfEvent.isBefore(endOfPeriod)) {
       generateFreeSlots(
-        endOfEvent.clone().add(1, 'minute').startOf('minute').toISOString(),
+        endOfEvent.clone().add(1, 'ms').toISOString(),
         endOfPeriod.toISOString()
       ).map(pushSlot);
     }
@@ -127,10 +126,11 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
 };
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
-  ({dateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
-    const dateStart = moment.utc(dateCurrent).startOf('day').add(hourStart, 'hours');
-    const dateEnd = moment.utc(dateCurrent).startOf('day').add(hourEnd, 'hours').endOf('hour');
-    const slots = generateSlots(events, dateStart.toISOString(), dateEnd.toISOString(), dateCurrent);
+  ({date, isDateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
+    const dateStart = moment(date).startOf('day').add(hourStart, 'hours');
+    const dateEnd = moment(date).startOf('day').add(hourEnd, 'hours').endOf('hour');
+    const slots = generateSlots(
+      events, dateStart.toISOString(), dateEnd.toISOString(), isDateCurrent ? date : undefined);
 
     const total = +dateEnd - +dateStart;
 

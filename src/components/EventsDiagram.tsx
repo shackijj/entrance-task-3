@@ -12,7 +12,8 @@ import './EventsDiagram.css';
 interface EventsDiagramProps {
   floors: Floor[];
   classes: string[];
-  dateCurrent?: Date;
+  date: string;
+  isDateCurrent: boolean;
 }
 
 type Tooltip = {
@@ -37,13 +38,13 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
   }
 
   public componentWillReceiveProps(nextProps: EventsDiagramProps) {
-    if (this.props.dateCurrent !== nextProps.dateCurrent) {
+    if (this.props.date !== nextProps.date) {
       this._closeTooltip();
-    } 
+    }
   }
 
   public render() {
-    const {floors, classes, dateCurrent} = this.props;
+    const {floors, classes, date, isDateCurrent} = this.props;
     const { tooltip }  = this.state;
     const isScrollDisabled = !!tooltip;
     return (
@@ -56,7 +57,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
             classes={['EventsDiagram-Timeline']}
             hourStart={HOUR_START}
             hourEnd={HOUR_END}
-            dateCurrent={dateCurrent}
+            dateCurrent={new Date(date)}
           />
 
           <div
@@ -72,7 +73,8 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                     <div className="EventDiagram-Room" key={roomIdx}>
                       <Room {...room}/>
                       <RoomTimeline
-                        dateCurrent={dateCurrent}
+                        isDateCurrent={isDateCurrent}
+                        date={date}
                         hourStart={HOUR_START}
                         hourEnd={HOUR_END}
                         onEventClick={this._onEventClick}
