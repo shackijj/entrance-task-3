@@ -73,6 +73,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                     <div className="EventDiagram-Room" key={roomIdx}>
                       <Room {...room}/>
                       <RoomTimeline
+                        id={room.id}
                         isDateCurrent={isDateCurrent}
                         date={date}
                         hourStart={HOUR_START}

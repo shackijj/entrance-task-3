@@ -12,6 +12,7 @@ describe('EventDiagram', () => {
         floor: 7,
         rooms: [
           {
+            id: '1',
             title: 'Ржавый Фред',
             capacity: 7,
             events: [
@@ -59,6 +60,7 @@ describe('EventDiagram', () => {
         floor: 7,
         rooms: [
           {
+            id: '1',
             title: 'Ржавый Фред',
             capacity: 7,
             events: [

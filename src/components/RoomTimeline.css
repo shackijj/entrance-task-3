@@ -1,3 +1,5 @@
+@import url(./GlyphIcon/GlyphIcon.css);
+
 .RoomTimeline {
   height: 28px;
 }
@@ -19,6 +21,18 @@
 
 .RoomTimeline-Slot_free:hover {
   background-color: #1D54FE;
+  border-radius: 2px;
+}
+
+.RoomTimeline-Slot_free:hover:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.932em;
+  transform: translate(-50%, -50%) rotate(45deg);
+  font-family: 'GlyphIcon';
+  content: "\e903";
+  color: #fff;
 }
 
 .RoomTimeline-Slot_free:active {

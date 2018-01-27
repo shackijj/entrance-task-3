@@ -15,9 +15,10 @@ query FloorGroupedRoomEvents($date: Date) {
   floors {
     floor
     rooms {
+      id
       title
       capacity
-      events(filter: {onDate: $date}, sort: {field: "dateStart", order: DESC}) {
+      events(filter: {onDate: $date}, sort: {field: "dateStart", order: ASC}) {
         id
         dateStart
         dateEnd
@@ -39,6 +40,7 @@ export type Event = {
 };
 
 export type Room = {
+  id: string;
   title: string;
   capacity: number;
   events: Event[];

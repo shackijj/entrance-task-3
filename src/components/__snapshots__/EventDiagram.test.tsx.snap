@@ -90,6 +90,7 @@ exports[`EventDiagram should render a floors list 1`] = `
                   "users": Array [],
                 },
               ],
+              "id": "1",
               "title": "Ржавый Фред",
             },
           ],

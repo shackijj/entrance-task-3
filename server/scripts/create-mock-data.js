@@ -75,6 +75,11 @@ function createData ({models}) {
       title: '🍨 Пробуем kefir.js',
       dateStart: twoHoursLater,
       dateEnd: threeHoursLater
+    },
+    {
+      title: 'Lorem Ipsum',
+      dateStart: twoHoursLater,
+      dateEnd: threeHoursLater
     }
   ])
 
@@ -99,13 +104,14 @@ function createData ({models}) {
       promises.push(users[2].setFloor(floors[2]))
 
       promises.push(events[0].setRoom(rooms[0]))
+      promises.push(events[3].setRoom(rooms[0]))
       promises.push(events[1].setRoom(rooms[1]))
       promises.push(events[2].setRoom(rooms[2]))
 
       promises.push(events[0].setUsers([users[0], users[1]]))
       promises.push(events[1].setUsers([users[1], users[2]]))
       promises.push(events[2].setUsers([users[0], users[2]]))
-
+      promises.push(events[3].setUsers([users[0], users[1]]))
       return Promise.all(promises)
     })
 }

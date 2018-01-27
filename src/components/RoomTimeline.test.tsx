@@ -433,25 +433,25 @@ describe('#generateSlots', () => {
     const dateCurrent = '2018-01-09T09:10:00.000Z';
 
     const past1Start = hourStart;
-    const past1End = '2018-01-09T07:29:59.999Z';
+    const past1End = '2018-01-09T06:59:59.999Z';
 
     const event1Start = '2018-01-09T07:00:00.000Z';
     const event1End = '2018-01-09T07:30:00.000Z';
 
     const past2Start = '2018-01-09T07:30:00.001Z';
-    const past2End = '2018-01-09T08:59:59.999Z';
+    const past2End = '2018-01-09T07:59:59.999Z';
 
-    const event2Start = '2018-01-09T09:00:00.000Z';
+    const event2Start = '2018-01-09T08:00:00.000Z';
     const event2End = '2018-01-09T08:15:00.000Z';
 
     const past3Start = '2018-01-09T08:15:00.001Z';
     const past3End = dateCurrent;
 
     const free1Start = '2018-01-09T09:10:00.001Z';
-    const free1End = hourEnd;
+    const free1End = '2018-01-09T09:29:59.999Z';
 
     const event3Start = '2018-01-09T09:30:00.000Z';
-    const event3End = '2018-01-09T9:45:00.000Z';
+    const event3End = '2018-01-09T09:45:00.000Z';
 
     const free3Start = '2018-01-09T09:45:00.001Z';
     const free3End = hourEnd;
@@ -537,6 +537,7 @@ describe('RoomTimeline', () => {
     const spy = jest.fn();
     const wrapper = mount(
       <RoomTimeline
+        id={'1'}
         date={'2018-01-09T07:30:00.55'}
         isDateCurrent={true}
         hourStart={7}
