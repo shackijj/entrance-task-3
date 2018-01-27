@@ -44,6 +44,7 @@
   background-color: #D5DFE9; 
 }
 
+.RoomTimeline-Slot_event_highlighted,
 .RoomTimeline-Slot_event:hover {
   background-color: #98A9B9;
 }
@@ -57,6 +58,7 @@
   transform: translateX(-50%);
 }
 
+.RoomTimeline-Slot_event_highlighted,
 .RoomTimeline-Slot:hover {
   z-index: 3;
 }

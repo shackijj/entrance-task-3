@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import RoomTimeline, { generateFreeSlots, generateSlots, Event } from './RoomTimeline';
 
 const getDuration = (start: string, end: string) => (new Date(end)).getTime() - (new Date(start)).getTime();
@@ -562,5 +562,70 @@ describe('RoomTimeline', () => {
       .simulate('click');
 
     expect(spy.mock.calls.length).toEqual(1);
+  });
+
+  it('should fire onEventClick when an event is clicked', () => {
+    const spy = jest.fn();
+    const wrapper = mount(
+      <RoomTimeline
+        id={'1'}
+        date={'2018-01-09T07:30:00.55'}
+        isDateCurrent={true}
+        hourStart={7}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        onEventClick={spy}
+        capacity={4}
+        events={
+          [
+            {
+              id: '1',
+              dateStart: '2018-01-09T10:00:00.55',
+              dateEnd: '2018-01-09T13:00:00.55',
+            },
+          ]
+        }
+      />
+    );
+
+    wrapper
+      .find('.RoomTimeline-Slot_event')
+      .simulate('click');
+
+    expect(spy.mock.calls.length).toEqual(1);
+  });
+
+  it('should highlight events if their id is equal with given', () => {
+    const wrapper = shallow(
+      <RoomTimeline
+        id={'1'}
+        date={'2018-01-09T07:30:00.55'}
+        isDateCurrent={true}
+        hourStart={7}
+        hourEnd={23}
+        title={'Ржавый Фред'}
+        capacity={4}
+        highlightEventId={'1'}
+        events={
+          [
+            {
+              id: '1',
+              dateStart: '2018-01-09T10:00:00.555Z',
+              dateEnd: '2018-01-09T13:00:00.555Z',
+            },
+            {
+              id: '2',
+              dateStart: '2018-01-09T13:59:00.555Z',
+              dateEnd: '2018-01-09T13:00:00.555Z',
+            },
+          ]
+        }
+      />
+    );
+
+    const events = wrapper.find('.RoomTimeline-Slot_event');
+    expect(events).toHaveLength(2);
+    expect(shallow(events.get(0)).hasClass('RoomTimeline-Slot_event_highlighted')).toBeTruthy();
+    expect(shallow(events.get(1)).hasClass('RoomTimeline-Slot_event_highlighted')).toBeFalsy();
   });
 });

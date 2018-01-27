@@ -17,7 +17,8 @@ interface EventsDiagramProps {
 }
 
 type Tooltip = {
-  id: string;
+  eventId: string;
+  roomId: string;
   style: React.CSSProperties;
 };
 
@@ -47,6 +48,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
     const {floors, classes, date, isDateCurrent} = this.props;
     const { tooltip }  = this.state;
     const isScrollDisabled = !!tooltip;
+    const highlightedEventId = tooltip ? tooltip.eventId : undefined;
     return (
       <div
         className={classNames('EventsDiagram', {'EventsDiagram_noscroll': isScrollDisabled }, classes)}
@@ -78,6 +80,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                         date={date}
                         hourStart={HOUR_START}
                         hourEnd={HOUR_END}
+                        highlightEventId={highlightedEventId}
                         onEventClick={this._onEventClick}
                         {...room}
                       />
@@ -93,7 +96,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
           ref={div => this._tooltip = div}
           style={tooltip && tooltip.style || {}}
         >
-          {tooltip && <EventTooltip {...tooltip} onCloseClick={this._closeTooltip}/>}
+          {tooltip && <EventTooltip id={tooltip.eventId} onCloseClick={this._closeTooltip}/>}
         </div>
       </div>
     );
@@ -104,7 +107,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
     this.setState(newState);
   }
 
-  private _onEventClick(id: string, divEvent: HTMLDivElement) {
+  private _onEventClick(eventId: string, roomId: string, divEvent: HTMLDivElement) {
     if (this._container && this._tooltip) {
       const er = divEvent.getBoundingClientRect();
 
@@ -127,7 +130,8 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
       }
       this.setState({
         tooltip: {
-          id,
+          eventId,
+          roomId,
           style: {
             top,
             left,

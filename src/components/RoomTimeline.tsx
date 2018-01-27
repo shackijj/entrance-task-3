@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './RoomTimeline.css';
 import { RoomProps } from './Room';
+import * as classNames from 'classnames';
 import * as moment from 'moment';
 
 export interface Event {
@@ -25,7 +26,8 @@ export interface RoomTimelineProps extends RoomProps {
   hourStart: number;
   hourEnd: number;
   events: Event[];
-  onEventClick?: (id: string, e: HTMLDivElement) => void;
+  highlightEventId?: string;
+  onEventClick?: (eventId: string, roomId: string, div: HTMLDivElement) => void;
 }
 
 export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
@@ -188,7 +190,7 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
 };
 
 const RoomTimeline: React.SFC<RoomTimelineProps> =
-  ({date, isDateCurrent, events, hourStart, hourEnd, title, onEventClick}) => {
+  ({id, date, isDateCurrent, events, hourStart, hourEnd, title, onEventClick, highlightEventId}) => {
     const dateStart = moment(date).startOf('day').add(hourStart, 'hours');
     const dateEnd = moment(date).startOf('day').add(hourEnd, 'hours').endOf('hour');
     // Slots generation could be done on a server
@@ -197,24 +199,30 @@ const RoomTimeline: React.SFC<RoomTimelineProps> =
 
     const total = +dateEnd - +dateStart;
 
-    const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        const target = event.target as HTMLDivElement;
-        const eventId = target.getAttribute('data-event-id');
-        if (onEventClick && target && eventId) {
-          onEventClick(eventId as string, target);
-        }
-    };
-
     return (
-      <div className="RoomTimeline" onClick={onClick}>
-        {slots.map(({type, duration, id}, idx) => (
-          <div
+      <div className="RoomTimeline">
+        {slots.map((slot, idx) => {
+          let onSlotClick;
+          let isHighlighted = false;
+          if (onEventClick && slot.type === 'event' && onEventClick && slot.id) {
+            onSlotClick = (event: React.MouseEvent<HTMLDivElement>) => {
+              onEventClick(slot.id as string, id, event.currentTarget);
+            };
+          } 
+          if (highlightEventId && slot.type === 'event') {
+            isHighlighted = slot.id === highlightEventId;
+          }
+          return (<div
             key={idx}
-            className={`RoomTimeline-Slot RoomTimeline-Slot_${type}`}
-            data-event-id={id}
-            style={{width: `${(duration / total) * 100}%`}}
-          />
-        ))}
+            className={classNames([
+              'RoomTimeline-Slot',
+              `RoomTimeline-Slot_${slot.type}`,
+              { 'RoomTimeline-Slot_event_highlighted': isHighlighted}])
+            }
+            onClick={onSlotClick}
+            style={{width: `${(slot.duration / total) * 100}%`}}
+          />);
+        })}
       </div>
     );
   };
