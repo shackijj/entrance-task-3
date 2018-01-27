@@ -179,10 +179,25 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
     }
 
     if (idx === ary.length - 1 && endOfEvent.isBefore(endOfPeriod)) {
-      generateFreeSlots(
-        endOfEvent.clone().add(1, 'ms').toISOString(),
-        endOfPeriod.toISOString()
-      ).map(pushSlot);
+      if (dateCurrent && current.isAfter(endOfEvent)) {
+        const pastStart = endOfEvent.clone().add(1, 'ms');
+        const pastEnd = current.clone();
+        slots.push({
+          type: 'past',
+          dateStart: pastStart.toISOString(),
+          dateEnd: pastEnd.toISOString(),
+          duration: +pastEnd - +pastStart
+        });
+        generateFreeSlots(
+          pastEnd.clone().add(1, 'ms').toISOString(),
+          endOfPeriod.toISOString()
+        ).map(pushSlot);
+      } else {
+        generateFreeSlots(
+          endOfEvent.clone().add(1, 'ms').toISOString(),
+          endOfPeriod.toISOString()
+        ).map(pushSlot);
+      }
     }
   });
 
