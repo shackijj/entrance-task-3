@@ -73,7 +73,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                 {
                   floor.rooms.map((room, roomIdx) => (
                     <div className="EventDiagram-Room" key={roomIdx}>
-                      <Room {...room}/>
+                      <Room {...room} isHovered={!!(tooltip && room.id === tooltip.roomId)}/>
                       <RoomTimeline
                         id={room.id}
                         isDateCurrent={isDateCurrent}
