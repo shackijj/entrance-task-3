@@ -4,8 +4,9 @@ import Room from './Room';
 import RoomTimeline from './RoomTimeline';
 import EventTooltip from './EventTooltip';
 import * as classNames from 'classnames';
+import * as moment from 'moment';
 import { Floor } from './MainPage';
-import { HOUR_START, HOUR_END } from '../constants';
+import { HOUR_START, HOUR_END, MIN_EVENT_DURATION } from '../constants';
 
 import './EventsDiagram.css';
 
@@ -49,6 +50,8 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
     const { tooltip }  = this.state;
     const isScrollDisabled = !!tooltip;
     const highlightedEventId = tooltip ? tooltip.eventId : undefined;
+    const dateStart = moment(date).startOf('day').add(HOUR_START, 'hours');
+    const dateEnd = moment(date).startOf('day').add(HOUR_END, 'hours').endOf('hour');
     return (
       <div
         className={classNames('EventsDiagram', {'EventsDiagram_noscroll': isScrollDisabled }, classes)}
@@ -78,10 +81,11 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                         id={room.id}
                         isDateCurrent={isDateCurrent}
                         date={date}
-                        hourStart={HOUR_START}
-                        hourEnd={HOUR_END}
+                        dateStart={dateStart.toISOString()}
+                        dateEnd={dateEnd.toISOString()}
                         highlightEventId={highlightedEventId}
                         onEventClick={this._onEventClick}
+                        activeFreeSlotDuration={MIN_EVENT_DURATION}
                         {...room}
                       />
                     </div>

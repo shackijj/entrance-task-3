@@ -18,18 +18,6 @@ export type Slot = {
   dateEnd: string
 };
 
-export interface RoomTimelineProps extends RoomProps {
-  id: string;
-  date: string;
-  isDateCurrent: boolean;
-  title: string;
-  hourStart: number;
-  hourEnd: number;
-  events: Event[];
-  highlightEventId?: string;
-  onEventClick?: (eventId: string, roomId: string, div: HTMLDivElement) => void;
-}
-
 export const generateFreeSlots = (dateStart: string, dateEnd: string) => {
   const rc: Array<{type: 'free', dateStart: string, dateEnd: string, duration: number}> = [];
   let start = moment(dateStart);
@@ -204,42 +192,76 @@ export const generateSlots = (events: Event[], hourStart: string, hourEnd: strin
   return slots;
 };
 
-const RoomTimeline: React.SFC<RoomTimelineProps> =
-  ({id, date, isDateCurrent, events, hourStart, hourEnd, title, onEventClick, highlightEventId}) => {
-    const dateStart = moment(date).startOf('day').add(hourStart, 'hours');
-    const dateEnd = moment(date).startOf('day').add(hourEnd, 'hours').endOf('hour');
-    // Slots generation could be done on a server
-    const slots = generateSlots(
-      events, dateStart.toISOString(), dateEnd.toISOString(), isDateCurrent ? date : undefined);
+export interface RoomTimelineProps extends RoomProps {
+  id: string;
+  date: string;
+  isDateCurrent: boolean;
+  title: string;
+  dateStart: string;
+  dateEnd: string;
+  events: Event[];
+  highlightEventId?: string;
+  activeFreeSlotDuration: number;
+  onFreeSlotClick?: (dateStart: string, dateEnd: string) => void;
+  onEventClick?: (eventId: string, roomId: string, div: HTMLDivElement) => void;
+}
 
-    const total = +dateEnd - +dateStart;
+const RoomTimeline: React.SFC<RoomTimelineProps> = (props) => {
+  const {
+    id,
+    date,
+    isDateCurrent,
+    events,
+    dateStart,
+    dateEnd,
+    onEventClick,
+    highlightEventId,
+    onFreeSlotClick,
+    activeFreeSlotDuration
+  } = props;
 
-    return (
-      <div className="RoomTimeline">
-        {slots.map((slot, idx) => {
-          let onSlotClick;
-          let isHighlighted = false;
-          if (onEventClick && slot.type === 'event' && onEventClick && slot.id) {
-            onSlotClick = (event: React.MouseEvent<HTMLDivElement>) => {
-              onEventClick(slot.id as string, id, event.currentTarget);
+  // Slots generation could be done on a server
+  const slots = generateSlots(
+    events, dateStart, dateEnd, isDateCurrent ? date : undefined);
+
+  const total = +moment(dateEnd) - +moment(dateStart);
+
+  return (
+    <div className="RoomTimeline">
+      {slots.map((slot, idx) => {
+        let onSlotClick;
+        let isHighlighted = false;
+        let isFreeActive = false;
+        if (onEventClick && slot.type === 'event' && onEventClick && slot.id) {
+          onSlotClick = (event: React.MouseEvent<HTMLDivElement>) => {
+            onEventClick(slot.id as string, id, event.currentTarget);
+          };
+        } 
+        if (highlightEventId && slot.type === 'event') {
+          isHighlighted = slot.id === highlightEventId;
+        }
+        if (slot.type === 'free' && slot.duration >= activeFreeSlotDuration) {
+          isFreeActive = true;
+          if (onFreeSlotClick) {
+            onSlotClick = () => {
+              onFreeSlotClick(slot.dateStart, slot.dateEnd);
             };
-          } 
-          if (highlightEventId && slot.type === 'event') {
-            isHighlighted = slot.id === highlightEventId;
           }
-          return (<div
-            key={idx}
-            className={classNames([
-              'RoomTimeline-Slot',
-              `RoomTimeline-Slot_${slot.type}`,
-              { 'RoomTimeline-Slot_event_highlighted': isHighlighted}])
-            }
-            onClick={onSlotClick}
-            style={{width: `${(slot.duration / total) * 100}%`}}
-          />);
-        })}
-      </div>
-    );
+        }
+        return (<div
+          key={idx}
+          className={classNames([
+            'RoomTimeline-Slot',
+            `RoomTimeline-Slot_${slot.type}`,
+            { 'RoomTimeline-Slot_event_highlighted': isHighlighted },
+            { 'RoomTimeline-Slot_free_active': isFreeActive }])
+          }
+          onClick={onSlotClick}
+          style={{width: `${(slot.duration / total) * 100}%`}}
+        />);
+      })}
+    </div>
+  );
   };
 
 export default RoomTimeline;

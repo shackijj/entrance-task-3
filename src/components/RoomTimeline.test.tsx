@@ -587,6 +587,42 @@ describe('#generateSlots', () => {
     const actual = generateSlots(events, hourStart, hourEnd, dateCurrent);
     expect(actual).toEqual(expected);
   });
+
+  it('should create an event slot and a free slot.', () => {
+    const hourStart = '2018-01-09T07:00:00.000Z';
+    const hourEnd = '2018-01-09T08:59:59.999Z';
+
+    const eventStart = '2018-01-09T06:30:00.555Z';
+    const eventEnd = '2018-01-09T08:46:00.555Z';
+    const freeStart = '2018-01-09T08:46:00.556Z';
+    const freeEnd = hourEnd;
+
+    const events = [
+      {
+        id: '1',
+        dateStart: eventStart,
+        dateEnd: eventEnd,
+      },
+    ];
+
+    const expected = [
+      {
+        type: 'event',
+        id: '1',
+        dateStart: eventStart,
+        dateEnd: eventEnd,
+        duration: getDuration(hourStart, eventEnd)
+      },
+      {
+        type: 'free',
+        dateStart: freeStart,
+        dateEnd: freeEnd,
+        duration: getDuration(freeStart, freeEnd)
+      }
+    ];
+    const actual = generateSlots(events, hourStart, hourEnd);
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe('RoomTimeline', () => {
@@ -595,10 +631,11 @@ describe('RoomTimeline', () => {
     const wrapper = mount(
       <RoomTimeline
         id={'1'}
-        date={'2018-01-09T07:30:00.55'}
+        activeFreeSlotDuration={15 * 60 * 1000}
+        date={'2018-01-09T07:30:00.555Z'}
         isDateCurrent={true}
-        hourStart={7}
-        hourEnd={23}
+        dateStart={'2018-01-09T07:00:00.000Z'}
+        dateEnd={'2018-01-09T23:59:59.999Z'}
         title={'Ржавый Фред'}
         onEventClick={spy}
         capacity={4}
@@ -628,11 +665,12 @@ describe('RoomTimeline', () => {
         id={'1'}
         date={'2018-01-09T07:30:00.55'}
         isDateCurrent={true}
-        hourStart={7}
-        hourEnd={23}
+        dateStart={'2018-01-09T07:00:00.000Z'}
+        dateEnd={'2018-01-09T23:59:59.999Z'}
         title={'Ржавый Фред'}
         onEventClick={spy}
         capacity={4}
+        activeFreeSlotDuration={15 * 60 * 1000}
         events={
           [
             {
@@ -658,10 +696,11 @@ describe('RoomTimeline', () => {
         id={'1'}
         date={'2018-01-09T07:30:00.55'}
         isDateCurrent={true}
-        hourStart={7}
-        hourEnd={23}
+        dateStart={'2018-01-09T07:00:00.000Z'}
+        dateEnd={'2018-01-09T23:59:59.999Z'}
         title={'Ржавый Фред'}
         capacity={4}
+        activeFreeSlotDuration={15 * 60 * 1000}
         highlightEventId={'1'}
         events={
           [
@@ -684,5 +723,98 @@ describe('RoomTimeline', () => {
     expect(events).toHaveLength(2);
     expect(shallow(events.get(0)).hasClass('RoomTimeline-Slot_event_highlighted')).toBeTruthy();
     expect(shallow(events.get(1)).hasClass('RoomTimeline-Slot_event_highlighted')).toBeFalsy();
+  });
+
+  it('should fire onEvent click', () => {
+    const spy = jest.fn();
+    const wrapper = shallow(
+      <RoomTimeline
+        id={'1'}
+        date={'2018-01-09T07:00:00.555Z'}
+        isDateCurrent={false}
+        dateStart={'2018-01-09T07:00:00.000Z'}
+        dateEnd={'2018-01-09T08:59:59.999Z'}
+        title={'Ржавый Фред'}
+        capacity={4}
+        onFreeSlotClick={spy}
+        activeFreeSlotDuration={15 * 60 * 1000}
+        events={
+          [
+            {
+              id: '1',
+              dateStart: '2018-01-09T06:00:00.555Z',
+              dateEnd: '2018-01-09T08:44:00.555Z',
+            },
+          ]
+        }
+      />
+    );
+    wrapper.find('.RoomTimeline-Slot_free').simulate('click');
+    expect(spy.mock.calls).toHaveLength(1);
+    expect(spy.mock.calls[0]).toEqual(['2018-01-09T08:44:00.556Z', '2018-01-09T08:59:59.999Z']);
+  });
+
+  it(`a free slot should have _free_active modifier
+    if its duration great or equal given activeFreeSlotDuration`,
+     () => {
+      const wrapper = shallow(
+        <RoomTimeline
+          id={'1'}
+          date={'2018-01-09T07:30:00.555Z'}
+          isDateCurrent={false}
+          dateStart={'2018-01-09T07:00:00.000Z'}
+          dateEnd={'2018-01-09T09:59:59.999Z'}
+          title={'Ржавый Фред'}
+          capacity={4}
+          activeFreeSlotDuration={15 * 60 * 1000}
+          events={
+            [
+              {
+                id: '1',
+                dateStart: '2018-01-09T06:30:00.555Z',
+                dateEnd: '2018-01-09T08:46:00.555Z',
+              },
+            ]
+          }
+        />
+      );
+
+      const events = wrapper.find('.RoomTimeline-Slot_free');
+      expect(events).toHaveLength(2);
+      expect(shallow(events.get(0)).hasClass('RoomTimeline-Slot_free_active')).toBeFalsy();
+      expect(shallow(events.get(1)).hasClass('RoomTimeline-Slot_free_active')).toBeTruthy();
+    });
+
+  it(`inactive free slots should not be clickable`, () => {
+    const spy = jest.fn();
+    const wrapper = shallow(
+      <RoomTimeline
+        id={'1'}
+        date={'2018-01-09T07:30:00.555Z'}
+        isDateCurrent={false}
+        dateStart={'2018-01-09T07:00:00.000Z'}
+        dateEnd={'2018-01-09T09:59:59.999Z'}
+        title={'Ржавый Фред'}
+        capacity={4}
+        onFreeSlotClick={spy}
+        activeFreeSlotDuration={15 * 60 * 1000}
+        events={
+          [
+            {
+              id: '1',
+              dateStart: '2018-01-09T06:30:00.555Z',
+              dateEnd: '2018-01-09T08:46:00.555Z',
+            },
+          ]
+        }
+      />
+    );
+
+    const events = wrapper.find('.RoomTimeline-Slot_free');
+    shallow(events.get(0)).simulate('click');
+    expect(spy.mock.calls).toHaveLength(0);
+
+    shallow(events.get(1)).simulate('click');
+    expect(spy.mock.calls).toHaveLength(1);
   });
 });

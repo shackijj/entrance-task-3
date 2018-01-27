@@ -55,10 +55,14 @@ function createData ({models}) {
   ])
 
   const HOUR = 60 * 60 * 1000
+  const DAY = 24 * 60 * 60 * 1000
   let now = new Date()
   let oneHourLater = new Date(now.getTime() + HOUR)
   let twoHoursLater = new Date(oneHourLater.getTime() + HOUR)
   let threeHoursLater = new Date(twoHoursLater.getTime() + HOUR)
+
+  let oneHourLaterTommorow = new Date(now.getTime() + HOUR + DAY)
+  let twoHoursLaterTommorow = new Date(oneHourLater.getTime() + HOUR + DAY)
 
   let eventsPromise = models.Event.bulkCreate([
     {
@@ -77,9 +81,14 @@ function createData ({models}) {
       dateEnd: threeHoursLater
     },
     {
-      title: 'Lorem Ipsum',
+      title: 'Lorem Ipsum 1',
       dateStart: twoHoursLater,
       dateEnd: threeHoursLater
+    },
+    {
+      title: 'Lorem Ipsum 2',
+      dateStart: oneHourLaterTommorow,
+      dateEnd: twoHoursLaterTommorow
     }
   ])
 
@@ -104,14 +113,16 @@ function createData ({models}) {
       promises.push(users[2].setFloor(floors[2]))
 
       promises.push(events[0].setRoom(rooms[0]))
-      promises.push(events[3].setRoom(rooms[0]))
       promises.push(events[1].setRoom(rooms[1]))
       promises.push(events[2].setRoom(rooms[2]))
+      promises.push(events[3].setRoom(rooms[0]))
+      promises.push(events[4].setRoom(rooms[0]))
 
       promises.push(events[0].setUsers([users[0], users[1]]))
       promises.push(events[1].setUsers([users[1], users[2]]))
       promises.push(events[2].setUsers([users[0], users[2]]))
       promises.push(events[3].setUsers([users[0], users[1]]))
+      promises.push(events[4].setUsers([users[0], users[1]]))
       return Promise.all(promises)
     })
 }
