@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersHint should show a list of users 1`] = `
+<div
+  className="UsersHint"
+>
+  <div
+    className="UsersHint-User"
+    key="0"
+  >
+    <User
+      avatarUrl="https://somewhere.ru"
+      login="Артур Пирожков"
+    />
+    <div
+      className="UsersHint-UserFloor"
+    >
+       · 
+      1
+       этаж
+    </div>
+  </div>
+  <div
+    className="UsersHint-User"
+    key="1"
+  >
+    <User
+      avatarUrl="https://somewhere.ru"
+      login="Артур Пирожков"
+    />
+    <div
+      className="UsersHint-UserFloor"
+    >
+       · 
+      1
+       этаж
+    </div>
+  </div>
+</div>
+`;

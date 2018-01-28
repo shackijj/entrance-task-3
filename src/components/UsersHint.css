@@ -1,0 +1,24 @@
+.UsersHint {
+
+}
+
+.UsersHint-User {
+  height: 34px;
+  padding: 0 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.UsersHint-User:hover {
+  font-weight: bold;
+  background-color: #F6F7F9;
+}
+
+.UsersHint-User:hover {
+  font-weight: bold;
+}
+
+.UsersHint-UserFloor {
+  color: #A7ADB5;
+}
