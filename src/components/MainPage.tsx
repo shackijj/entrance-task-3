@@ -1,5 +1,6 @@
 import DatePicker from './DatePicker';
 import EventDiagram from './EventsDiagram';
+import Header from './Header';
 import './MainPage.css';
 
 import { RouteComponentProps, withRouter } from 'react-router';
@@ -84,6 +85,9 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
       dateCurrent: new Date()
     };
     this._onDatePick = this._onDatePick.bind(this);
+    this._onFreeSlotClick = this._onFreeSlotClick.bind(this);
+    this._onCreateEventClick = this._onCreateEventClick.bind(this);
+    this._onEditEventClick = this._onEditEventClick.bind(this);
   }
   componentWillReceiveProps(props: MainPagePropsConnected) {
     this.setState({
@@ -97,6 +101,10 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
     const isToday = moment(dateCurrent).isSame(dateChosen, 'day');
     return (
       <div className="MainPage">
+        <Header
+          isCreateButtonShown={true}
+          onCreateButtonClick={this._onCreateEventClick}
+        />
         <div className="MainPage-SubHeader"/>
         <DatePicker
           classes={['MainPage-DatePicker']}
@@ -110,6 +118,8 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
             date={isToday ? dateCurrent.toISOString() : dateChosen.toISOString()}
             isDateCurrent={isToday}
             classes={['MainPage-EventsDiagram']}
+            onFreeSlotClick={this._onFreeSlotClick}
+            onEventEditClick={this._onEditEventClick}
           />
         }
       </div>
@@ -122,6 +132,15 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
     if (moment(dateStr).isSameOrAfter(dateCurrent, 'day')) {
       history.push(`/events/${dateStr}`);
     }
+  }
+  private _onFreeSlotClick(roomId: string, dateStart: string, dateEnd: string) {
+    this.props.history.push(`/create?roomId=${roomId}&dateStart=${dateStart}&dateEnd=${dateEnd}`);
+  }
+  private _onCreateEventClick() {
+    this.props.history.push(`/create`);
+  }
+  private _onEditEventClick(eventId: string) {
+    this.props.history.push(`/edit/${eventId}`);
   }
 }
 

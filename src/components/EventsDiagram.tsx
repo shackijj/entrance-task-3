@@ -15,6 +15,8 @@ interface EventsDiagramProps {
   classes: string[];
   date: string;
   isDateCurrent: boolean;
+  onFreeSlotClick?: (roomId: string, dateStart: string, dateEnd: string) => void;
+  onEventEditClick?: (eventId: string) => void;
 }
 
 type Tooltip = {
@@ -36,6 +38,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
       tooltip: null
     };
     this._onEventClick = this._onEventClick.bind(this);
+    this._onEventEditClick = this._onEventEditClick.bind(this);
     this._closeTooltip = this._closeTooltip.bind(this);
   }
 
@@ -46,7 +49,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
   }
 
   public render() {
-    const {floors, classes, date, isDateCurrent} = this.props;
+    const {floors, classes, date, isDateCurrent, onFreeSlotClick} = this.props;
     const { tooltip }  = this.state;
     const isScrollDisabled = !!tooltip;
     const highlightedEventId = tooltip ? tooltip.eventId : undefined;
@@ -85,6 +88,7 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
                         dateEnd={dateEnd.toISOString()}
                         highlightEventId={highlightedEventId}
                         onEventClick={this._onEventClick}
+                        onFreeSlotClick={onFreeSlotClick}
                         activeFreeSlotDuration={MIN_EVENT_DURATION}
                         {...room}
                       />
@@ -100,7 +104,12 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
           ref={div => this._tooltip = div}
           style={tooltip && tooltip.style || {}}
         >
-          {tooltip && <EventTooltip id={tooltip.eventId} onCloseClick={this._closeTooltip}/>}
+          {tooltip &&
+            <EventTooltip
+              id={tooltip.eventId}
+              onCloseClick={this._closeTooltip}
+              onEditClick={this._onEventEditClick}
+            />}
         </div>
       </div>
     );
@@ -109,6 +118,13 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
   private _closeTooltip() {
     const newState = Object.assign({}, this.state, { tooltip: null });
     this.setState(newState);
+  }
+
+  private _onEventEditClick() {
+    if (this.props.onEventEditClick && this.state.tooltip) {
+      const { eventId } = this.state.tooltip;
+      this.props.onEventEditClick(eventId);
+    }
   }
 
   private _onEventClick(eventId: string, roomId: string, divEvent: HTMLDivElement) {

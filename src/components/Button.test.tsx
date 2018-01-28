@@ -26,4 +26,12 @@ describe('Button', () => {
     const a = wrapper.find('a');
     expect(a.hasClass('Button Button_disabled')).toEqual(true);
   });
+
+  it('should be clickable if callback is given', () => {
+    const mock = jest.fn();
+    const wrapper = shallow(<Button onClick={mock}>Foo</Button>);
+    wrapper.simulate('click');
+
+    expect(mock).toHaveBeenCalledTimes(1);
+  });
 });

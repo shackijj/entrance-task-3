@@ -6,6 +6,7 @@ import TextInput from './TextInput';
 import InputLabel from './InputLabel';
 import UserInput from './UserInput';
 import RoomInput from './RoomInput';
+import Header from './Header';
 
 import './EditEventPage.css';
 
@@ -13,6 +14,7 @@ const ButtonClasses = ['EditEventPage-Button', 'Button_theme_cancel'];
 
 const EditEventPage = () => (
   <div className="EditEventPage">
+    <Header/>
     <div className="EditEventPage-Main">
       <div className="EditEventPage-Form">
         <h1 className="EditEventPage-Heading">

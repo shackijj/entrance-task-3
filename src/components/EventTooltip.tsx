@@ -70,7 +70,7 @@ export const EventTooltip: React.SFC<Event> = ({title, room, dateStart, dateEnd,
   );
 };
 
-const TOOLTIP_QUERY = gql`
+export const TOOLTIP_QUERY = gql`
   query EventQuery($id: ID!) {
     event(id: $id) {
       title
