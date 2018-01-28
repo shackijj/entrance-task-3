@@ -21,7 +21,6 @@
     "node_modules",
     "build",
     "scripts",
-    "stories",
     "server/",
     "acceptance-tests",
     "webpack",
