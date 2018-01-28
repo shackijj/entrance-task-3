@@ -3,7 +3,7 @@ import User from './User';
 
 import './UsersHint.css';
 
-type User = {
+export type User = {
   firstName: string;
   secondName: string;
   avatarUrl: string;
@@ -11,7 +11,7 @@ type User = {
   floor: number;
 };
 
-interface UsersHintProps {
+export interface UsersHintProps {
   users: User[];
   onUserClick?: (userId: string) => void;
 }

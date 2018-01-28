@@ -8,19 +8,28 @@ interface TextInputProps {
   icon?: JSX.Element;
   placeholder?: string;
   classes?: string[];
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onChange?: () => void;
 }
 
-const TextInput = ({label, icon, placeholder, classes}: TextInputProps) => {
+const TextInput = ({label, icon, placeholder, classes, onBlur, onFocus, onChange}: TextInputProps) => {
   let _input: HTMLInputElement | null;
   let _container: HTMLElement | null;
-  const onFocus = () => {
+  const _onFocus = () => {
     if (_container) {
       _container.classList.add('TextInput_focus');
     }
+    if (onFocus) {
+      onFocus();
+    }
   };
-  const onBlur = () => {
+  const _onBlur = () => {
     if (_container) {
       _container.classList.remove('TextInput_focus');
+    }
+    if (onBlur) {
+      onBlur();
     }
   };
   return (
@@ -32,8 +41,9 @@ const TextInput = ({label, icon, placeholder, classes}: TextInputProps) => {
           ref={input => _input = input}
           type="text"
           placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
+          onFocus={_onFocus}
+          onBlur={_onBlur}
+          onChange={onChange ? onChange : undefined}
         />
         <span className="TextInput-Icon">{icon}</span>
       </div>
