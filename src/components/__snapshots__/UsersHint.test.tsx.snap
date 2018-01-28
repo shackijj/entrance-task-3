@@ -15,7 +15,11 @@ exports[`UsersHint should show a list of users 1`] = `
     <div
       className="UsersHint-UserFloor"
     >
-       · 
+      <span
+        className="UsersHint-Separator"
+      >
+         · 
+      </span>
       1
        этаж
     </div>
@@ -31,7 +35,11 @@ exports[`UsersHint should show a list of users 1`] = `
     <div
       className="UsersHint-UserFloor"
     >
-       · 
+      <span
+        className="UsersHint-Separator"
+      >
+         · 
+      </span>
       1
        этаж
     </div>
