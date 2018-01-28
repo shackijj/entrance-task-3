@@ -83,6 +83,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
       dateChosen: propsToDate(props),
       dateCurrent: new Date()
     };
+    this._onDatePick = this._onDatePick.bind(this);
   }
   componentWillReceiveProps(props: MainPagePropsConnected) {
     this.setState({
@@ -91,7 +92,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
     });
   }
   render() {
-    const {data, history} = this.props;
+    const {data} = this.props;
     const {dateCurrent, dateChosen} = this.state;
     const isToday = moment(dateCurrent).isSame(dateChosen, 'day');
     return (
@@ -101,7 +102,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
           classes={['MainPage-DatePicker']}
           dateCurrent={dateCurrent}
           dateChosen={dateChosen}
-          onDatePick={dateStr => history.push(`/events/${dateStr}`)}
+          onDatePick={this._onDatePick}
         />
         {data && data.floors &&
           <EventDiagram
@@ -113,6 +114,14 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
         }
       </div>
     );
+  }
+  private _onDatePick(dateStr: string) {
+    const { dateCurrent } = this.state;
+    const { history } = this.props;
+
+    if (moment(dateStr).isSameOrAfter(dateCurrent, 'day')) {
+      history.push(`/events/${dateStr}`);
+    }
   }
 }
 
