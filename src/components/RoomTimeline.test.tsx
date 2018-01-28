@@ -751,7 +751,7 @@ describe('RoomTimeline', () => {
     );
     wrapper.find('.RoomTimeline-Slot_free').simulate('click');
     expect(spy.mock.calls).toHaveLength(1);
-    expect(spy.mock.calls[0]).toEqual(['2018-01-09T08:44:00.556Z', '2018-01-09T08:59:59.999Z']);
+    expect(spy.mock.calls[0]).toEqual(['1', '2018-01-09T08:44:00.556Z', '2018-01-09T08:59:59.999Z']);
   });
 
   it(`a free slot should have _free_active modifier

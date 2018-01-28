@@ -112,6 +112,9 @@ class EventsDiagram extends React.Component<EventsDiagramProps, EventsDiagramSta
   }
 
   private _onEventClick(eventId: string, roomId: string, divEvent: HTMLDivElement) {
+    /**
+     * TODO. Add unit tests
+     */
     if (this._container && this._tooltip) {
       const er = divEvent.getBoundingClientRect();
 

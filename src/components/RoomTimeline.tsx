@@ -202,7 +202,7 @@ export interface RoomTimelineProps extends RoomProps {
   events: Event[];
   highlightEventId?: string;
   activeFreeSlotDuration: number;
-  onFreeSlotClick?: (dateStart: string, dateEnd: string) => void;
+  onFreeSlotClick?: (roomId: string, dateStart: string, dateEnd: string) => void;
   onEventClick?: (eventId: string, roomId: string, div: HTMLDivElement) => void;
 }
 
@@ -244,7 +244,7 @@ const RoomTimeline: React.SFC<RoomTimelineProps> = (props) => {
           isFreeActive = true;
           if (onFreeSlotClick) {
             onSlotClick = () => {
-              onFreeSlotClick(slot.dateStart, slot.dateEnd);
+              onFreeSlotClick(id, slot.dateStart, slot.dateEnd);
             };
           }
         }
