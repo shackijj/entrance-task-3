@@ -5,11 +5,11 @@ import { Close } from '../src/components/GlyphIcon/GlyphIcon';
 
 storiesOf('TextInput', module)
   .add('default', () => (
-      <TextInput label="test"/>
+      <TextInput value="" label="test"/>
   ))
   .add('with placeholder', () => (
-    <TextInput placeholder="О чем будете говорить?" label="Что-то"/>
+    <TextInput value="" placeholder="О чем будете говорить?" label="Что-то"/>
   ))
   .add('with icon', () => (
-    <TextInput label="test" icon={<Close/>} />
+    <TextInput value="" label="test" icon={<Close/>} />
   ));

@@ -10,45 +10,62 @@ interface TextInputProps {
   classes?: string[];
   onFocus?: () => void;
   onBlur?: () => void;
-  onChange?: () => void;
+  onChange?: (value: string) => void;
+  value: string;
 }
 
-const TextInput = ({label, icon, placeholder, classes, onBlur, onFocus, onChange}: TextInputProps) => {
-  let _input: HTMLInputElement | null;
-  let _container: HTMLElement | null;
-  const _onFocus = () => {
-    if (_container) {
-      _container.classList.add('TextInput_focus');
-    }
-    if (onFocus) {
-      onFocus();
-    }
-  };
-  const _onBlur = () => {
-    if (_container) {
-      _container.classList.remove('TextInput_focus');
-    }
-    if (onBlur) {
-      onBlur();
-    }
-  };
-  return (
-    <div className={classNames('TextInput', classes)} ref={div => _container = div}>
-      {label ? <InputLabel>{label}</InputLabel> : ''}
-      <div className="TextInput-InputContainer">
-        <input 
-          className="TextInput-Input"
-          ref={input => _input = input}
-          type="text"
-          placeholder={placeholder}
-          onFocus={_onFocus}
-          onBlur={_onBlur}
-          onChange={onChange ? onChange : undefined}
-        />
-        <span className="TextInput-Icon">{icon}</span>
+interface TextInputState {
+  focused: boolean;
+}
+
+class TextInput extends React.Component<TextInputProps, TextInputState> {
+  constructor(props: TextInputProps) {
+    super(props);
+    this.state = {
+      focused: false
+    };
+    this._handleChange = this._handleChange.bind(this);
+    this._onFocus = this._onFocus.bind(this);
+    this._onBlur = this._onBlur.bind(this);
+  }
+  render() {
+    const {label, icon, placeholder, classes, value} = this.props;
+    return (
+      <div className={classNames('TextInput', {'TextInput_focus': this.state.focused}, classes)}>
+        {label ? <InputLabel>{label}</InputLabel> : ''}
+        <div className="TextInput-InputContainer">
+          <input 
+            className="TextInput-Input"
+            type="text"
+            value={value}
+            placeholder={placeholder}
+            onFocus={this._onFocus}
+            onBlur={this._onBlur}
+            onChange={this._handleChange}
+          />
+          <span className="TextInput-Icon">{icon}</span>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+  private _onFocus() {
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
+    this.setState({focused: true});
+  }
+  private _onBlur() {
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
+    this.setState({focused: false});
+  }
+  private _handleChange(event: React.FormEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
+    if (this.props.onChange) {
+      this.props.onChange(target.value);
+    }
+  }
+}
 
 export default TextInput;
