@@ -100,6 +100,7 @@ class DateIntervalInput extends React.Component<DateIntervalInputProps, DateInte
           onFocus={this._onTimeStartInputFocus}
           onBlur={this._onTimeStartInputBlur}
         />
+        <div className="DateIntervalInput-Separator">—</div>
         <TextInput
           onChange={this._onTimeEndChange}
           classes={['DateIntervalInput-TimeEndInput']}

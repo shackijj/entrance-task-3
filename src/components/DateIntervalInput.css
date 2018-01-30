@@ -11,9 +11,15 @@
   width: 72px;
 }
 
-.DateIntervalInput-DateInput,
-.DateIntervalInput-TimeStartInput {
+.DateIntervalInput-DateInput {
   margin-right: 16px;
+}
+
+.DateIntervalInput-Separator {
+  padding-top: 32px;
+  width: 16px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .DateIntervalInput-Date {
