@@ -12,3 +12,7 @@
   color: #AFB4B8;
   cursor: pointer;
 }
+
+.UserInput:hover .UserInput-Close {
+  color: #000;
+}

@@ -3,6 +3,8 @@ import TextInput from './TextInput';
 import UsersHints, { User } from './UsersHint';
 import UserInput from './UserInput';
 
+import './UsersInput.css';
+
 interface UsersInputProps {
   usersHint: User[];
   users: User[];

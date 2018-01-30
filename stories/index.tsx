@@ -15,3 +15,4 @@ import './RoomInput';
 import './UserInput';
 import './EventsDiagram';
 import './UsersHint';
+import './UsersInput';
