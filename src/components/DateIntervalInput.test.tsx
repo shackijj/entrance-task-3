@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as moment from 'moment';
 import DateIntervalInput from './DateIntervalInput';
 import { mount } from 'enzyme';
-import * as ReactDOM from 'react-dom';
 
 describe('DateIntervalInput', () => {
   it('should take dateStart and dateEnd in UTC and show it in user\'s timezone', () => {

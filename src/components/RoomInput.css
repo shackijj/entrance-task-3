@@ -17,6 +17,7 @@
 
 .RoomInput_active {
   background-color: #007DFF;
+  border-color: #007DFF;
   color: #fff;
 }
 

@@ -15,6 +15,7 @@ interface DateIntervalInputProps {
   dateCurrent?: string;
   dateStart?: string;
   dateEnd?: string;
+  classes?: string[];
   onChange?: (dateStart: string, dateEnd: string) => void;
 }
 
@@ -59,10 +60,10 @@ class DateIntervalInput extends React.Component<DateIntervalInputProps, DateInte
     document.removeEventListener('mousedown', this._handleClickOutside);
   }
   render() {
-    const {dateCurrent} = this.props;
+    const {dateCurrent, classes} = this.props;
     const {inputStart, inputEnd, inputDate, inputDateFocused, inputTimeEndFocused, inputTimeStartFocused} = this.state;
     return (
-      <div className="DateIntervalInput">
+      <div className={classNames(['DateIntervalInput', classes])}>
         <div className="DateIntervalInput-Date" ref={this._setDateContainerRef}>
           <TextInput
             classes={['DateIntervalInput-DateInput']}
@@ -133,6 +134,7 @@ class DateIntervalInput extends React.Component<DateIntervalInputProps, DateInte
 
   private _onDateChange(date: string) {
     const {dateStart, dateEnd, onChange} = this.props;
+    this.setState(Object.assign({}, this.state, {inputDateFocused: false}));
     if (onChange) {
       const newDate = moment(date).date();
       const start = moment(dateStart).date(newDate);

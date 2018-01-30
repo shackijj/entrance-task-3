@@ -10,6 +10,7 @@ interface UsersInputProps {
   users: User[];
   onUserAdd?: (userId: string) => void;
   onUserRemove?: (userId: string) => void;
+  onInputChange?: (value: string) => void;
 }
 
 interface UsersInputState {
@@ -36,6 +37,7 @@ class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
       <div className="UsersInput">
         <div className="UsersInput-Input">
           <TextInput
+            label={'Участники'}
             value={inputValue}
             onFocus={this._onFocus}
             onBlur={this._onBlur}
@@ -78,6 +80,9 @@ class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
   private _onInputChange(inputValue: string) {
     const newState = Object.assign({}, this.state, {inputValue});
     this.setState(newState);
+    if (this.props.onInputChange) {
+      this.props.onInputChange(inputValue);
+    }
   }
 }
 
