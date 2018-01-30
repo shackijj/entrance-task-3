@@ -69,6 +69,8 @@ export const DatePicker = ({classes, dateCurrent, onDatePick, dateChosen = dateC
           hideKeyboardShortcutsPanel={true}
           isOutsideRange={(date: moment.Moment) => date.isBefore(dateCurrent, 'day')}
           numberOfMonths={3}
+          initialVisibleMonth={() => moment(dateCurrent)}
+          focused={true}
           noBorder={true}
         />
       </div>

@@ -1,0 +1,59 @@
+.DateIntervalInput {
+  display: flex;
+}
+
+.DateIntervalInput-Date,
+.DateIntervalInput-TimeStart {
+  margin-right: 16px;
+}
+
+.DateIntervalInput-Date {
+  position: relative;
+}
+
+.DateIntervalInput-Calendar {
+  position: absolute;
+  visibility: hidden;
+  top: 100%;
+}
+
+
+.DateIntervalInput-Calendar {
+  visibility: hidden;
+  top: 100%;
+}
+
+.DateIntervalInput-Calendar_open {
+  visibility: visible;
+  top: 100%;
+}
+
+.DateIntervalInput-Calendar .DayPicker {
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(0,44,92,0.28);
+  border-radius: 4px;
+}
+
+.DateIntervalInput .CalendarMonth_caption {
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.DateIntervalInput .CalendarMonth_caption {
+  color: #000;
+  font-size: 15px;
+  padding-bottom: 48px;
+  font-weight: 500;
+}
+
+.DateIntervalInput .CalendarDay__blocked_out_of_range {
+  color: #858E98 !important;
+}
+
+.DateIntervalInput .CalendarDay {
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  vertical-align: middle;
+}

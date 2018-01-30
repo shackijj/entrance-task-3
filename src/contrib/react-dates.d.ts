@@ -15,6 +15,9 @@ declare module 'react-dates' {
     isFocused?: boolean;
     orientation?: string;
     noBorder?: boolean;
+    date?: moment.Moment;
+    initialVisibleMonth?: () => moment.Moment;
+    onFocusChange?: () => void;
   }
 
   class DayPickerSingleDateController extends React.Component<DayPickerSingleDateControllerProps> {

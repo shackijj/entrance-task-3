@@ -156,8 +156,8 @@ describe('DatePicker', () => {
     const mockCb = jest.fn();
     const wrapper = mount(
       <DatePicker
-        dateCurrent={new Date('2018-01-09')}
-        dateChosen={new Date('2018-01-09')}
+        dateCurrent={new Date('2018-02-09')}
+        dateChosen={new Date('2018-02-09')}
         onDatePick={mockCb}
       />
     );
@@ -174,7 +174,7 @@ describe('DatePicker', () => {
     ).toBe('DatePicker DatePicker_open');
 
     wrapper
-      .find('[aria-label="суббота, 20 января 2018 г."]')
+      .find('[aria-label="вторник, 20 февраля 2018 г."]')
       .first()
       .simulate('click');
 
