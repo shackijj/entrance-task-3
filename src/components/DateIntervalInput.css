@@ -2,8 +2,17 @@
   display: flex;
 }
 
-.DateIntervalInput-Date,
-.DateIntervalInput-TimeStart {
+.DateIntervalInput-DateInput {
+  width: 238px;
+}
+
+.DateIntervalInput-TimeStartInput,
+.DateIntervalInput-TimeEndInput {
+  width: 72px;
+}
+
+.DateIntervalInput-DateInput,
+.DateIntervalInput-TimeStartInput {
   margin-right: 16px;
 }
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import DateIntervalInput from './DateIntervalInput';
 import { mount } from 'enzyme';
+import * as ReactDOM from 'react-dom';
 
 describe('DateIntervalInput', () => {
   it('should take dateStart and dateEnd in UTC and show it in user\'s timezone', () => {
@@ -18,13 +19,13 @@ describe('DateIntervalInput', () => {
     const expectedStart = moment(dateStart).format('HH:mm');
     const expectedEnd = moment(dateEnd).format('HH:mm');
 
-    const dateInput = wrapper.find('.DateIntervalInput-Date input').getDOMNode() as HTMLInputElement;
+    const dateInput = wrapper.find('.DateIntervalInput-DateInput input').getDOMNode() as HTMLInputElement;
     expect(dateInput.value).toEqual(expectedDate);
 
-    const startInput = wrapper.find('.DateIntervalInput-TimeStart input').getDOMNode() as HTMLInputElement;
+    const startInput = wrapper.find('.DateIntervalInput-TimeStartInput input').getDOMNode() as HTMLInputElement;
     expect(startInput.value).toEqual(expectedStart);
 
-    const endInput = wrapper.find('.DateIntervalInput-TimeEnd input').getDOMNode() as HTMLInputElement;
+    const endInput = wrapper.find('.DateIntervalInput-TimeEndInput input').getDOMNode() as HTMLInputElement;
     expect(endInput.value).toEqual(expectedEnd);
   });
 
@@ -40,7 +41,7 @@ describe('DateIntervalInput', () => {
 
     expect(wrapper.find('.DateIntervalInput-Calendar').hasClass('DateIntervalInput-Calendar_open')).toBeFalsy();
 
-    wrapper.find('.DateIntervalInput-Date input').simulate('focus');
+    wrapper.find('.DateIntervalInput-DateInput input').simulate('focus');
 
     expect(wrapper.find('.DateIntervalInput-Calendar').hasClass('DateIntervalInput-Calendar_open')).toBeTruthy();
   });
@@ -76,10 +77,14 @@ describe('DateIntervalInput', () => {
       />);
 
     wrapper
-      .find('.DateIntervalInput-TimeStart input')
+      .find('.DateIntervalInput-TimeStartInput input')
       .simulate('change', {target: {value: '07:12'}});
 
-    expect(mock).toBeCalledWith('2018-01-09T07:12:00.000Z', '2018-01-09T07:15:00.000Z');
+    const duration = moment.duration('07:12');
+    const start = moment(dateStart).startOf('day').add(duration);
+    const end = moment(dateEnd);
+
+    expect(mock).toBeCalledWith(start.toISOString(), end.toISOString());
   });
 
   it('should fire onChange when timeEnd changes', () => {
@@ -96,10 +101,14 @@ describe('DateIntervalInput', () => {
       />);
 
     wrapper
-      .find('.DateIntervalInput-TimeEnd input')
+      .find('.DateIntervalInput-TimeEndInput input')
       .simulate('change', {target: {value: '21:00'}});
 
-    expect(mock).toBeCalledWith('2018-01-09T07:00:00.000Z', '2018-01-09T21:00:00.000Z');
+    const duration = moment.duration('21:00');
+    const start = moment(dateStart);
+    const end = moment(dateEnd).startOf('day').add(duration);
+
+    expect(mock).toBeCalledWith(start.toISOString(), end.toISOString());
   });
 
   it('should not fire onChange when timeEnd is not a duration string', () => {
@@ -116,7 +125,7 @@ describe('DateIntervalInput', () => {
       />);
 
     wrapper
-      .find('.DateIntervalInput-TimeEnd input')
+      .find('.DateIntervalInput-TimeEndInput input')
       .simulate('change', {target: {value: 'asd'}});
 
     expect(mock).toHaveBeenCalledTimes(0);

@@ -4,6 +4,7 @@ import './TextInput.css';
 import * as classNames from 'classnames';
 
 interface TextInputProps {
+  value: string;
   label?: string;
   icon?: JSX.Element;
   placeholder?: string;
@@ -11,27 +12,20 @@ interface TextInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   onChange?: (value: string) => void;
-  value: string;
+  focused?: boolean;
 }
 
-interface TextInputState {
-  focused: boolean;
-}
-
-class TextInput extends React.Component<TextInputProps, TextInputState> {
+class TextInput extends React.Component<TextInputProps> {
   constructor(props: TextInputProps) {
     super(props);
-    this.state = {
-      focused: false
-    };
     this._handleChange = this._handleChange.bind(this);
     this._onFocus = this._onFocus.bind(this);
     this._onBlur = this._onBlur.bind(this);
   }
   render() {
-    const {label, icon, placeholder, classes, value} = this.props;
+    const {label, icon, placeholder, classes, value, focused} = this.props;
     return (
-      <div className={classNames('TextInput', {'TextInput_focus': this.state.focused}, classes)}>
+      <div className={classNames('TextInput', {'TextInput_focus': focused}, classes)}>
         {label ? <InputLabel>{label}</InputLabel> : ''}
         <div className="TextInput-InputContainer">
           <input 
