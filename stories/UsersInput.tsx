@@ -12,17 +12,21 @@ storiesOf('UsersInput', module)
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       }
     ];
-    return <UsersInput users={users} usersHint={[]}/>;
+    return <UsersInput users={users} usersHint={[]} inputValue=""/>;
   })
   .add('with users hints', () => {
     const usersHints = [
@@ -31,17 +35,21 @@ storiesOf('UsersInput', module)
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
     ];
-    return <UsersInput usersHint={usersHints} users={[]}/>;
+    return <UsersInput usersHint={usersHints} users={[]} inputValue=""/>;
   })
   .add('with users hints and users', () => {
     const usersHints = [
@@ -50,57 +58,73 @@ storiesOf('UsersInput', module)
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '1',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '1',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '1',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       },
       {
         id: '2',
         firstName: 'Test',
         secondName: 'Second',
         avatarUrl,
-        floor: 1,
+        floor: {
+          floor: 1
+        },
       }
     ];
-    return <UsersInput usersHint={usersHints} users={usersHints}/>;
+    return <UsersInput usersHint={usersHints} users={usersHints} inputValue=""/>;
   });

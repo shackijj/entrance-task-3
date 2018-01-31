@@ -55,6 +55,14 @@ describe('UsersHint', () => {
     shallow(usersElements.get(1)).simulate('click');
 
     expect(mock).toHaveBeenCalledTimes(1);
-    expect(mock).toHaveBeenCalledWith('2');
+    expect(mock).toHaveBeenCalledWith({
+      firstName: 'Артур',
+      secondName: 'Пирожков',
+      id: '2',
+      floor: {
+        floor: 1
+      },
+      avatarUrl: 'https://somewhere.ru'
+    });
   });
 });

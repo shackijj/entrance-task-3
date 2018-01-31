@@ -11,8 +11,8 @@ import gql from 'graphql-tag';
 interface UsersInputWrappedProps {
   users: User[];
   inputValue: string;
-  onUserAdd?: (userId: string) => void;
-  onUserRemove?: (userId: string) => void;
+  onUserAdd?: (user: User) => void;
+  onUserRemove?: (user: User) => void;
   onInputChange?: (value: string) => void;
 }
 
@@ -25,6 +25,7 @@ interface UsersInputState {
 }
 
 export class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
+  private _container: HTMLDivElement | null;
   constructor(props: UsersInputProps) {
     super(props);
     this.state = {
@@ -34,19 +35,27 @@ export class UsersInput extends React.Component<UsersInputProps, UsersInputState
     this._onBlur = this._onBlur.bind(this);
     this._onInputChange = this._onInputChange.bind(this);
     this._onUserAdd = this._onUserAdd.bind(this);
+    this._onDocumentMouseDown = this._onDocumentMouseDown.bind(this);
+    this._onContainerRef = this._onContainerRef.bind(this);
+  }
+  componentDidMount() {
+    document.addEventListener('mousedown', this._onDocumentMouseDown);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this._onDocumentMouseDown);
   }
   render() {
     const {usersHint, users, onUserRemove, inputValue} = this.props;
     const {focused} = this.state;
     return (
-      <div className="UsersInput">
+      <div className="UsersInput" ref={this._onContainerRef}>
         <div className="UsersInput-Input">
           <TextInput
             label={'Участники'}
             value={inputValue}
             onFocus={this._onFocus}
-            onBlur={this._onBlur}
             onChange={this._onInputChange}
+            focused={focused}
           />
           {focused && usersHint.length > 0 &&
             <div className="UserInput-Hints">
@@ -60,18 +69,18 @@ export class UsersInput extends React.Component<UsersInputProps, UsersInputState
               key={idx}
               avatarUrl={user.avatarUrl}
               login={`${user.firstName} ${user.secondName}`}
-              onCloseClick={onUserRemove ? () => onUserRemove(user.id) : undefined}
+              onCloseClick={onUserRemove ? () => onUserRemove(user) : undefined}
             />
           ))}
         </div>
       </div>
     );
   }
-  private _onUserAdd(userId: string) {
+  private _onUserAdd(user: User) {
     if (this.props.onUserAdd) {
-      this.props.onUserAdd(userId);
+      this.props.onUserAdd(user);
     }
-    const newState = Object.assign({}, this.state, {inputValue: ''});
+    const newState = Object.assign({}, this.state, {inputValue: '', focused: false});
     this.setState(newState);
   }
   private _onFocus() {
@@ -87,10 +96,21 @@ export class UsersInput extends React.Component<UsersInputProps, UsersInputState
       this.props.onInputChange(inputValue);
     }
   }
+  private _onContainerRef(div: HTMLDivElement) {
+    if (div) {
+      this._container = div;
+    }
+  }
+  private _onDocumentMouseDown(event: MouseEvent) {
+    const target = event.target as Node;
+    if (this._container && !this._container.contains(target)) {
+      this.setState(Object.assign({}, this.state, {focused: false}));
+    }
+  }
 }
 
 export const USERS_QUERY = gql`
-query UsersQuery($nameContains: string) {
+query UsersQuery($nameContains: String) {
   users(filter: $nameContains) {
     id
     firstName

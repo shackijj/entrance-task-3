@@ -11,14 +11,18 @@ storiesOf('UsersHint', module)
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '1',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl,
       },
       {
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '2',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl,
       }
     ];

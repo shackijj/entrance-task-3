@@ -9,6 +9,8 @@ import UsersInputWithGQL from './UsersInput';
 import RoomInput from './RoomInput';
 import Header from './Header';
 
+import { User } from './UsersHint';
+
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import './EditEventPage.css';
@@ -25,16 +27,23 @@ interface CreateEventPageState {
   dateStart: string;
   dateEnd: string;
   id: string;
+  users: User[];
+  usersInput: string;
 }
 
 class CreateEventPage extends React.Component<CreateEventPageProps, CreateEventPageState> {
   constructor(props: CreateEventPageProps) {
     super(props);
     this.state = {
+      users: [],
+      usersInput: '',
       dateStart: '',
       dateEnd: '',
       id: '',
     };
+    this._onUserAdd = this._onUserAdd.bind(this);
+    this._onUserRemove = this._onUserRemove.bind(this);
+    this._onUsersInputChange = this._onUsersInputChange.bind(this);
   }
   componentWillMount() {
     let newState = Object.assign({}, this.state, {
@@ -60,7 +69,13 @@ class CreateEventPage extends React.Component<CreateEventPageProps, CreateEventP
                 placeholder="О чем будете говорить?"
                 value={'test'}
               />
-              <UsersInputWithGQL inputValue="" users={[]}/>
+              <UsersInputWithGQL
+                users={this.state.users}
+                inputValue={this.state.usersInput}
+                onUserAdd={this._onUserAdd}
+                onUserRemove={this._onUserRemove}
+                onInputChange={this._onUsersInputChange}
+              />
             </div>
             <div className="EditEventPage-InputsColumn">
               <DateInvervalInput
@@ -92,6 +107,20 @@ class CreateEventPage extends React.Component<CreateEventPageProps, CreateEventP
       </div>
     </div>
     );
+  }
+  private _onUsersInputChange(usersInput: string) {
+    this.setState(Object.assign({}, this.state, { usersInput }));
+  }
+  private _onUserAdd(user: User) {
+    const users = [
+      ...this.state.users,
+      user
+    ];
+    this.setState(Object.assign({}, this.state, { users }));
+  }
+  private _onUserRemove(user: User) {
+    const users = this.state.users.filter(chosenUser => chosenUser.id !== user.id);
+    this.setState(Object.assign({}, this.state, { users }));
   }
 }
 

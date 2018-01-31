@@ -15,15 +15,17 @@ export type User = {
 
 export interface UsersHintProps {
   users: User[];
-  onUserClick?: (userId: string) => void;
+  onUserClick?: (user: User) => void;
 }
 
 const UsersHint: React.SFC<UsersHintProps> = ({users, onUserClick}) => (
   <div className="UsersHint">
-    {users.map(({id, firstName, secondName, avatarUrl, floor}, idx) => (
-      <div key={idx} className="UsersHint-User" onClick={onUserClick ? () => onUserClick(id) : undefined}>
-        <User login={`${firstName} ${secondName}`} avatarUrl={avatarUrl}/>
-        <div className="UsersHint-UserFloor"><span className="UsersHint-Separator"> · </span>{floor.floor} этаж</div>
+    {users.map((user, idx) => (
+      <div key={idx} className="UsersHint-User" onClick={onUserClick ? () => onUserClick(user) : undefined}>
+        <User login={`${user.firstName} ${user.secondName}`} avatarUrl={user.avatarUrl}/>
+        <div className="UsersHint-UserFloor">
+          <span className="UsersHint-Separator"> · </span>{user.floor.floor} этаж
+        </div>
       </div>
     ))}
   </div>

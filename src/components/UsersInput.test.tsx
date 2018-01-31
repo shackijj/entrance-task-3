@@ -1,7 +1,6 @@
 import * as React from 'react';
 import UsersInputWithGQL, { UsersInput, USERS_QUERY } from './UsersInput';
 import { MockedProvider } from 'react-apollo/test-utils';
-import { addTypenameToDocument } from 'apollo-utilities';
 import { mount } from 'enzyme';
 
 describe('UsersInput', () => {
@@ -33,33 +32,6 @@ describe('UsersInput', () => {
     expect(wrapper.find('.UserInput-Hints')).toHaveLength(0);
     wrapper.find('div > input').simulate('focus');
     expect(wrapper.find('.UserInput-Hints')).toHaveLength(1);
-  });
-
-  it('hide the hint when the input is blured', () => {
-    const wrapper = mount(
-      <UsersInput
-        users={[]}
-        inputValue=""
-        usersHint={
-          [
-            {
-              id: '1',
-              firstName: 'Test',
-              secondName: 'Second',
-              floor: {
-                floor: 1
-              },
-              avatarUrl: 'http://s.x',
-            }
-          ]
-        }
-      />);
-  
-    expect(wrapper.find('.UserInput-Hints')).toHaveLength(0);
-    wrapper.find('div > input').simulate('focus');
-    expect(wrapper.find('.UserInput-Hints')).toHaveLength(1);
-    wrapper.find('div > input').simulate('blur');
-    expect(wrapper.find('.UserInput-Hints')).toHaveLength(0);
   });
 
   it('should fire onUserAdd when hint is clicked and clear the input', () => {
@@ -97,7 +69,15 @@ describe('UsersInput', () => {
     hintUser.simulate('click');
     expect(mock1).toHaveBeenCalledTimes(1);
 
-    expect(mock1).toHaveBeenCalledWith('1');
+    expect(mock1).toHaveBeenCalledWith({
+      id: '1',
+      firstName: 'Test',
+      secondName: 'Second',
+      floor: {
+        floor: 1
+      },
+      avatarUrl: 'http://s.x',
+    });
    });
 
   it('should render userInputs when users is given and fire onUserRemove when user\'s close button is clicked', () => {
@@ -136,7 +116,15 @@ describe('UsersInput', () => {
     expect(mock).toHaveBeenCalledTimes(0);
     wrapper.find('.UserInput-Close').first().simulate('click');
     expect(mock).toHaveBeenCalledTimes(1);
-    expect(mock).toHaveBeenCalledWith('1');
+    expect(mock).toHaveBeenCalledWith({
+      id: '1',
+      firstName: 'Test',
+      secondName: 'Second',
+      avatarUrl: 'http://s.x',
+      floor: {
+        floor: 1
+      },
+    });
   });
 });
 
@@ -145,7 +133,7 @@ describe('UsersInputWithGQL', () => {
     const mocks = [
       {
         request: {
-          query: addTypenameToDocument(USERS_QUERY),
+          query: USERS_QUERY,
           variables: { nameContains: 'Test' }
         },
         result: {
@@ -170,7 +158,7 @@ describe('UsersInputWithGQL', () => {
     ];
   
     const wrapper = mount(
-      <MockedProvider mocks={mocks}>
+      <MockedProvider mocks={mocks} removeTypename={true}>
         <UsersInputWithGQL
           users={[]}
           inputValue="Test"
