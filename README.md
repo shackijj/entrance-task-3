@@ -29,6 +29,7 @@ src/components/CreateEventPage.test.tsx - так я вижу интерацио�
 
 ```
 npm install
+git submodule update --init
 cd server
 npm install
 ````
