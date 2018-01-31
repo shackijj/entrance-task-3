@@ -10,14 +10,18 @@ describe('UsersHint', () => {
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '1',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl: 'https://somewhere.ru'
       },
       {
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '2',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl: 'https://somewhere.ru'
       }
     ];
@@ -31,14 +35,18 @@ describe('UsersHint', () => {
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '1',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl: 'https://somewhere.ru'
       },
       {
         firstName: 'Артур',
         secondName: 'Пирожков',
         id: '2',
-        floor: 1,
+        floor: {
+          floor: 1
+        },
         avatarUrl: 'https://somewhere.ru'
       }
     ];

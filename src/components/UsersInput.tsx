@@ -5,24 +5,29 @@ import UserInput from './UserInput';
 
 import './UsersInput.css';
 
-interface UsersInputProps {
-  usersHint: User[];
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
+interface UsersInputWrappedProps {
   users: User[];
+  inputValue: string;
   onUserAdd?: (userId: string) => void;
   onUserRemove?: (userId: string) => void;
   onInputChange?: (value: string) => void;
 }
 
+interface UsersInputProps extends UsersInputWrappedProps {
+  usersHint: User[];
+}
+
 interface UsersInputState {
-  inputValue: string;
   focused: boolean;
 }
 
-class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
+export class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
   constructor(props: UsersInputProps) {
     super(props);
     this.state = {
-      inputValue: '',
       focused: false,
     };
     this._onFocus = this._onFocus.bind(this);
@@ -31,8 +36,8 @@ class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
     this._onUserAdd = this._onUserAdd.bind(this);
   }
   render() {
-    const {usersHint, users, onUserRemove} = this.props;
-    const {focused, inputValue} = this.state;
+    const {usersHint, users, onUserRemove, inputValue} = this.props;
+    const {focused} = this.state;
     return (
       <div className="UsersInput">
         <div className="UsersInput-Input">
@@ -78,12 +83,44 @@ class UsersInput extends React.Component<UsersInputProps, UsersInputState> {
     this.setState(newState);
   }
   private _onInputChange(inputValue: string) {
-    const newState = Object.assign({}, this.state, {inputValue});
-    this.setState(newState);
     if (this.props.onInputChange) {
       this.props.onInputChange(inputValue);
     }
   }
 }
 
-export default UsersInput;
+export const USERS_QUERY = gql`
+query UsersQuery($nameContains: string) {
+  users(filter: $nameContains) {
+    id
+    firstName
+    secondName
+    avatarUrl
+    floor {
+      floor
+    }
+  }
+}
+`;
+
+type Response = {
+  users: User[];
+};
+
+const withUsers = graphql<Response, UsersInputWrappedProps, UsersInputProps>(USERS_QUERY, {
+  options: ({inputValue}) => ({
+    variables: { nameContains: inputValue }
+  }),
+  props: ({ ownProps, data }) => {
+    let usersHint: User[] = [];
+    if (data && data.users) {
+      usersHint = data.users;
+    }
+    return {
+      usersHint,
+      ...ownProps
+    };
+  },
+});
+
+export default withUsers(UsersInput);

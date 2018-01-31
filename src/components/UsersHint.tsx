@@ -8,7 +8,9 @@ export type User = {
   secondName: string;
   avatarUrl: string;
   id: string;
-  floor: number;
+  floor: {
+    floor: number;
+  };
 };
 
 export interface UsersHintProps {
@@ -21,7 +23,7 @@ const UsersHint: React.SFC<UsersHintProps> = ({users, onUserClick}) => (
     {users.map(({id, firstName, secondName, avatarUrl, floor}, idx) => (
       <div key={idx} className="UsersHint-User" onClick={onUserClick ? () => onUserClick(id) : undefined}>
         <User login={`${firstName} ${secondName}`} avatarUrl={avatarUrl}/>
-        <div className="UsersHint-UserFloor"><span className="UsersHint-Separator"> · </span>{floor} этаж</div>
+        <div className="UsersHint-UserFloor"><span className="UsersHint-Separator"> · </span>{floor.floor} этаж</div>
       </div>
     ))}
   </div>

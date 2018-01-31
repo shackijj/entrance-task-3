@@ -5,7 +5,7 @@ import { Close } from './GlyphIcon/GlyphIcon';
 import TextInput from './TextInput';
 import InputLabel from './InputLabel';
 import DateInvervalInput from './DateIntervalInput';
-import UsersInput from './UsersInput';
+import UsersInputWithGQL from './UsersInput';
 import RoomInput from './RoomInput';
 import Header from './Header';
 
@@ -60,7 +60,7 @@ class CreateEventPage extends React.Component<CreateEventPageProps, CreateEventP
                 placeholder="О чем будете говорить?"
                 value={'test'}
               />
-              <UsersInput users={[]} usersHint={[]}/>
+              <UsersInputWithGQL inputValue="" users={[]}/>
             </div>
             <div className="EditEventPage-InputsColumn">
               <DateInvervalInput

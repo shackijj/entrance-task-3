@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import UsersInput from '../src/components/UsersInput';
+import { UsersInput } from '../src/components/UsersInput';
 
 const avatarUrl = 'https://pp.userapi.com/c402317/v402317531/6107/Tg1PWZHDAO0.jpg';
 
