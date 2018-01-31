@@ -9,9 +9,39 @@ import UsersInput from './UsersInput';
 import RoomInput from './RoomInput';
 import Header from './Header';
 
+import { RouteComponentProps, withRouter } from 'react-router';
+
 import './EditEventPage.css';
 
-class CreateEventPage extends React.Component {
+interface MatchProps {
+  id?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}
+
+type CreateEventPageProps = RouteComponentProps<MatchProps>;
+
+interface CreateEventPageState {
+  dateStart: string;
+  dateEnd: string;
+  id: string;
+}
+
+class CreateEventPage extends React.Component<CreateEventPageProps, CreateEventPageState> {
+  constructor(props: CreateEventPageProps) {
+    super(props);
+    this.state = {
+      dateStart: '',
+      dateEnd: '',
+      id: '',
+    };
+  }
+  componentWillMount() {
+    let newState = Object.assign({}, this.state, {
+      ...this.props.match.params
+    });
+    this.setState(newState);
+  }
   render() {
     return (
       <div className="EditEventPage">
@@ -35,16 +65,16 @@ class CreateEventPage extends React.Component {
             <div className="EditEventPage-InputsColumn">
               <DateInvervalInput
                 classes={['EditEventPage-Input']}
-                dateStart={'2018-01-13T15:24:49.265Z'}
-                dateEnd={'2018-01-13T15:28:49.265Z'}
+                dateStart={this.state.dateStart}
+                dateEnd={this.state.dateEnd}
               />
               <div className="EditEventPage-Input">
                 <InputLabel>
                   Ваша переговорка:
                 </InputLabel>
                 <RoomInput
-                  dateStart={new Date('2018-01-13T15:24:49.265')}
-                  dateEnd={new Date('2018-01-13T15:34:49.265')}
+                  dateStart={this.state.dateStart}
+                  dateEnd={this.state.dateEnd}
                   isActive={true}
                   room={{
                     title: 'Оранжевый рассвет',
@@ -65,4 +95,4 @@ class CreateEventPage extends React.Component {
   }
 }
 
-export default CreateEventPage;
+export default withRouter(CreateEventPage);

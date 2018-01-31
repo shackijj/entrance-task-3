@@ -6,8 +6,8 @@ import { Close } from './GlyphIcon/GlyphIcon';
 import './RoomInput.css';
 
 interface RoomInputProps {
-  dateStart: Date;
-  dateEnd: Date;
+  dateStart: string;
+  dateEnd: string;
   isActive?: boolean;
   room: {
     title: string;

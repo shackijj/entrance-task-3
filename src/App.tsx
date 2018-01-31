@@ -11,7 +11,7 @@ const App = () => (
         <Route exact={true} path="/" render={() => <Redirect to="/events/today"/>} />
         <Route exact={true} path="/events/" render={() => <Redirect to="/events/today"/>} />
         <Route exact={true} path="/events/:date" component={MainPage} />
-        <Route exact={true} path="/create" component={CreateEventPage} />
+        <Route exact={true} path="/create/:roomId?/:dateStart?/:dateEnd?" component={CreateEventPage} />
         <Route exact={true} path="/edit/:id" component={EditEventPage} />
       </Switch>
     </div>

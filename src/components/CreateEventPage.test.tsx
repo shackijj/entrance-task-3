@@ -1,5 +1,25 @@
+import * as React from 'react';
+import { mount } from 'enzyme';
+import CreateEventPage from './CreateEventPage';
+import { MemoryRouter, Route, RouteProps } from 'react-router';
+import DateIntervalInput from './DateIntervalInput';
+
 describe('CreateEventPage', () => {
-  it('should take params from history and put then into DateInput and RoomInput compomnents');
+  it('should take params from history and put then into DateInput and RoomInput compomnents', () => {
+    const dateStart = '2018-01-09T07:00:00.000Z';
+    const dateEnd = '2018-01-09T07:15:00.000Z';
+    const wrapper = mount(
+      <MemoryRouter initialEntries={[`/create/1/${dateStart}/${dateEnd}`]}>
+        <Route
+          component={(props: RouteProps) => <CreateEventPage {...props}/>}
+          path="/create/:roomId?/:dateStart?/:dateEnd?"
+        />
+      </MemoryRouter>,
+    );
+    const dateIntervalProps = wrapper.find(DateIntervalInput).props();
+    expect(dateIntervalProps.dateStart).toEqual(dateStart);
+    expect(dateIntervalProps.dateEnd).toEqual(dateEnd);
+  });
 
   it('request for users should be made on changing UserInput');
 

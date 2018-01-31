@@ -47,8 +47,8 @@ const EditEventPage = () => (
                   Рекомендованные переговорки
                 </InputLabel>
                 <RoomInput
-                  dateStart={new Date('2018-01-13T15:24:49.265')}
-                  dateEnd={new Date('2018-01-13T15:34:49.265')}
+                  dateStart={'2018-01-13T15:24:49.265'}
+                  dateEnd={'2018-01-13T15:34:49.265'}
                   room={{
                     title: 'Оранжевый рассвет',
                     floor: 4,

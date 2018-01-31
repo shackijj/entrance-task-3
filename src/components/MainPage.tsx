@@ -134,7 +134,7 @@ class MainPage extends React.Component<MainPagePropsConnected, MainPageState> {
     }
   }
   private _onFreeSlotClick(roomId: string, dateStart: string, dateEnd: string) {
-    this.props.history.push(`/create?roomId=${roomId}&dateStart=${dateStart}&dateEnd=${dateEnd}`);
+    this.props.history.push(`/create/${roomId}/${dateStart}/${dateEnd}`);
   }
   private _onCreateEventClick() {
     this.props.history.push(`/create`);
